@@ -7,13 +7,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
-class MapButton extends JPanel {
+class MapPanel extends JPanel {
 
     private boolean isSelected;
     private Color border = Color.gray;
     private Entity entity_on_tile;
 
-    public MapButton() {
+    public MapPanel() {
 
         super();
         entity_on_tile = null;
@@ -28,7 +28,7 @@ class MapButton extends JPanel {
         initUI();
     }*/
 
-    public MapButton(Entity entity_){
+    public MapPanel(Entity entity_){
         super();
         this.entity_on_tile = entity_;
         initUI();

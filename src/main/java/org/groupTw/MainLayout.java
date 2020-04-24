@@ -2,6 +2,7 @@ package org.groupTw;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,10 +11,13 @@ import java.util.List;
  */
 public class MainLayout extends JFrame
 {
-    List<MapButton> buttons;
+    static private int MapSize = 8;
+    ArrayList<MapPanel> mapTiles;
+    ArrayList<Entity> player1_Army;
+    ArrayList<Entity> player2_Army;
     private JPanel panel_1;
     private JPanel map;
-    static private int MapSize = 8;
+
 
     public MainLayout() {
         init();
@@ -39,10 +43,11 @@ public class MainLayout extends JFrame
 
         for(int i = 0; i<MapSize; i++) {
             for (int j = 0; j < MapSize; j++) {
-                MapButton btn = new MapButton();
+                MapPanel btn = new MapPanel();
                 if(i%2 == j%2) btn.setBackground(Color.black);
                 else btn.setBackground(Color.white);
                 btn.putClientProperty("Position", new Point(i,j));
+                mapTiles.add(btn);
                 //btn.add(new JPanel());
                 map.add(btn);
                 btn.setBorder(BorderFactory.createLineBorder(Color.gray));

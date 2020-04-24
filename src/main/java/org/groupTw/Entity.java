@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 abstract public class Entity {
     Point position;
@@ -37,10 +39,15 @@ abstract public class Entity {
 
 
     private Image loadImage( String imagePath) throws IOException {
-
-        Image bimg = ImageIO.read(new File(imagePath));
-
-        return bimg;
+        try {
+            Image bimg = ImageIO.read(new File(imagePath));
+            return bimg;
+        }
+        catch(IOException exc){
+            Logger.getLogger(Main.class.getName()).log(
+                    Level.SEVERE, null, exc);
+             }
+        return null;
     }
 
     abstract void AttackPattern();
