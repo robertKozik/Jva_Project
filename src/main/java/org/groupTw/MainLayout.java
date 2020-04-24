@@ -36,18 +36,19 @@ public class MainLayout extends JFrame
 
         map = new JPanel();
         map.setLayout(new GridLayout(8,8,0 ,0));
-        Color[] colors = new Color[]{Color.BLACK, Color.WHITE};
+
         for(int i = 0; i<MapSize; i++) {
             for (int j = 0; j < MapSize; j++) {
                 MapButton btn = new MapButton();
-                if(i%2 == j%2) btn.setBackground(colors[0]);
-                else btn.setBackground(colors[1]);
-
+                if(i%2 == j%2) btn.setBackground(Color.black);
+                else btn.setBackground(Color.white);
+                btn.putClientProperty("Position", new Point(i,j));
                 //btn.add(new JPanel());
                 map.add(btn);
                 btn.setBorder(BorderFactory.createLineBorder(Color.gray));
             }
         }
+
         map.setPreferredSize(new Dimension(400,400));
         map.setMaximumSize(new Dimension(400,400));
         flow.add(map);

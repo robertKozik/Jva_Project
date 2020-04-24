@@ -3,17 +3,20 @@ package org.groupTw;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
 class MapButton extends JPanel {
 
     private boolean isSelected;
     private Color border = Color.gray;
+    private Entity entity_on_tile;
 
     public MapButton() {
 
         super();
+        entity_on_tile = null;
 
         initUI();
     }
@@ -24,6 +27,12 @@ class MapButton extends JPanel {
 
         initUI();
     }*/
+
+    public MapButton(Entity entity_){
+        super();
+        this.entity_on_tile = entity_;
+        initUI();
+    }
 
     private void initUI() {
         final int n = 2;
