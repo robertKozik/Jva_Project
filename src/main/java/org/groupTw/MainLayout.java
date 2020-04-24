@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class MainLayout extends JFrame
 {
-    List<MapPane> buttons;
+    List<MapButton> buttons;
     private JPanel panel_1;
     private JPanel map;
     static private int MapSize = 8;
@@ -31,17 +31,22 @@ public class MainLayout extends JFrame
         //game map
         JPanel flow = new JPanel();
         flow.setLayout(new FlowLayout(FlowLayout.CENTER, 60,50));
-        flow.setBackground(Color.blue);
+        //flow.setBackground(Color.blue);
         panel_1.add(flow);
 
         map = new JPanel();
         map.setLayout(new GridLayout(8,8,0 ,0));
+        Color[] colors = new Color[]{Color.BLACK, Color.WHITE};
+        for(int i = 0; i<MapSize; i++) {
+            for (int j = 0; j < MapSize; j++) {
+                MapButton btn = new MapButton();
+                if(i%2 == j%2) btn.setBackground(colors[0]);
+                else btn.setBackground(colors[1]);
 
-        for(int i = 0; i<MapSize*MapSize; i++){
-            MapPane btn = new MapPane();
-            btn.setText(String.valueOf(i+1));
-            map.add(btn);
-            btn.setBorder(BorderFactory.createLineBorder(Color.gray));
+                //btn.add(new JPanel());
+                map.add(btn);
+                btn.setBorder(BorderFactory.createLineBorder(Color.gray));
+            }
         }
         map.setPreferredSize(new Dimension(400,400));
         map.setMaximumSize(new Dimension(400,400));

@@ -6,44 +6,44 @@ import java.awt.event.*;
 
 
 
-class MapPane extends JButton {
+class MapButton extends JPanel {
 
     private boolean isSelected;
     private Color border = Color.gray;
 
-    public MapPane() {
+    public MapButton() {
 
         super();
 
         initUI();
     }
 
-    public MapPane(Image image) {
+    /*public MapButton(Image image) {
 
         super(new ImageIcon(image));
 
         initUI();
-    }
+    }*/
 
     private void initUI() {
-
+        final int n = 2;
         isSelected = false;
-        BorderFactory.createLineBorder(border);
+        BorderFactory.createLineBorder(border, n);
 
         addMouseListener(new MouseAdapter() {
 
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if(border != Color.green) {
+                if(border != Color.red) {
                     border = Color.yellow;
-                    setBorder(BorderFactory.createLineBorder(border));
+                    setBorder(BorderFactory.createLineBorder(border,n));
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if(border != Color.green) {
+                if(border != Color.RED) {
                     border = Color.gray;
                     setBorder(BorderFactory.createLineBorder(border));
                 }
@@ -52,21 +52,31 @@ class MapPane extends JButton {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if(border != Color.green) {
-                    border = Color.green;
-                    setBorder(BorderFactory.createLineBorder(border));
-                } else setBorder(BorderFactory.createLineBorder(Color.gray));
+                if(border != Color.red) {
+                    border = Color.red;
+                } else {
+                    border = Color.gray;
+                }
+                setBorder(BorderFactory.createLineBorder(border,n));
             }
         });
     }
 
-    public void setLastButton() {
+    public void setSelected() {
 
         isSelected = true;
     }
 
-    public boolean isLastButton() {
+    public boolean isSelected() {
 
         return isSelected;
+    }
+
+    public void setBorder(Color border) {
+        this.border = border;
+        this.setBorder(BorderFactory.createLineBorder(border));
+    }
+    public Color getTileBorder(){
+        return border;
     }
 }
