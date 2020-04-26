@@ -1,6 +1,7 @@
 package org.groupTw;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,11 +14,14 @@ import java.util.logging.Logger;
 abstract public class Entity {
     Point position;
     ArrayList<Point> possible_attacks;
-    Image image;
     boolean canAttack;
     int health;
     int attack;
     int defense;
+    ImageIcon picLabel;
+    //__________________
+    final int imgW = 35;
+    final int imgH = 35;
 
     public Entity(){
         this.position = new Point(0,0);
@@ -27,20 +31,21 @@ abstract public class Entity {
         this.attack = 0;
         this.defense = 0;
     }
-    public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) throws IOException{
+    public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {
         this.position = position_;
-        this.image = loadImage( imagePath_ );
         this.canAttack = canAttack_;
         this.health = health_;
         this.attack = attack_;
         this.defense = defense_;
+        picLabel = new ImageIcon(loadImage(imagePath_));
     }
 
 
 
-    private Image loadImage( String imagePath) throws IOException {
+    private Image loadImage( String imagePath)  {
         try {
-            Image bimg = ImageIO.read(new File(imagePath));
+            Image img = ImageIO.read(new File(imagePath));
+            Image bimg = img.getScaledInstance(imgW,imgH,Image.SCALE_FAST);
             return bimg;
         }
         catch(IOException exc){

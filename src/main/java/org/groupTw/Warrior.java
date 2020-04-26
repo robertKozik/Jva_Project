@@ -14,8 +14,8 @@ public class Warrior extends Entity implements iMovable {
         AttackPattern();
     }
     //Constructor
-    public Warrior(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_, boolean can_Move) throws IOException {
-        super(position_, imagePath_, health_, attack_, defense_, canAttack_);
+    public Warrior(Point position_, int health_, int attack_, int defense_, boolean canAttack_, boolean can_Move) {
+        super(position_, "src/Art/paladin.png", health_, attack_, defense_, canAttack_);
         MovePattern();
         AttackPattern();
 
@@ -35,12 +35,13 @@ public class Warrior extends Entity implements iMovable {
         int y = this.position.y;
         this.possible_attacks = new ArrayList<>();
         for (int x_ = -1; x_ < 1; x_++) {
+            int attackX = x + x_;
             for (int y_ = -1; y_ < 1; y_++) {
-                if (x > -1 && x < 8 && y > -1 && x < 8)
-                    this.possible_attacks.add(new Point(x + x_, y = y_));
+                if(x_ == 0 && y_== 0) continue;
+                int attackY = y + y_;
+                if (attackX > -1 && attackX < 8 && attackY > -1 && attackY < 8) this.possible_moves.add(new Point(attackX, attackY));
             }
         }
-        this.possible_attacks.remove(5);
 
     }
 
@@ -59,12 +60,15 @@ public class Warrior extends Entity implements iMovable {
         int x = this.position.x;
         int y = this.position.y;
         this.possible_moves = new ArrayList<>();
+
         for (int x_ = -1; x_ < 1; x_++) {
+             int moveX = x + x_;
             for (int y_ = -1; y_ < 1; y_++) {
-                if (x > -1 && x < 8 && y > -1 && y < 8) this.possible_moves.add(new Point(x, y));
+                if(x_ == 0 && y_== 0) continue;
+                int moveY = y + y_;
+                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.possible_moves.add(new Point(moveX, moveY));
             }
         }
-        this.possible_moves.remove(4); //current position
     }
 
     @Override

@@ -21,7 +21,7 @@ class MapPanel extends JPanel {
         initUI();
     }
 
-    /*public MapButton(Image image) {
+    /*public MapPanel(Image image) {
 
         super(new ImageIcon(image));
 
@@ -34,6 +34,7 @@ class MapPanel extends JPanel {
         initUI();
     }
 
+
     private void initUI() {
         final int n = 2;
         isSelected = false;
@@ -45,7 +46,8 @@ class MapPanel extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 if(border != Color.red) {
-                    border = Color.yellow;
+                    if(entity_on_tile != null)border = Color.green;
+                    else border = Color.yellow;
                     setBorder(BorderFactory.createLineBorder(border,n));
                 }
             }
@@ -61,11 +63,11 @@ class MapPanel extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if(border != Color.red) {
+                if(border != Color.red && entity_on_tile != null) {
                     border = Color.red;
-                } else {
-                    border = Color.gray;
-                }
+                } else if(entity_on_tile != null) {
+                    border = Color.green;
+                }else border = Color.yellow;
                 setBorder(BorderFactory.createLineBorder(border,n));
             }
         });
@@ -87,5 +89,12 @@ class MapPanel extends JPanel {
     }
     public Color getTileBorder(){
         return border;
+    }
+
+    public void setEntity_on_tile(Entity entity_on_tile) {
+        this.entity_on_tile = entity_on_tile;
+    }
+    public Entity getEntity_on_tile(){
+        return this.entity_on_tile;
     }
 }

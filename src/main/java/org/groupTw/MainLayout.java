@@ -30,7 +30,10 @@ public class MainLayout extends JFrame
         this.add(panel_1);
         //settings panel
         JPanel left = new JPanel();
-        left.setBackground(Color.black);
+        //JLabel label = new JLabel();
+        //label.setText("XXX");
+        //left.add(label);
+        //left.setBackground(Color.black);
         panel_1.add(left);
         //game map
         JPanel flow = new JPanel();
@@ -40,19 +43,44 @@ public class MainLayout extends JFrame
 
         map = new JPanel();
         map.setLayout(new GridLayout(8,8,0 ,0));
+        mapTiles = new ArrayList<>();
+        player1_Army = new ArrayList<>();
+
 
         for(int i = 0; i<MapSize; i++) {
             for (int j = 0; j < MapSize; j++) {
                 MapPanel btn = new MapPanel();
-                if(i%2 == j%2) btn.setBackground(Color.black);
-                else btn.setBackground(Color.white);
-                btn.putClientProperty("Position", new Point(i,j));
                 mapTiles.add(btn);
-                //btn.add(new JPanel());
-                map.add(btn);
+                if(i%2 == j%2) btn.setBackground(Color.black);
+                    else btn.setBackground(Color.white);
+                btn.putClientProperty("Position", new Point(i,j));
                 btn.setBorder(BorderFactory.createLineBorder(Color.gray));
+                map.add(btn);
             }
         }
+
+        Warrior war = new Warrior(new Point(1,1),10,10,10,true,true);
+        player1_Army.add(war);
+        /*
+        do optymalizacji !
+         */
+        for(Entity ent : player1_Army){
+            Point position = ent.position;
+            System.out.println(mapTiles.size());
+            for(MapPanel tile : mapTiles){
+                Point tle = (Point)tile.getClientProperty("Position");
+                if(tle.equals(position)) {
+                    tile.add(new JLabel(war.picLabel));
+                    tile.setEntity_on_tile(ent);
+
+                }
+            }
+        }
+
+        /*for(MapPanel btn : mapTiles){
+            map.add(btn);
+        }*/
+
 
         map.setPreferredSize(new Dimension(400,400));
         map.setMaximumSize(new Dimension(400,400));
