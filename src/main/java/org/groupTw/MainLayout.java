@@ -11,10 +11,10 @@ import java.util.List;
  */
 public class MainLayout extends JFrame
 {
-    static private int MapSize = 8;
-    ArrayList<MapPanel> mapTiles;
-    ArrayList<Entity> player1_Army;
-    ArrayList<Entity> player2_Army;
+    final protected int MapSize = 8;
+    private ArrayList<MapPanel> mapTiles;
+    private ArrayList<Entity> player1_Army;
+    private ArrayList<Entity> player2_Army;
     private JPanel panel_1;
     private JPanel map;
 
@@ -22,6 +22,7 @@ public class MainLayout extends JFrame
     public MainLayout() {
         init();
     }
+
     private void init(){
         this.setSize(1000,520);
         //divide on settings, and game map
@@ -61,27 +62,24 @@ public class MainLayout extends JFrame
 
         Warrior war = new Warrior(new Point(1,1),10,10,10,true,true);
         player1_Army.add(war);
+
         /*
         do optymalizacji !
+        O(n^2) :/
          */
         for(Entity ent : player1_Army){
             Point position = ent.position;
-            System.out.println(mapTiles.size());
             for(MapPanel tile : mapTiles){
                 Point tle = (Point)tile.getClientProperty("Position");
                 if(tle.equals(position)) {
                     tile.add(new JLabel(war.picLabel));
                     tile.setEntity_on_tile(ent);
-
+                    break;
                 }
             }
         }
 
-        /*for(MapPanel btn : mapTiles){
-            map.add(btn);
-        }*/
-
-
+       
         map.setPreferredSize(new Dimension(400,400));
         map.setMaximumSize(new Dimension(400,400));
         flow.add(map);
