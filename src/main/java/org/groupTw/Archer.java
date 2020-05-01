@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Archer extends Entity implements iMovable {
 
-    private ArrayList<Point> possible_moves;
     /*
     attack pattern:
     - - - - -
@@ -17,10 +16,10 @@ public class Archer extends Entity implements iMovable {
      */
     @Override
     void AttackPattern() {
-        int x = this.position.x;
-        int y = this.position.y;
-        this.possible_attacks = new ArrayList<>();
-        for( int y_ = 1; y_< 4; y_++) this.possible_attacks.add(new Point( x,y+y_ ));
+        int x = this.getPosition().x;
+        int y = this.getPosition().y;
+        this.getPossible_attacks().clear();
+        for( int y_ = 1; y_< 4; y_++) this.getPossible_attacks().add(new Point( x,y+y_ ));
 
     }
     /*
@@ -34,19 +33,21 @@ public class Archer extends Entity implements iMovable {
     @Override
     public void MovePattern() {
 
-        int x = this.position.x;
-        int y = this.position.y;
-        this.possible_moves = new ArrayList<>();
-        for (int x_ = -1; x_ < 1; x_++) {
-            for (int y_ = -1; y_ < 1; y_++) {
-                if (x > -1 && x < 8 && y > -1 && y < 8) this.possible_moves.add(new Point(x, y));
+        int x = this.getPosition().x;
+        int y = this.getPosition().y;
+        this.getPossible_moves().clear();
+
+        for (int x_ = -1; x_ < 2; x_++) {
+            int moveX = x + x_;
+            for (int y_ = -1; y_ < 2; y_++) {
+                if(x_ == 0 && y_== 0) continue;
+                int moveY = y + y_;
+                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
-        this.possible_moves.remove(4); //current position
     }
-
     @Override
     public void Move(Point position_) {
-
+        this.setPosition(position_);
     }
 }

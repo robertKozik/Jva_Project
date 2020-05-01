@@ -12,26 +12,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 abstract public class Entity {
-    Point position;
-    ArrayList<Point> possible_attacks;
-    boolean canAttack;
-    int health;
-    int attack;
-    int defense;
-    ImageIcon picLabel;
+    private Point position;
+    private ArrayList<Point> possible_attacks;
+    private ArrayList<Point> possible_moves;
+    private boolean canAttack;
+    private int health;
+    private int attack;
+    private int defense;
+    private ImageIcon picLabel;
     //__________________
     final int imgW = 35;
     final int imgH = 35;
 
     public Entity(){
         this.position = new Point(0,0);
-        possible_attacks = new ArrayList<>();
+        this.possible_attacks = new ArrayList<>();
+        this.possible_moves = new ArrayList<>();
         this.canAttack = false;
         this.health = 0;
         this.attack = 0;
         this.defense = 0;
     }
     public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {
+        this.possible_attacks = new ArrayList<>();
+        this.possible_moves = new ArrayList<>();
         this.position = position_;
         this.canAttack = canAttack_;
         this.health = health_;
@@ -56,5 +60,78 @@ abstract public class Entity {
     }
 
     abstract void AttackPattern();
+    abstract void MovePattern();
+    abstract void Move(Point position_);
 
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public ArrayList<Point> getPossible_attacks() {
+        return possible_attacks;
+    }
+
+    public void setPossible_attacks(ArrayList<Point> possible_attacks) {
+        this.possible_attacks = possible_attacks;
+    }
+
+    public ArrayList<Point> getPossible_moves() {
+        return possible_moves;
+    }
+
+    public void setPossible_moves(ArrayList<Point> possible_moves) {
+        this.possible_moves = possible_moves;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public ImageIcon getPicLabel() {
+        return picLabel;
+    }
+
+    public void setPicLabel(ImageIcon picLabel) {
+        this.picLabel = picLabel;
+    }
+
+    public int getImgW() {
+        return imgW;
+    }
+
+    public int getImgH() {
+        return imgH;
+    }
 }

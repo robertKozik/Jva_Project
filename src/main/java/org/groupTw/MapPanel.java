@@ -11,8 +11,8 @@ class MapPanel extends JPanel {
 
     private boolean isSelected;
     private Color border = Color.gray;
-    private Entity entity_on_tile;
-
+    protected Entity entity_on_tile;
+    final int n = 2;
     public MapPanel() {
 
         super();
@@ -36,7 +36,7 @@ class MapPanel extends JPanel {
 
 
     private void initUI() {
-        final int n = 2;
+
         isSelected = false;
         BorderFactory.createLineBorder(border, n);
 
@@ -83,9 +83,9 @@ class MapPanel extends JPanel {
         return isSelected;
     }
 
-    public void setBorder(Color border) {
-        this.border = border;
-        this.setBorder(BorderFactory.createLineBorder(border));
+    public void setBorder(Color border_, int width_) {
+        this.border = border_;
+        this.setBorder(BorderFactory.createLineBorder(border,width_));
     }
     public Color getTileBorder(){
         return border;
@@ -96,5 +96,11 @@ class MapPanel extends JPanel {
     }
     public Entity getEntity_on_tile(){
         return this.entity_on_tile;
+    }
+
+    public boolean equals(MapPanel obj) {
+        Point point1 = (Point)this.getClientProperty("Position");
+        Point point2 = (Point)obj.getClientProperty("Position");
+        return super.equals(obj);
     }
 }
