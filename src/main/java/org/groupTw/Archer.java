@@ -5,6 +5,26 @@ import java.util.ArrayList;
 
 public class Archer extends Entity implements iMovable {
 
+    public Archer(){
+        super();
+        MovePattern();
+        AttackPattern();
+    }
+
+    public Archer(Point position_, int health_, int attack_, int defense_, boolean canAttack_) {
+        super(position_, "src/Art/dagger.png", health_, attack_, defense_, canAttack_);
+        MovePattern();
+        AttackPattern();
+
+    }
+
+    public Archer(Point position_){
+        super(position_,"src/Art/dagger.png",10,10,10,true);
+        MovePattern();
+        AttackPattern();
+    }
+
+
     /*
     attack pattern:
     - - - - -
@@ -19,7 +39,7 @@ public class Archer extends Entity implements iMovable {
         int x = this.getPosition().x;
         int y = this.getPosition().y;
         this.getPossible_attacks().clear();
-        for( int y_ = 1; y_< 4; y_++) this.getPossible_attacks().add(new Point( x,y+y_ ));
+        for( int x_ = 1; x_< 4; x_++) this.getPossible_attacks().add(new Point( x+x_,y ));
 
     }
     /*
@@ -46,8 +66,11 @@ public class Archer extends Entity implements iMovable {
             }
         }
     }
+
     @Override
     public void Move(Point position_) {
         this.setPosition(position_);
+        this.MovePattern();
+        this.AttackPattern();
     }
 }

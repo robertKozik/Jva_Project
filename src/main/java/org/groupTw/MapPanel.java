@@ -3,20 +3,20 @@ package org.groupTw;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+
+import static java.awt.Color.gray;
 
 
 class MapPanel extends JPanel {
 
-    private boolean isSelected;
-    private Color border = Color.gray;
+    private Color border = Color.BLACK;
     protected Entity entity_on_tile;
     final int n = 2;
     public MapPanel() {
 
         super();
         entity_on_tile = null;
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         initUI();
     }
@@ -37,7 +37,6 @@ class MapPanel extends JPanel {
 
     private void initUI() {
 
-        isSelected = false;
         BorderFactory.createLineBorder(border, n);
 
         addMouseListener(new MouseAdapter() {
@@ -45,23 +44,22 @@ class MapPanel extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if(border != Color.red) {
-                    if(entity_on_tile != null)border = Color.green;
-                    else border = Color.yellow;
-                    setBorder(BorderFactory.createLineBorder(border,n));
+                if(border == Color.BLACK ) {
+                    border = Color.GREEN;
+                    setBorder(border,n);
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if(border != Color.RED) {
-                    border = Color.gray;
-                    setBorder(BorderFactory.createLineBorder(border));
+                if(border == Color.GREEN){
+                    border = Color.BLACK;
+                    setBorder(border,n);
                 }
             }
 
 
-            @Override
+           /* @Override
             public void mouseReleased(MouseEvent e) {
                 if(border != Color.red && entity_on_tile != null) {
                     border = Color.red;
@@ -69,19 +67,10 @@ class MapPanel extends JPanel {
                     border = Color.green;
                 }else border = Color.yellow;
                 setBorder(BorderFactory.createLineBorder(border,n));
-            }
+            }*/
         });
     }
 
-    public void setSelected() {
-
-        isSelected = true;
-    }
-
-    public boolean isSelected() {
-
-        return isSelected;
-    }
 
     public void setBorder(Color border_, int width_) {
         this.border = border_;
@@ -98,6 +87,9 @@ class MapPanel extends JPanel {
         return this.entity_on_tile;
     }
 
+    public boolean isOccupied(){
+        return this.entity_on_tile != null;
+    }
     public boolean equals(MapPanel obj) {
         Point point1 = (Point)this.getClientProperty("Position");
         Point point2 = (Point)obj.getClientProperty("Position");

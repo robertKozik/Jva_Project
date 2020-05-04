@@ -6,10 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
+//Można zmienić private point na int x, int y;
+// tworzenie armii w nowej klasie ?
+// ogarnięcie ataków, schematów atakowania
+// menu po lewej stronie? Gra się włącza po prawej
+// pierwsza wersja, 2 jednostki, brak rozróżnienia na pola, brak budynków
+// przeniesienie pól do klasy wyżej ?
+//JLabel musi być center, ale jak to zrobić
 public class GameLayout extends JPanel
 {
-    final protected int MapSize = 8;
+    final protected static int MapSize = 8;
     private ArrayList<MapPanel> mapTiles;
     private ArrayList<Entity> player1_Army;
     private ArrayList<Entity> player2_Army;
@@ -29,7 +35,7 @@ public class GameLayout extends JPanel
 
     private void initLayout(){
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 60,50));
-        map.setLayout(new GridLayout(8,8,0 ,0));
+        map.setLayout(new GridLayout(MapSize,MapSize,0 ,0));
 
 
 
@@ -38,19 +44,19 @@ public class GameLayout extends JPanel
                 MapPanel btn = new MapPanel();
                 btn.addMouseListener(new ClickAction());
                 mapTiles.add(btn);
-                if(i%2 == j%2) btn.setBackground(Color.black);
+                if(i%2 == j%2) btn.setBackground(Color.GRAY);
                     else btn.setBackground(Color.white);
                 btn.putClientProperty("Position", new Point(i,j));
-                btn.setBorder(BorderFactory.createLineBorder(Color.gray));
+                btn.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
                 map.add(btn);
             }
         }
 
         EntityFactory factory = new EntityFactory();
 
-        player1_Army.add(factory.addEntity("warrior", new Point(0,5)));
+        player1_Army.add(factory.addEntity("warrior", new Point(0,0)));
+        player1_Army.add(factory.addEntity("archer",new Point(0,6)));
         player1_Army.add(factory.addEntity("warrior",new Point(0,1)));
-        player1_Army.add(factory.addEntity("warrior",new Point(0,2)));
         player1_Army.add(factory.addEntity("warrior",new Point(0,3)));
         player1_Army.add(factory.addEntity("warrior",new Point(0,4)));
 
@@ -69,6 +75,9 @@ public class GameLayout extends JPanel
     /**
      * Click Action Class is design in order to get any click on a MapTile,
      * then it decodes MapTile position property and next sends it to GameLogic class object
+     * According to current state of "selected" object it runs diffrent method of GameLogic class,
+     * if no tile selected, method tile not selected, if anyone selected, method tile selected is called
+     * GameLogic class process the rest of game states
      */
     private class ClickAction extends MouseAdapter {
 
@@ -78,38 +87,38 @@ public class GameLayout extends JPanel
             Point point = (Point) panel.getClientProperty("Position"); //decode tile position
                     if(selected == null && panel.getEntity_on_tile() != null){
                         System.out.println(1);
+                        panel.setBorder(Color.RED,2);
                         logic.tileNotSelected(panel, mapTiles);
                         selected = panel;
                         //paintArmy();
                     }
-                    else if ( selected != null && !(point.equals((Point)selected.getClientProperty("Position")))){
+                    else if ( selected != null && !(point.equals((Point)selected.getClientProperty("Position")) && panel.getEntity_on_tile() == null)){
                         System.out.println(2);
                         logic.tileSelected(panel,selected,mapTiles);
-                        selected.setBorder(Color.GRAY,1);
+                        selected.setBorder(Color.BLACK,1);
                         selected = null;
 
                         //paintArmy();
 
                     }
                     else {
+                        try {
+                            if (selected.getTileBorder() != Color.BLACK) selected.setBorder(Color.BLACK, 1);
+                        } catch( NullPointerException exc){
+
+                        }
                         selected = null;
                         System.out.println(3);
-                        logic.getPossibleMoves().clear();
-                        logic.getPossibleAttacks().clear();
+                        logic.clearArrAttacks();
+                        logic.clearArrMoves();
                         paintArmy();
                     }
-
-            paintArmy();//nwm jaki chuj ale z dwoma działa xD
+            System.out.println("Tura:"+ logic.getRoundCounter());
+            paintArmy();
 
         }
     }
 
-    private void refactorArmy( MapPanel panel_){
-        panel_.setEntity_on_tile(null);
-        panel_.removeAll();
-        paintArmy();
-
-    }
 
     /*
     do optymalizacji !
@@ -119,7 +128,7 @@ public class GameLayout extends JPanel
         for(Entity ent : player1_Army){
             Point position = ent.getPosition();
             for(MapPanel tile : mapTiles){
-                if(!(tile == selected || logic.getPossibleAttacks().contains(tile) || logic.getPossibleMoves().contains(tile) ))tile.setBorder(Color.GRAY,1);
+                if(!(tile == selected || logic.getPossibleAttacks().contains(tile) || logic.getPossibleMoves().contains(tile) ))tile.setBorder(Color.BLACK,2);
                 Point tle = (Point)tile.getClientProperty("Position");
                 if(tle.equals(position) && tile.getEntity_on_tile() == null) {
                     tile.add(new JLabel(ent.getPicLabel()));
@@ -128,6 +137,18 @@ public class GameLayout extends JPanel
                 }
             }
         }
+        /*for(MapPanel tile : mapTiles ){
+            Point tle = (Point)tile.getClientProperty("Position");
+            for(Entity ent : player1_Army){
+                Point position = ent.getPosition();
+                if(!(tile == selected || logic.getPossibleAttacks().contains(tile) || logic.getPossibleMoves().contains(tile) ))tile.setBorder(Color.GRAY,1);
+                if(tle.equals(position) && tile.getEntity_on_tile() == null) {
+                    tile.add(new JLabel(ent.getPicLabel()));
+                    tile.setEntity_on_tile(ent);
+                    break;
+                }
+            }
+        }*/
     }
 
     public MapPanel getTileFromPoint(Point point_){
@@ -144,7 +165,7 @@ public class GameLayout extends JPanel
     Getters and Setters
      */
 
-    public int getMapSize() {
+    public static int getMapSize() {
         return MapSize;
     }
 

@@ -19,9 +19,12 @@ public class GameLogic {
             setAttackBorders(Tile_, mapTiles_, Color.ORANGE);
     }
     public void tileSelected(MapPanel Tile_,MapPanel selected_, ArrayList<MapPanel> mapTiles_){
-        if(this.possibleMoves.contains(Tile_)){
+        if(this.possibleMoves.contains(Tile_) && Tile_ != selected_){
             moveEntity(Tile_,selected_);
         }
+        this.possibleMoves.clear();
+        this.possibleAttacks.clear();
+        return;
     }
 
     private void setAttackBorders(MapPanel Tile_, ArrayList<MapPanel> mapTiles_, Color color_){
@@ -30,8 +33,8 @@ public class GameLogic {
         for(Point point : entityOnTile.getPossible_attacks()){
             for(MapPanel tile : mapTiles_){
                 Point tilePosition = (Point)tile.getClientProperty("Position");
-                if(tilePosition.equals(point)) {
-                    tile.setBorder(color_,2);
+                if(tilePosition.equals(point) && tile.isOccupied()) {
+                    tile.setBorder(color_,3);
                     this.possibleAttacks.add(tile);
                 }
             }
@@ -43,8 +46,8 @@ public class GameLogic {
         for (Point point : entityOnTile.getPossible_moves()) {
             for (MapPanel tile : mapTiles_) {
                 Point tilePosition = (Point) tile.getClientProperty("Position");
-                if (tilePosition.equals(point)) {
-                    tile.setBorder(color_,2);
+                if (tilePosition.equals(point) && !tile.isOccupied()) {
+                    tile.setBorder(color_,3);
                     this.possibleMoves.add(tile);
                     }
             }
@@ -80,5 +83,12 @@ public class GameLogic {
 
     public static int getRoundCounter() {
         return roundCounter;
+    }
+
+    public void clearArrAttacks(){
+        this.possibleAttacks.clear();
+    }
+    public void clearArrMoves(){
+        this.possibleMoves.clear();
     }
 }
