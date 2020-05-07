@@ -22,4 +22,5 @@ public class EntityFactory {
         //...
         throw new NullPointerException("No such a Unit");
     }
+
 }
