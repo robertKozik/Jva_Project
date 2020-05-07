@@ -20,7 +20,7 @@ public class EntityFactory {
         if(type.equalsIgnoreCase("Warrior"))
             return new Warrior(position_);
         if(type.equalsIgnoreCase("Archer"))
-            return new Archer();
+            return new Archer(position_);
         //...
         throw new NullPointerException("No such a Unit");
     }
