@@ -4,12 +4,12 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Archer extends Entity implements iMovable {
-
     public Archer(){
         super();
         MovePattern();
         AttackPattern();
     }
+
 
     public Archer(Point position_, int health_, int attack_, int defense_, boolean canAttack_) {
         super(position_, "src/Art/dagger.png", health_, attack_, defense_, canAttack_);
@@ -23,7 +23,6 @@ public class Archer extends Entity implements iMovable {
         MovePattern();
         AttackPattern();
     }
-
 
     /*
     attack pattern:

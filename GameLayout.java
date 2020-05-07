@@ -71,7 +71,7 @@ public class GameLayout extends JPanel
         playersArr[1].getArmy().getTroops().add(factory.addEntity("warrior",new Point(7,7)));
 
         paintArmy();
-
+        System.out.println(playersArr[1].getArmy().getTroops());
        
         map.setPreferredSize(new Dimension(400,400));
         map.setMaximumSize(new Dimension(400,400));
@@ -148,6 +148,10 @@ public class GameLayout extends JPanel
                         if (tle.equals(position) && mapTiles[i][j].getEntity_on_tile() == null) {
                             mapTiles[i][j].add(new JLabel(ent.getPicLabel()));
                             mapTiles[i][j].setEntity_on_tile(ent);
+                            if(playersArr[1].getArmy().getTroops().contains(ent))
+                                mapTiles[i][j].owner=playersArr[1];
+                            else
+                                mapTiles[i][j].owner=playersArr[0];
                             break;
                         }
                     }
@@ -167,7 +171,9 @@ public class GameLayout extends JPanel
             return null;
         }
 
+    public void get_Player(){
 
+    }
 
     /*
     Getters and Setters

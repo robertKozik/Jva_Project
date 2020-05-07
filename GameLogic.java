@@ -37,7 +37,7 @@ public class GameLogic {
             for(int i=0;i<8;i++){
                 for(int j=0;j<8;j++) {
                     Point tilePosition = (Point) mapTiles_[i][j].getClientProperty("Position");
-                    if (tilePosition.equals(point) && mapTiles_[i][j].isOccupied()) {
+                    if (tilePosition.equals(point) && mapTiles_[i][j].isOccupied()  &&  mapTiles_[i][j].getOwner()!=Tile_.getOwner()) {
                         mapTiles_[i][j].setBorder(color_, 3);
                         this.possibleAttacks.add(mapTiles_[i][j]);
                     }

@@ -33,6 +33,7 @@ abstract public class Entity {
         this.attack = 0;
         this.defense = 0;
     }
+
     public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {
         this.possible_attacks = new ArrayList<>();
         this.possible_moves = new ArrayList<>();
@@ -134,4 +135,5 @@ abstract public class Entity {
     public int getImgH() {
         return imgH;
     }
+
 }
