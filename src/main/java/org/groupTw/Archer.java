@@ -2,7 +2,9 @@ package org.groupTw;
 
 import java.awt.*;
 import java.util.ArrayList;
-
+/*
+nie ma co opisywać, jednostka jak każda inna, dziedziczy po Enitity i implementuje interfejs iMovable
+ */
 public class Archer extends Entity implements iMovable {
 
     public Archer(){

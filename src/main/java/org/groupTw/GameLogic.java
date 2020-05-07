@@ -52,7 +52,7 @@ public class GameLogic {
                     }
             }
         }
-        //System.out.println(this.possibleMoves.size());
+
     }
 
     private void moveEntity(MapPanel tile_, MapPanel selected_){
