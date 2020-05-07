@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/*
+klasa abstrakcyjna po której dziedziczy każda jednostka
+ */
 abstract public class Entity {
     private Point position;
     private ArrayList<Point> possible_attacks;
@@ -20,10 +22,10 @@ abstract public class Entity {
     private int attack;
     private int defense;
     private ImageIcon picLabel;
-    //__________________
+    //__________________wymiary obrazka jednostki
     final int imgW = 35;
     final int imgH = 35;
-
+    //Konstruktory
     public Entity(){
         this.position = new Point(0,0);
         this.possible_attacks = new ArrayList<>();
@@ -45,7 +47,7 @@ abstract public class Entity {
     }
 
 
-
+    //funkcja odpowiedzialna za załadowanie obrazka jednostki
     private Image loadImage( String imagePath)  {
         try {
             Image img = ImageIO.read(new File(imagePath));
@@ -59,10 +61,14 @@ abstract public class Entity {
         return null;
     }
 
+
+    //funkcje abstrakcyjne które mogą zostać zaimplementowane
     abstract void AttackPattern();
     abstract void MovePattern();
     abstract void Move(Point position_);
 
+
+    //gettery i settery
     public Point getPosition() {
         return position;
     }

@@ -2,7 +2,9 @@ package org.groupTw;
 
 
 import java.awt.*;
-
+/*
+Klasa fabryki, zwraca ona każdą możliwą nową instancję jednostki, ułatwia tworzenie jednostek, armi etc.
+ */
 public class EntityFactory {
 
     public Entity addEntity(String type) throws NullPointerException {
