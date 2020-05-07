@@ -9,9 +9,12 @@ public class AppFrame extends JFrame {
     private JPanel layout;
     private GameLayout Map;
     private JPanel settingsPanel;
+    private Player[] playersArr;
 
     public AppFrame () {
-        init();
+        this.playersArr = new Player[2];
+        for(int i =0; i<2; i++) this.playersArr[i] = new Player();//init new players
+        init(); //inicjujesz na początku menu(może być prywatną klasą tutaj) która ma przyciski, po kliknięciu na "start game" usuwasz menu z widoku i dodajesz mapę
     }
 
     private void init(){
@@ -23,7 +26,7 @@ public class AppFrame extends JFrame {
         settingsPanel.add(new JLabel(String.valueOf(GameLogic.getRoundCounter())));
         this.add(settingsPanel);
 
-        Map = new GameLayout();
+        Map = new GameLayout(this.playersArr, new GameLogic());
         this.add(Map);
 
         setResizable(false);

@@ -15,19 +15,28 @@ import java.util.ArrayList;
 //JLabel musi być center, ale jak to zrobić
 public class GameLayout extends JPanel
 {
-    final protected static int MapSize = 8;
+    final static int MapSize = 8;
     private ArrayList<MapPanel> mapTiles;
-    private ArrayList<Entity> player1_Army;
-    private ArrayList<Entity> player2_Army;
+    private Player[] playersArr;
     private JPanel map;
     private GameLogic logic;
     private MapPanel selected;
+    private Army currentArmy;
 
+    public GameLayout(Player[] playersArr_, GameLogic logic_){
+        this.playersArr = playersArr_;
+        this.logic = logic_;
+        this.map = new JPanel();
+        this.selected = null;
+        this.mapTiles = new ArrayList<>();
+        initLayout();
+
+    }
 
     public GameLayout() {
         map = new JPanel();
         mapTiles = new ArrayList<>();
-        player1_Army = new ArrayList<>();
+        playersArr = new Player[2];
         logic = new GameLogic();
         selected = null;
         initLayout();
@@ -54,11 +63,12 @@ public class GameLayout extends JPanel
 
         EntityFactory factory = new EntityFactory();
 
-        player1_Army.add(factory.addEntity("warrior", new Point(0,0)));
-        player1_Army.add(factory.addEntity("archer",new Point(0,6)));
-        player1_Army.add(factory.addEntity("warrior",new Point(0,1)));
-        player1_Army.add(factory.addEntity("warrior",new Point(0,3)));
-        player1_Army.add(factory.addEntity("warrior",new Point(0,4)));
+        playersArr[0].getArmy().getTroops().add(factory.addEntity("warrior", new Point(0,0)));
+        playersArr[0].getArmy().getTroops().add(factory.addEntity("warrior", new Point(0,1)));
+        playersArr[0].getArmy().getTroops().add(factory.addEntity("archer",new Point(0,2)));
+        playersArr[1].getArmy().getTroops().add(factory.addEntity("warrior",new Point(7,5)));
+        playersArr[1].getArmy().getTroops().add(factory.addEntity("warrior",new Point(7,6)));
+        playersArr[1].getArmy().getTroops().add(factory.addEntity("warrior",new Point(7,7)));
 
         paintArmy();
 
@@ -83,9 +93,10 @@ public class GameLayout extends JPanel
 
         @Override
         public void mouseReleased(MouseEvent e) {
+            currentArmy = playersArr[logic.getRoundCounter()%2].getArmy();
             MapPanel panel = (MapPanel) e.getSource();
             Point point = (Point) panel.getClientProperty("Position"); //decode tile position
-                    if(selected == null && panel.getEntity_on_tile() != null){
+                    if(selected == null && currentArmy.getTroops().contains(panel.getEntity_on_tile())){
                         System.out.println(1);
                         panel.setBorder(Color.RED,2);
                         logic.tileNotSelected(panel, mapTiles);
@@ -125,31 +136,24 @@ public class GameLayout extends JPanel
     O(n^2) :/
     */
     private void paintArmy(){
-        for(Entity ent : player1_Army){
-            Point position = ent.getPosition();
-            for(MapPanel tile : mapTiles){
-                if(!(tile == selected || logic.getPossibleAttacks().contains(tile) || logic.getPossibleMoves().contains(tile) ))tile.setBorder(Color.BLACK,2);
-                Point tle = (Point)tile.getClientProperty("Position");
-                if(tle.equals(position) && tile.getEntity_on_tile() == null) {
-                    tile.add(new JLabel(ent.getPicLabel()));
-                    tile.setEntity_on_tile(ent);
-                    break;
+
+        for(Player ply : this.playersArr) {
+            for (Entity ent : ply.getArmy().getTroops()) {
+                Point position = ent.getPosition();
+                for (MapPanel tile : mapTiles) {
+                    if (!(tile == selected || logic.getPossibleAttacks().contains(tile) || logic.getPossibleMoves().contains(tile)))
+                        tile.setBorder(Color.BLACK, 2);
+                    Point tle = (Point) tile.getClientProperty("Position");
+                    if (tle.equals(position) && tile.getEntity_on_tile() == null) {
+                        tile.add(new JLabel(ent.getPicLabel()));
+                        tile.setEntity_on_tile(ent);
+                        break;
+                    }
                 }
             }
         }
-        /*for(MapPanel tile : mapTiles ){
-            Point tle = (Point)tile.getClientProperty("Position");
-            for(Entity ent : player1_Army){
-                Point position = ent.getPosition();
-                if(!(tile == selected || logic.getPossibleAttacks().contains(tile) || logic.getPossibleMoves().contains(tile) ))tile.setBorder(Color.GRAY,1);
-                if(tle.equals(position) && tile.getEntity_on_tile() == null) {
-                    tile.add(new JLabel(ent.getPicLabel()));
-                    tile.setEntity_on_tile(ent);
-                    break;
-                }
-            }
-        }*/
     }
+
 
     public MapPanel getTileFromPoint(Point point_){
         for(MapPanel tile : mapTiles){
@@ -177,20 +181,12 @@ public class GameLayout extends JPanel
         this.mapTiles = mapTiles;
     }
 
-    public ArrayList<Entity> getPlayer1_Army() {
-        return player1_Army;
+    public Player[] getPlayersArr() {
+        return playersArr;
     }
 
-    public void setPlayer1_Army(ArrayList<Entity> player1_Army) {
-        this.player1_Army = player1_Army;
-    }
-
-    public ArrayList<Entity> getPlayer2_Army() {
-        return player2_Army;
-    }
-
-    public void setPlayer2_Army(ArrayList<Entity> player2_Army) {
-        this.player2_Army = player2_Army;
+    public void setPlayersArr(Player[] playersArr) {
+        this.playersArr = playersArr;
     }
 
     public MapPanel getSelected() {
