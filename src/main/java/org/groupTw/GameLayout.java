@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class GameLayout extends JPanel
 {
     final static int MapSize = 8;
-    private ArrayList<MapPanel> mapTiles;
+    private MapPanel[][] mapTiles;
     private Player[] playersArr;
     private JPanel map;
     private GameLogic logic;
@@ -28,14 +28,14 @@ public class GameLayout extends JPanel
         this.logic = logic_;
         this.map = new JPanel();
         this.selected = null;
-        this.mapTiles = new ArrayList<>();
+        mapTiles = new MapPanel[MapSize][MapSize];
         initLayout();
 
     }
 
     public GameLayout() {
         map = new JPanel();
-        mapTiles = new ArrayList<>();
+        mapTiles = new MapPanel[MapSize][MapSize];
         playersArr = new Player[2];
         logic = new GameLogic();
         selected = null;
@@ -52,7 +52,7 @@ public class GameLayout extends JPanel
             for (int j = 0; j < MapSize; j++) {
                 MapPanel btn = new MapPanel();
                 btn.addMouseListener(new ClickAction());
-                mapTiles.add(btn);
+                mapTiles[i][j]=btn;
                 if(i%2 == j%2) btn.setBackground(Color.GRAY);
                     else btn.setBackground(Color.white);
                 btn.putClientProperty("Position", new Point(i,j));
@@ -71,7 +71,7 @@ public class GameLayout extends JPanel
         playersArr[1].getArmy().getTroops().add(factory.addEntity("warrior",new Point(7,7)));
 
         paintArmy();
-
+        System.out.println(playersArr[1].getArmy().getTroops());
        
         map.setPreferredSize(new Dimension(400,400));
         map.setMaximumSize(new Dimension(400,400));
@@ -135,19 +135,25 @@ public class GameLayout extends JPanel
     do optymalizacji !
     O(n^2) :/
     */
-    private void paintArmy(){
+    private void paintArmy() {
 
-        for(Player ply : this.playersArr) {
+        for (Player ply : this.playersArr) {
             for (Entity ent : ply.getArmy().getTroops()) {
                 Point position = ent.getPosition();
-                for (MapPanel tile : mapTiles) {
-                    if (!(tile == selected || logic.getPossibleAttacks().contains(tile) || logic.getPossibleMoves().contains(tile)))
-                        tile.setBorder(Color.BLACK, 2);
-                    Point tle = (Point) tile.getClientProperty("Position");
-                    if (tle.equals(position) && tile.getEntity_on_tile() == null) {
-                        tile.add(new JLabel(ent.getPicLabel()));
-                        tile.setEntity_on_tile(ent);
-                        break;
+                for (int i = 0; i < MapSize; i++) {
+                    for (int j = 0; j < MapSize; j++) {
+                        if (!(mapTiles[i][j] == selected || logic.getPossibleAttacks().contains(mapTiles[i][j]) || logic.getPossibleMoves().contains(mapTiles[i][j])))
+                            mapTiles[i][j].setBorder(Color.BLACK, 2);
+                        Point tle = (Point) mapTiles[i][j].getClientProperty("Position");
+                        if (tle.equals(position) && mapTiles[i][j].getEntity_on_tile() == null) {
+                            mapTiles[i][j].add(new JLabel(ent.getPicLabel()));
+                            mapTiles[i][j].setEntity_on_tile(ent);
+                            if(playersArr[1].getArmy().getTroops().contains(ent))
+                                mapTiles[i][j].owner=playersArr[1];
+                            else
+                                mapTiles[i][j].owner=playersArr[0];
+                            break;
+                        }
                     }
                 }
             }
@@ -155,15 +161,19 @@ public class GameLayout extends JPanel
     }
 
 
-    public MapPanel getTileFromPoint(Point point_){
-        for(MapPanel tile : mapTiles){
-            Point tilePosition = (Point)tile.getClientProperty("Position");
-            if(tilePosition.equals(point_))return tile;
+        private MapPanel getTileFromPoint (Point point_){
+            for (int i = 0; i < MapSize; i++) {
+                for (int j = 0; j < MapSize; j++) {
+                    Point tilePosition = (Point) mapTiles[i][j].getClientProperty("Position");
+                    if (tilePosition.equals(point_)) return mapTiles[i][j];
+                }
+            }
+            return null;
         }
-        return null;
+
+    public void get_Player(){
+
     }
-
-
 
     /*
     Getters and Setters
@@ -173,11 +183,11 @@ public class GameLayout extends JPanel
         return MapSize;
     }
 
-    public ArrayList<MapPanel> getMapTiles() {
+    public MapPanel[][] getMapTiles() {
         return mapTiles;
     }
 
-    public void setMapTiles(ArrayList<MapPanel> mapTiles) {
+    public void setMapTiles(MapPanel[][] mapTiles) {
         this.mapTiles = mapTiles;
     }
 

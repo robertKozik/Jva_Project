@@ -11,6 +11,7 @@ class MapPanel extends JPanel {
 
     private Color border = Color.BLACK;
     protected Entity entity_on_tile;
+    protected Player owner;
     final int n = 2;
     public MapPanel() {
 
@@ -79,7 +80,7 @@ class MapPanel extends JPanel {
     public Color getTileBorder(){
         return border;
     }
-
+    public Player getOwner(){return this.owner;}
     public void setEntity_on_tile(Entity entity_on_tile) {
         this.entity_on_tile = entity_on_tile;
     }

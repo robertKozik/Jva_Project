@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Warrior extends Entity implements iMovable {
 
 
-
     //Constructor
     public Warrior(){
         super();
@@ -27,6 +26,7 @@ public class Warrior extends Entity implements iMovable {
         MovePattern();
         AttackPattern();
     }
+
 
     /*
     Attack pattern :
