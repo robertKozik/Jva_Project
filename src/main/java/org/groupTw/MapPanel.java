@@ -3,28 +3,20 @@ package org.groupTw;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-/*
-podstawowy obiekt mapy
- */
+import static java.awt.Color.gray;
+
+
 class MapPanel extends JPanel {
 
-    private boolean isSelected;
-    private Color border = Color.gray;
+    private Color border = Color.BLACK;
     protected Entity entity_on_tile;
     final int n = 2;
     public MapPanel() {
 
-<<<<<<< Updated upstream
         super();
         entity_on_tile = null;
-=======
-        super(); // wywoałnie konstruktowa podstawowego obiektu JPanel
-        entity_on_tile = null; // początkowo nie mamy jednostki na polu
-        this.setLayout(new FlowLayout(FlowLayout.CENTER)); // ustawienie layoutu żeby jednostka wyświetlała się poprawnie
->>>>>>> Stashed changes
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         initUI();
     }
@@ -35,7 +27,7 @@ class MapPanel extends JPanel {
 
         initUI();
     }*/
-    // konstruktor tworzący pole mapy już z przypisaną jednostką
+
     public MapPanel(Entity entity_){
         super();
         this.entity_on_tile = entity_;
@@ -44,10 +36,7 @@ class MapPanel extends JPanel {
 
 
     private void initUI() {
-        BorderFactory.createLineBorder(border, n);//tworzenie ramki
 
-<<<<<<< Updated upstream
-        isSelected = false;
         BorderFactory.createLineBorder(border, n);
 
         addMouseListener(new MouseAdapter() {
@@ -55,40 +44,22 @@ class MapPanel extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if(border != Color.red) {
-                    if(entity_on_tile != null)border = Color.green;
-                    else border = Color.yellow;
-                    setBorder(BorderFactory.createLineBorder(border,n));
-=======
-        addMouseListener(new MouseAdapter() {   // dodajemy obiekt nasłuchujący odpowiedzialny za podświetlenie pola nad którym znajduje się kursor
-
-
-            @Override
-            public void mouseEntered(MouseEvent e) {    //kursor pojawia się nad polem, zmiana jego ramki na zieloną
                 if(border == Color.BLACK ) {
                     border = Color.GREEN;
                     setBorder(border,n);
->>>>>>> Stashed changes
                 }
             }
 
             @Override
-<<<<<<< Updated upstream
             public void mouseExited(MouseEvent e) {
-                if(border != Color.RED) {
-                    border = Color.gray;
-                    setBorder(BorderFactory.createLineBorder(border));
-=======
-            public void mouseExited(MouseEvent e) { //kursor oddala się od pola, zmieniamy jego ramkę na czarną
                 if(border == Color.GREEN){
                     border = Color.BLACK;
                     setBorder(border,n);
->>>>>>> Stashed changes
                 }
             }
 
 
-            @Override
+           /* @Override
             public void mouseReleased(MouseEvent e) {
                 if(border != Color.red && entity_on_tile != null) {
                     border = Color.red;
@@ -96,25 +67,15 @@ class MapPanel extends JPanel {
                     border = Color.green;
                 }else border = Color.yellow;
                 setBorder(BorderFactory.createLineBorder(border,n));
-            }
+            }*/
         });
     }
 
-    public void setSelected() {
 
-        isSelected = true;
-    }
-
-    public boolean isSelected() {
-
-        return isSelected;
-    }
-
-    public void setBorder(Color border_, int width_) {  // metoda zmieniająca kolor ramki na podany jao argument
+    public void setBorder(Color border_, int width_) {
         this.border = border_;
         this.setBorder(BorderFactory.createLineBorder(border,width_));
     }
-    //Gettery i Settery
     public Color getTileBorder(){
         return border;
     }
@@ -126,6 +87,9 @@ class MapPanel extends JPanel {
         return this.entity_on_tile;
     }
 
+    public boolean isOccupied(){
+        return this.entity_on_tile != null;
+    }
     public boolean equals(MapPanel obj) {
         Point point1 = (Point)this.getClientProperty("Position");
         Point point2 = (Point)obj.getClientProperty("Position");

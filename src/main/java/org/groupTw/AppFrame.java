@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-/*
-główny obiekt programu, dziedziczy po Ramce JFrame, w niej znajdą się wszystkie komponenty
- */
+
 public class AppFrame extends JFrame {
     private JPanel layout;
     private GameLayout Map;
