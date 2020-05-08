@@ -23,16 +23,16 @@ public class GameLayout extends JPanel
     private MapPanel selected;
     private Army currentArmy;
 
-    public GameLayout(Player[] playersArr_, GameLogic logic_){
+    public GameLayout(Player[] playersArr_, GameLogic logic_,MapPanel selected_,JPanel map_,MapPanel[][] mapTiles_){
         this.playersArr = playersArr_;
         this.logic = logic_;
-        this.map = new JPanel();
-        this.selected = null;
-        mapTiles = new MapPanel[MapSize][MapSize];
+        this.map = map_;
+        this.selected = selected_;
+        mapTiles = mapTiles_;
         initLayout();
 
     }
-
+    //to jest nieuzywane zostawiamy czy wywalamy
     public GameLayout() {
         map = new JPanel();
         mapTiles = new MapPanel[MapSize][MapSize];

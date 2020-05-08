@@ -9,8 +9,12 @@ public class GameLogic {
     private ArrayList<MapPanel> possibleMoves;
     static private int roundCounter;
 
+    public GameLogic(int roundCounter_){
+        roundCounter = roundCounter_;
+        possibleAttacks = new ArrayList<>();
+        possibleMoves = new ArrayList<>();
+    }
     public GameLogic(){
-        roundCounter = 0;
         possibleAttacks = new ArrayList<>();
         possibleMoves = new ArrayList<>();
     }
@@ -64,6 +68,7 @@ public class GameLogic {
 
     private void moveEntity(MapPanel tile_, MapPanel selected_){
         roundCounter++;
+        //this.roundCounter++;
         selected_.getEntity_on_tile().Move((Point)tile_.getClientProperty("Position"));
         selected_.removeAll();
         selected_.setEntity_on_tile(null);
@@ -73,6 +78,7 @@ public class GameLogic {
     }
     private void attackEntity(MapPanel tile_, MapPanel selected_){
         roundCounter++;
+        //this.roundCounter++;
         tile_.getEntity_on_tile().Move((Point)selected_.getClientProperty("Position"));
         tile_.removeAll();
         tile_.setEntity_on_tile(null);
