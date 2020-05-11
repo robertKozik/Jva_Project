@@ -7,11 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 //Można zmienić private point na int x, int y;
-// tworzenie armii w nowej klasie ?
-// ogarnięcie ataków, schematów atakowania
 // menu po lewej stronie? Gra się włącza po prawej
 // pierwsza wersja, 2 jednostki, brak rozróżnienia na pola, brak budynków
-// przeniesienie pól do klasy wyżej ?
 //JLabel musi być center, ale jak to zrobić
 public class GameLayout extends JPanel
 {
@@ -33,6 +30,7 @@ public class GameLayout extends JPanel
 
     }
     //to jest nieuzywane zostawiamy czy wywalamy
+    //zostawiamy, to jest konstruktor domyślny, może się jeszcze przydać! -R.
     public GameLayout() {
         map = new JPanel();
         mapTiles = new MapPanel[MapSize][MapSize];
@@ -89,6 +87,10 @@ public class GameLayout extends JPanel
      * if no tile selected, method tile not selected, if anyone selected, method tile selected is called
      * GameLogic class process the rest of game states
      */
+    /*
+    Trzeba przenieść całe rozumowanie odtyczące czy pole wybrane czy nie do GameLogic
+    Dzięki temu będziemy mogli używać tego layoutu, podmieniając tylko logikę i lewy panel,do innych rzeczy, na przykład ustawiania armii ;)
+     */
     private class ClickAction extends MouseAdapter {
 
         @Override
@@ -134,6 +136,8 @@ public class GameLayout extends JPanel
     /*
     do optymalizacji !
     O(n^2) :/
+
+    te dwie pętle iterujące po
     */
     private void paintArmy() {
 
@@ -159,6 +163,31 @@ public class GameLayout extends JPanel
             }
         }
     }
+    //kolorowanie obramowania tylko tutaj ?
+    //prototyp !!! nie działa xD
+    private void updateMap() {
+        for (int i = 0; i < MapSize; i++) {
+            for (int j = 0; j < MapSize; j++) {
+                mapTiles[i][j].setOwner(null);
+                mapTiles[i][j].removeAll();
+                if (!(mapTiles[i][j] == selected || logic.getPossibleAttacks().contains(mapTiles[i][j])
+                        || logic.getPossibleMoves().contains(mapTiles[i][j]))) mapTiles[i][j].setBorder(Color.BLACK, 2);
+            }
+        }
+        for (Player ply : this.playersArr) {
+            for (Entity ent : ply.getArmy().getTroops()) {
+                Point position = ent.getPosition();
+                int x_ = (int) position.getX();
+                int y_ = (int) position.getY();
+                mapTiles[x_][y_].add(new JLabel(ent.getPicLabel()));
+                mapTiles[x_][y_].setEntity_on_tile(ent);
+                if (playersArr[1].getArmy().getTroops().contains(ent))
+                    mapTiles[x_][y_].owner = playersArr[1];
+                else
+                    mapTiles[x_][y_].owner = playersArr[0];
+            }
+        }
+    }
 
 
         private MapPanel getTileFromPoint (Point point_){
@@ -171,13 +200,17 @@ public class GameLayout extends JPanel
             return null;
         }
 
-    public void get_Player(){
-
-    }
-
     /*
     Getters and Setters
      */
+
+
+    public Player[] get_Player(){
+        return this.playersArr;
+    }
+    public void setPlayer(Player[] playersArr_){
+        this.playersArr = playersArr_;
+    }
 
     public static int getMapSize() {
         return MapSize;

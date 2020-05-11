@@ -17,15 +17,17 @@ public class AppFrame extends JFrame {
     private JPanel mapPanel;
     private MapPanel[][] mapTiles;
     private int roundCounter;
+
+
     public AppFrame () {
         this.roundCounter=0;
         this.mapTiles= new MapPanel[MapSize][MapSize];
         this.mapPanel = new JPanel();
-        this.selected = new MapPanel();
+        this.selected = null;
         this.playersArr = new Player[2];
         for(int i =0; i<2; i++) this.playersArr[i] = new Player();//init new players
         init(); //inicjujesz na początku menu(może być prywatną klasą tutaj) która ma przyciski, po kliknięciu na "start game" usuwasz menu z widoku i dodajesz mapę
-    }
+        }
 
     private void init(){
         this.logic=new GameLogic(this.roundCounter);

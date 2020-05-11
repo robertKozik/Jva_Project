@@ -63,12 +63,10 @@ public class GameLogic {
                 }
             }
         }
-        //System.out.println(this.possibleMoves.size());
     }
 
     private void moveEntity(MapPanel tile_, MapPanel selected_){
-        roundCounter++;
-        //this.roundCounter++;
+        this.roundCounter++;
         selected_.getEntity_on_tile().Move((Point)tile_.getClientProperty("Position"));
         selected_.removeAll();
         selected_.setEntity_on_tile(null);
@@ -77,8 +75,7 @@ public class GameLogic {
 
     }
     private void attackEntity(MapPanel tile_, MapPanel selected_){
-        roundCounter++;
-        //this.roundCounter++;
+        this.roundCounter++;
         tile_.getEntity_on_tile().Move((Point)selected_.getClientProperty("Position"));
         tile_.removeAll();
         tile_.setEntity_on_tile(null);

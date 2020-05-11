@@ -81,6 +81,9 @@ class MapPanel extends JPanel {
         return border;
     }
     public Player getOwner(){return this.owner;}
+    public void setOwner(Player owner_){
+        this.owner = owner_;
+    }
     public void setEntity_on_tile(Entity entity_on_tile) {
         this.entity_on_tile = entity_on_tile;
     }
