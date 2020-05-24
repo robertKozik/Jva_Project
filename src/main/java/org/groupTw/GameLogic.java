@@ -76,7 +76,7 @@ public class GameLogic {
     }
     private void attackEntity(MapPanel tile_, MapPanel selected_){
         this.roundCounter++;
-        tile_.getEntity_on_tile().Move((Point)selected_.getClientProperty("Position"));
+        tile_.getEntity_on_tile().setPosition(null);
         tile_.removeAll();
         tile_.setEntity_on_tile(null);
         System.out.println(tile_.getEntity_on_tile());

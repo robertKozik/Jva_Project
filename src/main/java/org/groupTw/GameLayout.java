@@ -45,20 +45,16 @@ public class GameLayout extends JPanel
         map.setLayout(new GridLayout(MapSize,MapSize,0 ,0));
 
 
-
         for(int i = 0; i<MapSize; i++) {
             for (int j = 0; j < MapSize; j++) {
                 MapPanel btn = new MapPanel();
                 btn.addMouseListener(new ClickAction());
                 mapTiles[i][j]=btn;
-                if(i%2 == j%2) btn.setBackground(Color.GRAY);
-                    else btn.setBackground(Color.white);
                 btn.putClientProperty("Position", new Point(i,j));
-                btn.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
+                //btn.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
                 map.add(btn);
             }
         }
-
         EntityFactory factory = new EntityFactory();
 
         playersArr[0].getArmy().getTroops().add(factory.addEntity("warrior", new Point(0,0)));
@@ -126,7 +122,6 @@ public class GameLayout extends JPanel
                         logic.clearArrMoves();
                         paintArmy();
                     }
-            System.out.println("Tura:"+ logic.getRoundCounter());
             paintArmy();
 
         }
@@ -140,14 +135,13 @@ public class GameLayout extends JPanel
     te dwie pętle iterujące po
     */
     private void paintArmy() {
-
         for (Player ply : this.playersArr) {
             for (Entity ent : ply.getArmy().getTroops()) {
                 Point position = ent.getPosition();
                 for (int i = 0; i < MapSize; i++) {
                     for (int j = 0; j < MapSize; j++) {
                         if (!(mapTiles[i][j] == selected || logic.getPossibleAttacks().contains(mapTiles[i][j]) || logic.getPossibleMoves().contains(mapTiles[i][j])))
-                            mapTiles[i][j].setBorder(Color.BLACK, 2);
+                            mapTiles[i][j].setBorder(Color.BLACK, 0);
                         Point tle = (Point) mapTiles[i][j].getClientProperty("Position");
                         if (tle.equals(position) && mapTiles[i][j].getEntity_on_tile() == null) {
                             mapTiles[i][j].add(new JLabel(ent.getPicLabel()));
@@ -163,6 +157,9 @@ public class GameLayout extends JPanel
             }
         }
     }
+
+
+    /*
     //kolorowanie obramowania tylko tutaj ?
     //prototyp !!! nie działa xD
     private void updateMap() {
@@ -199,7 +196,7 @@ public class GameLayout extends JPanel
             }
             return null;
         }
-
+*/
     /*
     Getters and Setters
      */
