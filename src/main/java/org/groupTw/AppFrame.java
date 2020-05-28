@@ -2,16 +2,12 @@ package org.groupTw;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 public class AppFrame extends JFrame {
     final static int MAPSIZE = 8;
     final static int YSPAN = 520;
     final static int XSPAN = 500;
     private Player[] playersArr;
-    protected MapPanel[][] map;
     private iLogic logic;
     private Menu menu;
 

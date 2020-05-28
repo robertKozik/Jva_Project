@@ -2,10 +2,8 @@ package org.groupTw;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 //Można zmienić private point na int x, int y;
 // menu po lewej stronie? Gra się włącza po prawej
 // pierwsza wersja, 2 jednostki, brak rozróżnienia na pola, brak budynków
@@ -34,6 +32,7 @@ public class GameLayout extends JPanel {
                 btn.addMouseListener(new ClickAction());
                 mapTiles[i][j] = btn;
                 btn.putClientProperty("Position", new Point(i, j));
+                map.add(mapTiles[i][j]);
             }
         }
 
@@ -47,11 +46,12 @@ public class GameLayout extends JPanel {
         logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 6)));
         logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 7)));
 
-        //assign troops to their tiles
+        //assign all troops to their tiles
         for( Player ply : logic.getPlayersArr()){
             for(Entity troop : ply.getArmy().getTroops()){
                 Point position = troop.getPosition();
                 mapTiles[(int)position.getX()][(int)position.getY()].setEntity_on_tile(troop);
+                mapTiles[(int)position.getX()][(int)position.getY()].setOwner(ply);
             }
         }
         repaintMap();
@@ -88,7 +88,7 @@ public class GameLayout extends JPanel {
         for(int i = 0; i<AppFrame.MAPSIZE; i++){
             for(int j = 0; j<AppFrame.MAPSIZE; j++){
                 mapTiles[i][j].removeAll();
-                map.add(mapTiles[i][j]);
+                //map.add(mapTiles[i][j]);
                 if(mapTiles[i][j].isOccupied()){
                     mapTiles[i][j].add(new JLabel(mapTiles[i][j].getEntity_on_tile().getPicLabel()));
                 }
