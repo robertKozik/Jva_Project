@@ -15,7 +15,6 @@ class MapPanel extends JPanel {
     protected Entity entity_on_tile;
     protected Player owner;
     private Image bgImage;
-    final int n = 1;
 
     public MapPanel() {
 
@@ -33,14 +32,16 @@ class MapPanel extends JPanel {
     public MapPanel(Entity entity_) {
         super();
         this.entity_on_tile = entity_;
+        try{
+            this.bgImage = ImageIO.read(new File("src/Art/grass.png"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         initUI();
     }
 
 
     private void initUI() {
-
-        setBorder(border, n);
-
         addMouseListener(new MouseAdapter() {
 
 
@@ -48,7 +49,7 @@ class MapPanel extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 if (border == Color.BLACK) {
                     border = Color.GREEN;
-                    setBorder(border, n);
+                    setBorder(border, 1);
                 }
             }
 
@@ -102,4 +103,6 @@ class MapPanel extends JPanel {
         Point point2 = (Point) obj.getClientProperty("Position");
         return super.equals(obj);
     }
+
+
 }

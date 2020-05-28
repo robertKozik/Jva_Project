@@ -9,6 +9,10 @@ public class Army {
         this.troops = new ArrayList<>();
     }
 
+    public void addTroop(Entity entity_){
+
+    }
+
     public Army(ArrayList<Entity> troops_) {
         this.troops = troops_;
     }
