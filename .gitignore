@@ -1,5 +1,3 @@
 
-target/classes/org/groupTw/AppFrame.class
-target/classes/org/groupTw/GameLayout.class
-target/classes/org/groupTw/GameLogic.class
-target/classes/org/groupTw/MapPanel.class
+target
+.idea
