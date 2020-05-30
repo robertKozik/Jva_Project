@@ -2,7 +2,6 @@ package org.groupTw;
 
 import java.awt.*;
 
-public class Warrior extends Entity implements iMovable {
 
 public class Warrior extends MovingUnit implements iMovable {
 
