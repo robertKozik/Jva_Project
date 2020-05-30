@@ -21,6 +21,9 @@ public class EntityFactory {
                 return new Warrior(position_);
             case "ARCHER":
                 return new Archer(position_);
+
+            case "ARCHER TOWER":
+                return new ArcherTower(position_);
         }
         throw new NullPointerException("No such a Unit");
     }

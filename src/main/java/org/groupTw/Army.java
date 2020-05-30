@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class Army {
     private ArrayList<Entity>troops;
+    private ArrayList<Entity>buildings;
 
     public Army(){
         this.troops = new ArrayList<>();
+        this.buildings = new ArrayList<>();
     }
 
     public void addTroop(Entity entity_){
@@ -29,5 +31,13 @@ public class Army {
 
     public void setTroops(ArrayList<Entity> troops) {
         this.troops = troops;
+    }
+
+    public ArrayList<Entity> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(ArrayList<Entity> buildings) {
+        this.buildings = buildings;
     }
 }

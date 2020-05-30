@@ -45,12 +45,18 @@ public class GameLayout extends JPanel {
         logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 5)));
         logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 6)));
         logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 7)));
+        logic.getPlayersArr()[1].getArmy().getBuildings().add(factory.addEntity("archer tower", new Point(3,3)));
 
         //assign all troops to their tiles
         for( Player ply : logic.getPlayersArr()){
             for(Entity troop : ply.getArmy().getTroops()){
                 Point position = troop.getPosition();
                 mapTiles[(int)position.getX()][(int)position.getY()].setEntity_on_tile(troop);
+                mapTiles[(int)position.getX()][(int)position.getY()].setOwner(ply);
+            }
+            for(Entity building: ply.getArmy().getBuildings()){
+                Point position = building.getPosition();
+                mapTiles[(int)position.getX()][(int)position.getY()].setEntity_on_tile(building);
                 mapTiles[(int)position.getX()][(int)position.getY()].setOwner(ply);
             }
         }

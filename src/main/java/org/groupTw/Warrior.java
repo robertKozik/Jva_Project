@@ -1,10 +1,10 @@
 package org.groupTw;
 
 import java.awt.*;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Warrior extends Entity implements iMovable {
+
+public class Warrior extends MovingUnit implements iMovable {
 
 
     //Constructor
@@ -15,16 +15,16 @@ public class Warrior extends Entity implements iMovable {
     }
 
     public Warrior(Point position_, int health_, int attack_, int defense_, boolean canAttack_) {
-        super(position_, "src/Art/paladin.png", health_, attack_, defense_, canAttack_);
+        super(position_, "src/Art/Warrior.png", health_, attack_, defense_, canAttack_);
         MovePattern();
         AttackPattern();
 
     }
 
     public Warrior (Point position_){
-        super(position_,"src/Art/paladin.png",10,10,10,true);
-        MovePattern();
+        super(position_,"src/Art/Warrior.png",10,10,10,true);
         AttackPattern();
+        MovePattern();
     }
 
 
@@ -78,11 +78,5 @@ public class Warrior extends Entity implements iMovable {
         }
     }
 
-    @Override
-    public void Move(Point position_) {
-        this.setPosition(position_);
-        this.MovePattern();
-        this.AttackPattern();
-    }
 
 }

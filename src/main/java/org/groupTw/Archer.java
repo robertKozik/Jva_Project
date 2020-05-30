@@ -3,7 +3,9 @@ package org.groupTw;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Archer extends Entity implements iMovable {
+
+public class Archer extends MovingUnit implements iMovable {
+
     public Archer(){
         super();
         MovePattern();
@@ -66,10 +68,4 @@ public class Archer extends Entity implements iMovable {
         }
     }
 
-    @Override
-    public void Move(Point position_) {
-        this.setPosition(position_);
-        this.MovePattern();
-        this.AttackPattern();
-    }
 }

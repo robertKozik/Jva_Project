@@ -8,13 +8,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 abstract public class Entity {
     private Point position;
     private ArrayList<Point> possible_attacks;
-    private ArrayList<Point> possible_moves;
     private boolean canAttack;
     private int health;
     private int attack;
@@ -27,7 +27,6 @@ abstract public class Entity {
     public Entity(){
         this.position = new Point(0,0);
         this.possible_attacks = new ArrayList<>();
-        this.possible_moves = new ArrayList<>();
         this.canAttack = false;
         this.health = 0;
         this.attack = 0;
@@ -36,13 +35,12 @@ abstract public class Entity {
 
     public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {
         this.possible_attacks = new ArrayList<>();
-        this.possible_moves = new ArrayList<>();
         this.position = position_;
         this.canAttack = canAttack_;
         this.health = health_;
         this.attack = attack_;
         this.defense = defense_;
-        picLabel = new ImageIcon(loadImage(imagePath_));
+        picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
     }
 
 
@@ -50,8 +48,7 @@ abstract public class Entity {
     private Image loadImage( String imagePath)  {
         try {
             Image img = ImageIO.read(new File(imagePath));
-            Image bimg = img.getScaledInstance(imgW,imgH,Image.SCALE_FAST);
-            return bimg;
+            return img.getScaledInstance(imgW,imgH,Image.SCALE_FAST);
         }
         catch(IOException exc){
             Logger.getLogger(Main.class.getName()).log(
@@ -61,8 +58,7 @@ abstract public class Entity {
     }
 
     abstract void AttackPattern();
-    abstract void MovePattern();
-    abstract void Move(Point position_);
+
 
     public Point getPosition() {
         return position;
@@ -80,13 +76,6 @@ abstract public class Entity {
         this.possible_attacks = possible_attacks;
     }
 
-    public ArrayList<Point> getPossible_moves() {
-        return possible_moves;
-    }
-
-    public void setPossible_moves(ArrayList<Point> possible_moves) {
-        this.possible_moves = possible_moves;
-    }
 
     public boolean isCanAttack() {
         return canAttack;
