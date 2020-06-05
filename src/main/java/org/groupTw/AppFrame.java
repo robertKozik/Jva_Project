@@ -10,17 +10,18 @@ public class AppFrame extends JFrame {
     private Player[] playersArr;
     private iLogic logic;
     private Menu menu;
+    private GameLayout mainGame;
 
 
     public AppFrame () {
         menu = new Menu();
+        mainGame = null;
         this.playersArr = new Player[2];
         for(int i=0; i<2; i++)
             this.playersArr[i] = new Player();//init new players
-        this.logic=new GameLogic(playersArr);
         this.setSize(FRAMEXSPAN, FRAMEYSPAN);
         this.setLayout(new FlowLayout());
-        setResizable(true);
+        setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         updateFrame("MENU");
@@ -32,16 +33,20 @@ public class AppFrame extends JFrame {
         switch (upperCase)
         {
             case "MENU":
+                this.repaint();
                 this.add(menu);
                 setVisible(true);
                 break;
             case "NEW GAME":
                 this.remove(menu);
                 logic = new GameLogic(this.playersArr);
-                GameLayout Map = new GameLayout(logic);
-                this.add(Map);
+                mainGame = new GameLayout(logic);
+                this.add(mainGame);
                 setVisible(true);
                 break;
+            case "ENDGAME":
+                this.remove(mainGame);
+                updateFrame("MENU");
         }
     }
 

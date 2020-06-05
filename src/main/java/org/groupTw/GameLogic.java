@@ -56,6 +56,7 @@ public class GameLogic implements iLogic {
             tileSelected(tile_);
             selected.setBorder(Color.BLACK, 0);
             selected = null;
+            updateBoardState();
 
         //second click on the same tile
         } else if (selected != null && selected.equals(tile_)) {
@@ -70,10 +71,11 @@ public class GameLogic implements iLogic {
             clearArrAttacks();
             clearArrMoves();
         }
-        updateBoardState();
+
     }
 
     private void updateBoardState(){
+        System.out.println(playersArr[ (roundCounter + 1)%2 ].getArmy().size());
         if(playersArr[ (roundCounter + 1)%2 ].getArmy().size() == 0){
             winner = currentPlayer;
             gameState = false;
@@ -81,6 +83,7 @@ public class GameLogic implements iLogic {
         for(Player ply : playersArr){
             ply.getGoldPerTurn();
         }
+        roundCounter++;
     }
     //updates map state, when no tile is selected before
     private void tileNotSelected(MapPanel Tile_, MapPanel[][] mapTiles_) {
@@ -150,7 +153,6 @@ public class GameLogic implements iLogic {
     Asserts unit can move.
      */
     private void moveEntity(MapPanel tile_, MapPanel selected_) {
-        GameLogic.roundCounter++;
         MovingUnit entity = (MovingUnit) selected_.getEntity_on_tile();
         entity.Move((Point) tile_.getClientProperty("Position"));
         tile_.setEntity_on_tile(entity);
@@ -168,7 +170,6 @@ public class GameLogic implements iLogic {
     all Entities can attack .
      */
     private void attackEntity(MapPanel tile_) {
-        GameLogic.roundCounter++;
 
         int attackValue = selected.getEntity_on_tile().getAttack();
         if(!tile_.getEntity_on_tile().getDamage(attackValue)){
@@ -237,4 +238,21 @@ public class GameLogic implements iLogic {
     public void setToShow(Entity toShow) {
         this.toShow = toShow;
     }
+
+    public void setSelected(MapPanel selected) {
+        this.selected = selected;
+    }
+
+    public boolean isGameState() {
+        return gameState;
+    }
+
+    public void setGameState(boolean gameState) {
+        this.gameState = gameState;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
 }

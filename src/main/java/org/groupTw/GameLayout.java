@@ -49,12 +49,12 @@ public class GameLayout extends JPanel {
         //temporary method of making troops
         EntityFactory factory = new EntityFactory();
 
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 0)));
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 1)));
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("archer", new Point(0, 2)));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 5)));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 6)));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 7)));
+        //logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 0)));
+        //logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 1)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("archer", new Point(1, 2)));
+        //logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 5)));
+        //logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 6)));
+        //logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 7)));
         logic.getPlayersArr()[1].getArmy().add(factory.addEntity("archer tower", new Point(3,3)));
 
         placeEntitiesOnMap();
@@ -82,9 +82,12 @@ public class GameLayout extends JPanel {
             MapPanel panel = (MapPanel) e.getSource();
             logic.action(panel, mapTiles);
 
-            if(logic instanceof GameLogic && ((GameLogic)logic).getToShow() != null){
-                System.out.println("Tutaj");
-             createStatisticsTab(((GameLogic)logic).getToShow());
+            if(logic instanceof GameLogic ){
+                if( ((GameLogic)logic).getToShow() != null )
+                    createStatisticsTab(((GameLogic)logic).getToShow());
+             if(((GameLogic)logic).getWinner() != null) {
+                 sentToFrame("ENDGAME");
+             }
             }
             repaintMap();
         }
@@ -149,5 +152,11 @@ public class GameLayout extends JPanel {
 
         statistics.add(mainStatisticsLayout);
         mainLayout.addTab("Stats", statistics);
+    }
+
+    private void sentToFrame(String action_){
+        AppFrame ancestorFrame = (AppFrame)SwingUtilities.getWindowAncestor(this);
+        ancestorFrame.updateFrame(action_);
+
     }
 }
