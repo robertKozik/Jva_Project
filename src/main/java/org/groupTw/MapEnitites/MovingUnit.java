@@ -9,8 +9,8 @@ import java.util.Objects;
 abstract public class MovingUnit extends Entity implements iMovable {
     private ArrayList<Point> possible_moves;
 
-    public MovingUnit(){
-        super();
+    public MovingUnit(String imagePath_){
+        super(imagePath_);
         this.possible_moves = new ArrayList<>();
 
     }

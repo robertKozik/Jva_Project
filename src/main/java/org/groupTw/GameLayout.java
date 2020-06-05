@@ -7,10 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-//Można zmienić private point na int x, int y;
-// menu po lewej stronie? Gra się włącza po prawej
-// pierwsza wersja, 2 jednostki, brak rozróżnienia na pola, brak budynków
-//JLabel musi być center, ale jak to zrobić
+
 public class GameLayout extends JPanel {
     private MapPanel[][] mapTiles;
     private JTabbedPane mainLayout;
@@ -49,12 +46,15 @@ public class GameLayout extends JPanel {
         //temporary method of making troops
         EntityFactory factory = new EntityFactory();
 
-        //logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 0)));
-        //logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 1)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 0)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 1)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 2)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 3)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 4)));
         logic.getPlayersArr()[0].getArmy().add(factory.addEntity("archer", new Point(1, 2)));
-        //logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 5)));
-        //logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 6)));
-        //logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 7)));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 5)));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 6)));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 7)));
         logic.getPlayersArr()[1].getArmy().add(factory.addEntity("archer tower", new Point(3,3)));
 
         placeEntitiesOnMap();
@@ -130,25 +130,35 @@ public class GameLayout extends JPanel {
         JPanel mainStatisticsLayout = new JPanel();
         mainStatisticsLayout.setLayout(new BoxLayout(mainStatisticsLayout,BoxLayout.Y_AXIS));
 
-        JLabel Pic = new JLabel(entity_.getPicLabel());
+        for(Player ply : logic.getPlayersArr()){
+            int length = ply.getArmy().size();
+            JPanel grid = new JPanel(new GridLayout(1, ply.getArmy().size()) );
+            for (Entity ent:
+                    ply.getArmy()) {
+                JPanel unitPanel = new JPanel();
+                unitPanel.setLayout(new BoxLayout(unitPanel, BoxLayout.Y_AXIS));
+                JLabel Pic = new JLabel(ent.getPicLabel());
+                JLabel attack = new JLabel("Attack: " + ent.getAttack());
+                JLabel health = new JLabel("Health: " + ent.getCurrentHealth() + "/" + ent.getMaxHealth());
 
+                unitPanel.add(Pic);
+                unitPanel.add(health);
+                unitPanel.add(attack);
+                grid.add(unitPanel);
+            }
+            mainStatisticsLayout.add(grid);
+        }
+
+
+
+
+        /*JLabel Pic = new JLabel(entity_.getPicLabel());
         JLabel attack = new JLabel("Attack: " + entity_.getAttack());
-
         JLabel health = new JLabel("Health: " + entity_.getCurrentHealth() + "/" + entity_.getMaxHealth());
-
-        JLabel Pic_ = new JLabel(entity_.getPicLabel());
-
-        JLabel attack_ = new JLabel("Attack: " + entity_.getAttack());
-
-        JLabel health_ = new JLabel("Health: " + entity_.getCurrentHealth() + "/" + entity_.getMaxHealth());
 
         mainStatisticsLayout.add(Pic);
         mainStatisticsLayout.add(health);
-        mainStatisticsLayout.add(attack);
-
-        mainStatisticsLayout.add(Pic_);
-        mainStatisticsLayout.add(health_);
-        mainStatisticsLayout.add(attack_);
+        mainStatisticsLayout.add(attack);*/
 
         statistics.add(mainStatisticsLayout);
         mainLayout.addTab("Stats", statistics);

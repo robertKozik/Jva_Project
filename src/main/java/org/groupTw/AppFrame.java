@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class AppFrame extends JFrame {
     final public static int MAPSIZE = 10;
-    final public static int FRAMEYSPAN = 720;
-    final public static int FRAMEXSPAN = 700;
+    final public static int FRAMEYSPAN = 920;
+    final public static int FRAMEXSPAN = 900;
     private Player[] playersArr;
     private iLogic logic;
     private Menu menu;
@@ -47,6 +47,14 @@ public class AppFrame extends JFrame {
             case "ENDGAME":
                 this.remove(mainGame);
                 updateFrame("MENU");
+                break;
+            case "CREATE YOUR MAP":
+                this.remove(menu);
+                logic = new CreatorLogic(playersArr);
+                CreatorMap create = new CreatorMap(new GameLayout(logic));
+                this.add(create);
+                setVisible(true);
+                break;
         }
     }
 

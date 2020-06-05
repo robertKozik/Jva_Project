@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-abstract public class Entity {
+public abstract class Entity {
     private Point position;
     private ArrayList<Point> possible_attacks;
     private boolean canAttack;
@@ -28,8 +28,8 @@ abstract public class Entity {
     final int imgW = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
     final int imgH = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
 
-    public Entity(){
-        this.position = new Point(0,0);
+    public Entity(String imagePath_){
+        this.position = new Point(-1,-1);
         this.possible_attacks = new ArrayList<>();
         this.canAttack = false;
         this.maxHealth = 0;
@@ -37,6 +37,7 @@ abstract public class Entity {
         this.attack = 0;
         this.defense = 0;
         this.isAlive = true;
+        picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
     }
 
     public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {

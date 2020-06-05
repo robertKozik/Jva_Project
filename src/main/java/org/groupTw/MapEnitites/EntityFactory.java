@@ -2,15 +2,20 @@ package org.groupTw.MapEnitites;
 
 
 import java.awt.*;
-
+// factory invokes builder ?
 public class EntityFactory {
 
-    public Entity addEntity(String type) throws NullPointerException {
-        if(type.equalsIgnoreCase("Warrior"))
-            return new Warrior();
-        else if(type.equalsIgnoreCase("Archer"))
-            return new Archer();
-        //...
+    public Entity addEntity(String type_) throws NullPointerException {
+        String type = type_.toUpperCase();
+        switch (type){
+            case "WARRIOR":
+                return new Warrior();
+            case "ARCHER":
+                return new Archer();
+
+            case "ARCHER TOWER":
+                return new ArcherTower();
+        }
         throw new NullPointerException("No such a Unit");
     }
 

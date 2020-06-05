@@ -56,7 +56,7 @@ public class GameLogic implements iLogic {
             tileSelected(tile_);
             selected.setBorder(Color.BLACK, 0);
             selected = null;
-            updateBoardState();
+
 
         //second click on the same tile
         } else if (selected != null && selected.equals(tile_)) {
@@ -100,9 +100,11 @@ public class GameLogic implements iLogic {
         //checks if unit can move, if it cans checks if its possible to move to the selected tile
         if (this.selected.getEntity_on_tile() instanceof iMovable && this.possibleMoves.contains(Tile_) && Tile_ != selected) {
             moveEntity(Tile_, selected);
+            updateBoardState();
         //every entity can attack, so it only checks if tile is possible to attack
         } else if (this.possibleAttacks.contains(Tile_) && Tile_ != selected) {
             attackEntity(Tile_);
+            updateBoardState();
         }
         //clear highlights
         this.clearArrAttacks();

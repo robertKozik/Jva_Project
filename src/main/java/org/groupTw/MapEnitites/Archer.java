@@ -4,11 +4,10 @@ import org.groupTw.iMovable;
 
 import java.awt.*;
 
-
-public class Archer extends MovingUnit {
+class Archer extends MovingUnit {
 
     public Archer(){
-        super();
+        super("src/Art/dagger.png");
         MovePattern();
         AttackPattern();
     }//constructor
@@ -75,4 +74,8 @@ public class Archer extends MovingUnit {
         }
     }
 
+    @Override
+    public String toString() {
+        return "archer";
+    }
 }

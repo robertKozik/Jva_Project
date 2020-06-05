@@ -5,12 +5,12 @@ import org.groupTw.iMovable;
 import java.awt.*;
 
 
-public class Warrior extends MovingUnit {
+class Warrior extends MovingUnit {
 
 
     //Constructor
     public Warrior(){
-        super();
+        super("src/Art/Warrior.png");
         MovePattern();
         AttackPattern();
     }
@@ -79,5 +79,8 @@ public class Warrior extends MovingUnit {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "warrior";
+    }
 }
