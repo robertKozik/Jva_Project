@@ -1,13 +1,15 @@
-package org.groupTw;
+package org.groupTw.MapEnitites;
+
+import org.groupTw.AppFrame;
+import org.groupTw.GameLayout;
+import org.groupTw.Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +23,8 @@ abstract public class Entity {
     private int defense;
     private ImageIcon picLabel;
     //__________________
-    final int imgW = 35;
-    final int imgH = 35;
+    final int imgW = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
+    final int imgH = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
 
     public Entity(){
         this.position = new Point(0,0);
@@ -125,4 +127,17 @@ abstract public class Entity {
         return imgH;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entity entity = (Entity) o;
+        return health == entity.health &&
+                Objects.equals(position, entity.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position, health);
+    }
 }

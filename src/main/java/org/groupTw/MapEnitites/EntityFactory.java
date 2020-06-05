@@ -1,4 +1,4 @@
-package org.groupTw;
+package org.groupTw.MapEnitites;
 
 
 import java.awt.*;

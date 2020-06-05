@@ -1,5 +1,7 @@
 package org.groupTw;
 
+import org.groupTw.MapEnitites.Entity;
+
 import java.util.ArrayList;
 
 public class Army {

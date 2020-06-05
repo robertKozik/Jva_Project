@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AppFrame extends JFrame {
-    final static int MAPSIZE = 8;
+    final public static int MAPSIZE = 8;
     final static int YSPAN = 520;
     final static int XSPAN = 500;
     private Player[] playersArr;
@@ -20,7 +20,7 @@ public class AppFrame extends JFrame {
         this.logic=new GameLogic(playersArr);
         this.setSize(XSPAN,YSPAN);
         this.setLayout(new FlowLayout());
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         updateFrame("MENU");

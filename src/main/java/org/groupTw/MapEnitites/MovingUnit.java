@@ -1,9 +1,12 @@
-package org.groupTw;
+package org.groupTw.MapEnitites;
+
+import org.groupTw.iMovable;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
-abstract class MovingUnit extends Entity implements iMovable {
+abstract public class MovingUnit extends Entity implements iMovable {
     private ArrayList<Point> possible_moves;
 
     public MovingUnit(){
@@ -32,5 +35,13 @@ abstract class MovingUnit extends Entity implements iMovable {
         this.possible_moves = possible_moves;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), possible_moves);
+    }
 }

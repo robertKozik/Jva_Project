@@ -1,4 +1,4 @@
-package org.groupTw;
+package org.groupTw.MapEnitites;
 
 import java.awt.*;
 
@@ -7,11 +7,11 @@ public class ArcherTower extends Building {
 
     public ArcherTower(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_) {
         super(position_, "src/Art/barracks.png", health_, attack_, defense_, canAttack_);
-    }
+    }//constructor
 
     public ArcherTower(Point position_){
         super(position_, "src/Art/barracks.png", 100, 10, 50, true);
-    }
+    }//constructor
 
     /*
         X X X X X

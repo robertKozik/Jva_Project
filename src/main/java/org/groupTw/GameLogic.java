@@ -1,5 +1,8 @@
 package org.groupTw;
 
+import org.groupTw.MapEnitites.Entity;
+import org.groupTw.MapEnitites.MovingUnit;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -33,12 +36,13 @@ public class GameLogic implements iLogic {
 
     /*
     Action method analise clicked tile according to current state of map and selected field.
-    After analise it get to right method which updates map state .
+    After analise it gets to right method which updates map state .
      */
     public void action(MapPanel tile_, MapPanel[][] mapTiles_) {
         currentPlayer = playersArr[roundCounter % 2];
         Army currentArmy = currentPlayer.getArmy();
         toShow = null;
+        //first click on unit, which is in your army
         if (selected == null && (currentArmy.getTroops().contains(tile_.getEntity_on_tile()) ||
                 currentArmy.getBuildings().contains(tile_.getEntity_on_tile()))) {
 
@@ -46,19 +50,21 @@ public class GameLogic implements iLogic {
             tile_.setBorder(Color.RED, 2);
             tileNotSelected(tile_, mapTiles_);
             selected = tile_;
-        } else if (selected != null && !(tile_.equals(selected.getClientProperty("Position")) && tile_.getEntity_on_tile() == null)) {
+        //second click on a tile other than selected
+        } else if (selected != null && !selected.equals(tile_) ) {
             System.out.println(2);
             tileSelected(tile_);
             selected.setBorder(Color.BLACK, 0);
             selected = null;
 
-
+        //second click on the same tile
         } else if (selected != null && selected.equals(tile_)) {
             toShow = selected.getEntity_on_tile();
             selected.setBorder(Color.BLACK, 0);
             selected = null;
             clearArrMoves();
             clearArrAttacks();
+        //for now - first click on a tile without unit, or on a tile which contains not yours unit
         } else {
             selected = null;
             System.out.println(3);
@@ -76,15 +82,17 @@ public class GameLogic implements iLogic {
     }
 
     /*
-    Updades map state, when unit was selected before. Checks if we ordered to move or attack
+    Updates map state, when unit was selected before. Checks if we ordered to move or attack
      */
     public void tileSelected(MapPanel Tile_) {
+        //checks if unit can move, if it cans checks if its possible to move to the selected tile
         if (this.selected.getEntity_on_tile() instanceof iMovable && this.possibleMoves.contains(Tile_) && Tile_ != selected) {
-            System.out.println("moving...");
             moveEntity(Tile_, selected);
+        //every entity can attack, so it only checks if tile is possible to attack
         } else if (this.possibleAttacks.contains(Tile_) && Tile_ != selected) {
             attackEntity(Tile_);
         }
+        //clear highlights
         this.clearArrAttacks();
         this.clearArrMoves();
     }
@@ -129,7 +137,7 @@ public class GameLogic implements iLogic {
 
 
     /*
-    Moves entity which is posisioned on MapPanel selected_ to MapPanel tile_ .
+    Moves entity which is positioned on MapPanel selected_ to MapPanel tile_ .
     Asserts unit can move.
      */
     private void moveEntity(MapPanel tile_, MapPanel selected_) {
@@ -147,7 +155,7 @@ public class GameLogic implements iLogic {
     }
 
     /*
-    Unit on selected tile, attacks and kills Enitity on MapPanel tile_ .
+    Unit on a selected tile attacks and kills Entity on MapPanel tile_ .
     all Entities can attack .
      */
     private void attackEntity(MapPanel tile_) {
@@ -181,31 +189,11 @@ public class GameLogic implements iLogic {
         this.possibleMoves.clear();
     }
 
-    public ArrayList<MapPanel> getPossibleAttacks() {
-        return possibleAttacks;
-    }
 
     //GETTERS AND SETTERS____________________________________________________
 
-    public void setPossibleAttacks(ArrayList<MapPanel> possibleAttacks) {
-        this.possibleAttacks = possibleAttacks;
-    }
-
-    public ArrayList<MapPanel> getPossibleMoves() {
-        return possibleMoves;
-    }
-
-    public void setPossibleMoves(ArrayList<MapPanel> possibleMoves) {
-        this.possibleMoves = possibleMoves;
-    }
-
-
     public MapPanel getSelected() {
         return selected;
-    }
-
-    public void setSelected(MapPanel selected) {
-        this.selected = selected;
     }
 
     public Player[] getPlayersArr() {
@@ -222,5 +210,13 @@ public class GameLogic implements iLogic {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public Entity getToShow() {
+        return toShow;
+    }
+
+    public void setToShow(Entity toShow) {
+        this.toShow = toShow;
     }
 }
