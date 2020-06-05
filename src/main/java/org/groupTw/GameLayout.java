@@ -17,7 +17,7 @@ public class GameLayout extends JPanel {
     private JPanel statistics;
     private JPanel map;
     private iLogic logic;
-    final public static int MAPDIM = 800;
+    final public static int MAPDIM = 600;
 
     public GameLayout(iLogic logic_) {
         this.mainLayout = new JTabbedPane();
@@ -33,6 +33,8 @@ public class GameLayout extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(mainLayout);
         map.setLayout(new GridLayout(AppFrame.MAPSIZE, AppFrame.MAPSIZE, 0, 0));
+
+
         //init empty map
         for (int i = 0; i < AppFrame.MAPSIZE; i++) {
             for (int j = 0; j < AppFrame.MAPSIZE; j++) {
@@ -47,20 +49,20 @@ public class GameLayout extends JPanel {
         //temporary method of making troops
         EntityFactory factory = new EntityFactory();
 
-        logic.getPlayersArr()[0].getArmy().getTroops().add(factory.addEntity("warrior", new Point(0, 0)));
-        logic.getPlayersArr()[0].getArmy().getTroops().add(factory.addEntity("warrior", new Point(0, 1)));
-        logic.getPlayersArr()[0].getArmy().getTroops().add(factory.addEntity("archer", new Point(0, 2)));
-        logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 5)));
-        logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 6)));
-        logic.getPlayersArr()[1].getArmy().getTroops().add(factory.addEntity("warrior", new Point(7, 7)));
-        logic.getPlayersArr()[1].getArmy().getBuildings().add(factory.addEntity("archer tower", new Point(3,3)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 0)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 1)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("archer", new Point(0, 2)));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 5)));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 6)));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 7)));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("archer tower", new Point(3,3)));
 
         placeEntitiesOnMap();
 
         repaintMap();
         map.setPreferredSize(new Dimension(MAPDIM, MAPDIM));
         map.setMaximumSize(new Dimension(MAPDIM, MAPDIM));
-        mainLayout.addTab("mapa", this.map); //show map
+        mainLayout.addTab("map", this.map); //show map
         setVisible(true);
 
 
@@ -92,20 +94,12 @@ public class GameLayout extends JPanel {
     private void placeEntitiesOnMap(){
 
         for( Player ply : logic.getPlayersArr()){
-            for(Entity troop : ply.getArmy().getTroops()){
+            for(Entity troop : ply.getArmy()){
                 Point position = troop.getPosition();
                 int xPosition = (int)position.getX();
                 int yPosition = (int)position.getY();
 
                 mapTiles[xPosition][yPosition].setEntity_on_tile(troop);
-                mapTiles[xPosition][yPosition].setOwner(ply);
-            }
-            for(Entity building: ply.getArmy().getBuildings()){
-                Point position = building.getPosition();
-                int xPosition = (int)position.getX();
-                int yPosition = (int)position.getY();
-
-                mapTiles[xPosition][yPosition].setEntity_on_tile(building);
                 mapTiles[xPosition][yPosition].setOwner(ply);
             }
         }
@@ -128,20 +122,31 @@ public class GameLayout extends JPanel {
     private void createStatisticsTab(Entity entity_){
         mainLayout.remove(statistics);
         statistics = new JPanel();
-        statistics.setLayout(new BoxLayout(statistics, BoxLayout.X_AXIS));
+        statistics.setLayout(new BorderLayout() );
 
         JPanel mainStatisticsLayout = new JPanel();
         mainStatisticsLayout.setLayout(new BoxLayout(mainStatisticsLayout,BoxLayout.Y_AXIS));
 
         JLabel Pic = new JLabel(entity_.getPicLabel());
 
-        JLabel health = new JLabel(String.valueOf(entity_.getAttack()));
+        JLabel attack = new JLabel("Attack: " + entity_.getAttack());
 
-        JLabel attack = new JLabel(String.valueOf(entity_.getHealth()));
+        JLabel health = new JLabel("Health: " + entity_.getCurrentHealth() + "/" + entity_.getMaxHealth());
+
+        JLabel Pic_ = new JLabel(entity_.getPicLabel());
+
+        JLabel attack_ = new JLabel("Attack: " + entity_.getAttack());
+
+        JLabel health_ = new JLabel("Health: " + entity_.getCurrentHealth() + "/" + entity_.getMaxHealth());
 
         mainStatisticsLayout.add(Pic);
         mainStatisticsLayout.add(health);
         mainStatisticsLayout.add(attack);
+
+        mainStatisticsLayout.add(Pic_);
+        mainStatisticsLayout.add(health_);
+        mainStatisticsLayout.add(attack_);
+
         statistics.add(mainStatisticsLayout);
         mainLayout.addTab("Stats", statistics);
     }

@@ -14,6 +14,8 @@ public class GameLogic implements iLogic {
     private Player[] playersArr;
     private Player currentPlayer;//player whose can play right now
     private Entity toShow;  //entity which is requested to show statistics
+    private boolean gameState; // is game won?
+    private Player winner;
 
 
     //constructor
@@ -24,6 +26,8 @@ public class GameLogic implements iLogic {
         currentPlayer = playersArr[roundCounter % 2];
         toShow = null;
         selected = null;
+        winner = null;
+        gameState = true;
     }
 
     public static int getRoundCounter() {
@@ -40,19 +44,15 @@ public class GameLogic implements iLogic {
      */
     public void action(MapPanel tile_, MapPanel[][] mapTiles_) {
         currentPlayer = playersArr[roundCounter % 2];
-        Army currentArmy = currentPlayer.getArmy();
+        ArrayList<Entity> currentArmy = currentPlayer.getArmy();
         toShow = null;
         //first click on unit, which is in your army
-        if (selected == null && (currentArmy.getTroops().contains(tile_.getEntity_on_tile()) ||
-                currentArmy.getBuildings().contains(tile_.getEntity_on_tile()))) {
-
-            System.out.println(1);
+        if (selected == null && currentArmy.contains(tile_.getEntity_on_tile())) {
             tile_.setBorder(Color.RED, 2);
             tileNotSelected(tile_, mapTiles_);
             selected = tile_;
         //second click on a tile other than selected
         } else if (selected != null && !selected.equals(tile_) ) {
-            System.out.println(2);
             tileSelected(tile_);
             selected.setBorder(Color.BLACK, 0);
             selected = null;
@@ -67,14 +67,23 @@ public class GameLogic implements iLogic {
         //for now - first click on a tile without unit, or on a tile which contains not yours unit
         } else {
             selected = null;
-            System.out.println(3);
             clearArrAttacks();
             clearArrMoves();
         }
+        updateBoardState();
     }
 
+    private void updateBoardState(){
+        if(playersArr[ (roundCounter + 1)%2 ].getArmy().size() == 0){
+            winner = currentPlayer;
+            gameState = false;
+        }
+        for(Player ply : playersArr){
+            ply.getGoldPerTurn();
+        }
+    }
     //updates map state, when no tile is selected before
-    public void tileNotSelected(MapPanel Tile_, MapPanel[][] mapTiles_) {
+    private void tileNotSelected(MapPanel Tile_, MapPanel[][] mapTiles_) {
         if (Tile_.getEntity_on_tile() instanceof iMovable) {
             setMoveBorders(Tile_, mapTiles_, Color.MAGENTA);
         }
@@ -84,7 +93,7 @@ public class GameLogic implements iLogic {
     /*
     Updates map state, when unit was selected before. Checks if we ordered to move or attack
      */
-    public void tileSelected(MapPanel Tile_) {
+    private void tileSelected(MapPanel Tile_) {
         //checks if unit can move, if it cans checks if its possible to move to the selected tile
         if (this.selected.getEntity_on_tile() instanceof iMovable && this.possibleMoves.contains(Tile_) && Tile_ != selected) {
             moveEntity(Tile_, selected);
@@ -160,19 +169,28 @@ public class GameLogic implements iLogic {
      */
     private void attackEntity(MapPanel tile_) {
         GameLogic.roundCounter++;
-        tile_.getEntity_on_tile().setPosition(null);
-        tile_.removeAll();
-        tile_.setEntity_on_tile(null);
-        tile_.setOwner(null);
+
+        int attackValue = selected.getEntity_on_tile().getAttack();
+        if(!tile_.getEntity_on_tile().getDamage(attackValue)){
+
+            Player ply = this.playersArr[ (roundCounter+1)%2 ]; //get owner of killed unit
+            ply.getArmy().remove(tile_.getEntity_on_tile());
+
+            tile_.removeAll();
+            tile_.setEntity_on_tile(null);
+            tile_.setOwner(null);
+
+        }
         clearArrMoves();
         clearArrAttacks();
+
 
     }
 
     /*
     Clears possibleAttacks array and change borders to normal color.
      */
-    public void clearArrAttacks() {
+    private void clearArrAttacks() {
         for (MapPanel panel : possibleAttacks) {
             panel.setBorder(Color.BLACK, 0);
         }
@@ -182,7 +200,7 @@ public class GameLogic implements iLogic {
     /*
     Clears possibleMoves array and change borders to normal color.
      */
-    public void clearArrMoves() {
+    private void clearArrMoves() {
         for (MapPanel panel : possibleMoves) {
             panel.setBorder(Color.BLACK, 0);
         }

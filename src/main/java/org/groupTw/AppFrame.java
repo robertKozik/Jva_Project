@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AppFrame extends JFrame {
-    final public static int MAPSIZE = 8;
-    final static int YSPAN = 520;
-    final static int XSPAN = 500;
+    final public static int MAPSIZE = 10;
+    final public static int FRAMEYSPAN = 720;
+    final public static int FRAMEXSPAN = 700;
     private Player[] playersArr;
     private iLogic logic;
     private Menu menu;
@@ -18,7 +18,7 @@ public class AppFrame extends JFrame {
         for(int i=0; i<2; i++)
             this.playersArr[i] = new Player();//init new players
         this.logic=new GameLogic(playersArr);
-        this.setSize(XSPAN,YSPAN);
+        this.setSize(FRAMEXSPAN, FRAMEYSPAN);
         this.setLayout(new FlowLayout());
         setResizable(true);
         setLocationRelativeTo(null);

@@ -18,9 +18,11 @@ abstract public class Entity {
     private Point position;
     private ArrayList<Point> possible_attacks;
     private boolean canAttack;
-    private int health;
+    private int maxHealth;
+    private int currentHealth;
     private int attack;
     private int defense;
+    private boolean isAlive;
     private ImageIcon picLabel;
     //__________________
     final int imgW = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
@@ -30,22 +32,24 @@ abstract public class Entity {
         this.position = new Point(0,0);
         this.possible_attacks = new ArrayList<>();
         this.canAttack = false;
-        this.health = 0;
+        this.maxHealth = 0;
+        this.currentHealth = this.maxHealth;
         this.attack = 0;
         this.defense = 0;
+        this.isAlive = true;
     }
 
     public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {
         this.possible_attacks = new ArrayList<>();
         this.position = position_;
         this.canAttack = canAttack_;
-        this.health = health_;
+        this.maxHealth = health_;
+        this.currentHealth = this.maxHealth;
         this.attack = attack_;
         this.defense = defense_;
+        this.isAlive = true;
         picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
     }
-
-
 
     private Image loadImage( String imagePath)  {
         try {
@@ -61,6 +65,10 @@ abstract public class Entity {
 
     abstract void AttackPattern();
 
+    public boolean getDamage(int damage_){
+        this.currentHealth -= damage_;
+        return this.currentHealth > 0;
+    }
 
     public Point getPosition() {
         return position;
@@ -87,12 +95,12 @@ abstract public class Entity {
         this.canAttack = canAttack;
     }
 
-    public int getHealth() {
-        return health;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public int getAttack() {
@@ -127,17 +135,29 @@ abstract public class Entity {
         return imgH;
     }
 
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Entity entity = (Entity) o;
-        return health == entity.health &&
+        return maxHealth == entity.maxHealth &&
                 Objects.equals(position, entity.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, health);
+        return Objects.hash(position, maxHealth);
     }
 }

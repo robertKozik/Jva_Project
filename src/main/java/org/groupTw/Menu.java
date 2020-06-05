@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class Menu extends JPanel {
     ArrayList<JButton> buttons;
     JPanel panel;
-    final static int X_BUTTON_MENU = AppFrame.XSPAN/3;
-    final static int Y_BUTTON_MENU = AppFrame.YSPAN/10;
+    final static int X_BUTTON_MENU = AppFrame.FRAMEXSPAN /3;
+    final static int Y_BUTTON_MENU = AppFrame.FRAMEYSPAN /10;
 
     public Menu(){
         createButtons();
-        this.setLayout(new FlowLayout(FlowLayout.CENTER,(AppFrame.XSPAN - X_BUTTON_MENU)/2,(AppFrame.YSPAN - (this.buttons.size() * Y_BUTTON_MENU))/2));
-        this.setPreferredSize(new Dimension(AppFrame.XSPAN,AppFrame.YSPAN));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER,(AppFrame.FRAMEXSPAN - X_BUTTON_MENU)/2,(AppFrame.FRAMEYSPAN - (this.buttons.size() * Y_BUTTON_MENU))/2));
+        this.setPreferredSize(new Dimension(AppFrame.FRAMEXSPAN,AppFrame.FRAMEYSPAN));
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         this.add(panel);

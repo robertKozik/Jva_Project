@@ -23,7 +23,7 @@ public class Warrior extends MovingUnit {
     }
 
     public Warrior (Point position_){
-        super(position_,"src/Art/Warrior.png",10,10,10,true);
+        super(position_,"src/Art/Warrior.png",20,10,10,true);
         AttackPattern();
         MovePattern();
     }
