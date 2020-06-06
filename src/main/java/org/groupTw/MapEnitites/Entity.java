@@ -24,6 +24,8 @@ public abstract class Entity {
     private int defense;
     private boolean isAlive;
     private ImageIcon picLabel;
+    public final static int BLUE = 1;
+    public final static int RED = 2;
     //__________________
     final int imgW = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
     final int imgH = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;

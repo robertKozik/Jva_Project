@@ -9,21 +9,14 @@ class Warrior extends MovingUnit {
 
 
     //Constructor
-    public Warrior(){
-        super("src/Art/Warrior.png");
+    public Warrior(String color_){
+        super("src/Art/warrior"+color_.toLowerCase()+".png");
         MovePattern();
         AttackPattern();
     }
 
-    public Warrior(Point position_, int health_, int attack_, int defense_, boolean canAttack_) {
-        super(position_, "src/Art/Warrior.png", health_, attack_, defense_, canAttack_);
-        MovePattern();
-        AttackPattern();
-
-    }
-
-    public Warrior (Point position_){
-        super(position_,"src/Art/Warrior.png",20,10,10,true);
+    public Warrior (Point position_, String color_){
+        super(position_,"src/Art/warrior"+color_.toLowerCase()+".png",20,10,10,true);
         AttackPattern();
         MovePattern();
     }

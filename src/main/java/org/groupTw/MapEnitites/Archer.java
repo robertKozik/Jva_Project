@@ -6,22 +6,15 @@ import java.awt.*;
 
 class Archer extends MovingUnit {
 
-    public Archer(){
-        super("src/Art/dagger.png");
+    public Archer(String color_){
+        super("src/Art/archer"+color_+".png");
+
         MovePattern();
         AttackPattern();
     }//constructor
 
-
-    public Archer(Point position_, int health_, int attack_, int defense_, boolean canAttack_) {
-        super(position_, "src/Art/dagger.png", health_, attack_, defense_, canAttack_);
-        MovePattern();
-        AttackPattern();
-
-    } //constructor
-
-    public Archer(Point position_){
-        super(position_,"src/Art/dagger.png",10,10,10,true);
+    public Archer(Point position_, String color_){
+        super(position_,"src/Art/archer"+color_+".png",10,10,10,true);
         MovePattern();
         AttackPattern();
     } //constructor

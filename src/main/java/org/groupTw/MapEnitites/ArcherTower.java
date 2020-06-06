@@ -4,16 +4,16 @@ import java.awt.*;
 
 class ArcherTower extends Building {
 
-    public ArcherTower() {
-        super("src/Art/barracks.png");
+    public ArcherTower(String color_) {
+        super("src/Art/tower"+color_.toLowerCase()+".png");
     }
 
     public ArcherTower(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_) {
         super(position_, "src/Art/barracks.png", health_, attack_, defense_, canAttack_);
     }//constructor
 
-    public ArcherTower(Point position_){
-        super(position_, "src/Art/barracks.png", 100, 10, 50, true);
+    public ArcherTower(Point position_, String color_){
+        super(position_, "src/Art/tower"+color_.toLowerCase()+".png", 100, 10, 50, true);
     }//constructor
 
     /*

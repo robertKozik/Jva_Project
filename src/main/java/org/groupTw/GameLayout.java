@@ -46,16 +46,16 @@ public class GameLayout extends JPanel {
         //temporary method of making troops
         EntityFactory factory = new EntityFactory();
 
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 0)));
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 1)));
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 2)));
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 3)));
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 4)));
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("archer", new Point(1, 2)));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 5)));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 6)));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 7)));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("archer tower", new Point(3,3)));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 0), "blue"));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 1), "blue"));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 2), "blue"));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 3), "blue"));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("warrior", new Point(0, 4), "blue"));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("archer", new Point(1, 2), "blue"));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 5), "Red"));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 6), "Red"));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("warrior", new Point(7, 7), "Red"));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("archer tower", new Point(3,3), "Red"));
 
         placeEntitiesOnMap();
 
