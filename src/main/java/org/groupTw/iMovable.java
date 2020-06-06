@@ -7,5 +7,6 @@ public interface iMovable {
 
     public void MovePattern();
     public void Move(Point position_);
+    public ArrayList<Point> getPossible_moves();
 
 }

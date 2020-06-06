@@ -1,28 +1,23 @@
-package org.groupTw;
+package org.groupTw.MapEnitites;
+
+import org.groupTw.iMovable;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Archer extends Entity implements iMovable {
-    public Archer(){
-        super();
+class Archer extends MovingUnit {
+
+    public Archer(String color_){
+        super("src/Art/archer"+color_+".png");
+
         MovePattern();
         AttackPattern();
-    }
+    }//constructor
 
-
-    public Archer(Point position_, int health_, int attack_, int defense_, boolean canAttack_) {
-        super(position_, "src/Art/dagger.png", health_, attack_, defense_, canAttack_);
+    public Archer(Point position_, String color_){
+        super(position_,"src/Art/archer"+color_+".png",10,10,10,true);
         MovePattern();
         AttackPattern();
-
-    }
-
-    public Archer(Point position_){
-        super(position_,"src/Art/dagger.png",10,10,10,true);
-        MovePattern();
-        AttackPattern();
-    }
+    } //constructor
 
     /*
     attack pattern:
@@ -31,6 +26,9 @@ public class Archer extends Entity implements iMovable {
     - - X - -
     - - X - -
     - - 0 - -
+    - - X - -
+    - - X - -
+    - - X - -
     - - - - -
      */
     @Override
@@ -38,7 +36,10 @@ public class Archer extends Entity implements iMovable {
         int x = this.getPosition().x;
         int y = this.getPosition().y;
         this.getPossible_attacks().clear();
-        for( int x_ = 1; x_< 4; x_++) this.getPossible_attacks().add(new Point( x+x_,y ));
+        for( int x_ = -3; x_< 4; x_++) {
+            if(x_ == 0)continue;
+            this.getPossible_attacks().add(new Point( x+x_,y ));
+        }
 
     }
     /*
@@ -67,9 +68,7 @@ public class Archer extends Entity implements iMovable {
     }
 
     @Override
-    public void Move(Point position_) {
-        this.setPosition(position_);
-        this.MovePattern();
-        this.AttackPattern();
+    public String toString() {
+        return "archer";
     }
 }

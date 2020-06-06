@@ -1,30 +1,24 @@
-package org.groupTw;
+package org.groupTw.MapEnitites;
+
+import org.groupTw.iMovable;
 
 import java.awt.*;
-import java.io.IOException;
-import java.util.ArrayList;
 
-public class Warrior extends Entity implements iMovable {
+
+class Warrior extends MovingUnit {
 
 
     //Constructor
-    public Warrior(){
-        super();
+    public Warrior(String color_){
+        super("src/Art/warrior"+color_.toLowerCase()+".png");
         MovePattern();
         AttackPattern();
     }
 
-    public Warrior(Point position_, int health_, int attack_, int defense_, boolean canAttack_) {
-        super(position_, "src/Art/paladin.png", health_, attack_, defense_, canAttack_);
-        MovePattern();
+    public Warrior (Point position_, String color_){
+        super(position_,"src/Art/warrior"+color_.toLowerCase()+".png",20,10,10,true);
         AttackPattern();
-
-    }
-
-    public Warrior (Point position_){
-        super(position_,"src/Art/paladin.png",10,10,10,true);
         MovePattern();
-        AttackPattern();
     }
 
 
@@ -79,10 +73,7 @@ public class Warrior extends Entity implements iMovable {
     }
 
     @Override
-    public void Move(Point position_) {
-        this.setPosition(position_);
-        this.MovePattern();
-        this.AttackPattern();
+    public String toString() {
+        return "warrior";
     }
-
 }

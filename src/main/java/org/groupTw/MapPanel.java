@@ -1,12 +1,12 @@
 package org.groupTw;
 
+import org.groupTw.MapEnitites.Entity;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-
-import static java.awt.Color.gray;
 
 
 class MapPanel extends JPanel {
@@ -66,7 +66,8 @@ class MapPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(bgImage, 0, 0, null);
+        Image img = bgImage.getScaledInstance(GameLayout.MAPDIM/AppFrame.MAPSIZE,GameLayout.MAPDIM/AppFrame.MAPSIZE, Image.SCALE_FAST);
+        g.drawImage(img, 0, 0, null);
     }
 
     public void setBorder(Color border_, int width_) {
@@ -101,7 +102,7 @@ class MapPanel extends JPanel {
     public boolean equals(MapPanel obj) {
         Point point1 = (Point) this.getClientProperty("Position");
         Point point2 = (Point) obj.getClientProperty("Position");
-        return super.equals(obj);
+        return point1.equals(point2);
     }
 
 

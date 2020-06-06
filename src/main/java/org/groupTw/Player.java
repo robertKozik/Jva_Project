@@ -1,36 +1,42 @@
 package org.groupTw;
 
+import org.groupTw.MapEnitites.Entity;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
-    Army army;
+    ArrayList<Entity> army;
     int gold;
     String playerName;
 
     public Player(){
-        army = new Army();
+        army = new ArrayList<>();
         gold = 0;
-        playerName = "Player"+ String.valueOf(new Random().nextInt(1000));
+        playerName = "Player-"+ String.valueOf(new Random().nextInt(1000));
     }
-    public Player(String playerName_, Army army_, int gold_){
-        this.army = army_;
+    public Player(String playerName_, ArrayList<Entity> army_, int gold_){
+        army = army_;
         this.gold = gold_;
         this.playerName = playerName_;
     }
 
     public Player(String playerName_){
-        this.army = new Army();
+        army = new ArrayList<>();
         this.gold = 0;
         this.playerName = playerName_;
     }
 
+    public void getGoldPerTurn(){
+        this.gold += 100;
+    }
     //Getters and setters:
 
-    public Army getArmy() {
+    public ArrayList<Entity> getArmy() {
         return army;
     }
 
-    public void setArmy(Army army) {
+    public void setArmy(ArrayList<Entity> army) {
         this.army = army;
     }
 
