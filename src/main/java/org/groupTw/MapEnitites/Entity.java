@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class Entity {
+abstract public class Entity {
     private Point position;
     private ArrayList<Point> possible_attacks;
     private boolean canAttack;
@@ -24,14 +24,13 @@ public abstract class Entity {
     private int defense;
     private boolean isAlive;
     private ImageIcon picLabel;
-    public final static int BLUE = 1;
-    public final static int RED = 2;
+    private String name;
     //__________________
     final int imgW = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
     final int imgH = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
 
-    public Entity(String imagePath_){
-        this.position = new Point(-1,-1);
+    public Entity(){
+        this.position = new Point(0,0);
         this.possible_attacks = new ArrayList<>();
         this.canAttack = false;
         this.maxHealth = 0;
@@ -39,10 +38,10 @@ public abstract class Entity {
         this.attack = 0;
         this.defense = 0;
         this.isAlive = true;
-        picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
+        this.name = null;
     }
 
-    public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {
+    public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ , String name_) {
         this.possible_attacks = new ArrayList<>();
         this.position = position_;
         this.canAttack = canAttack_;
@@ -51,6 +50,7 @@ public abstract class Entity {
         this.attack = attack_;
         this.defense = defense_;
         this.isAlive = true;
+        this.name = name_;
         picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
     }
 
@@ -148,6 +148,10 @@ public abstract class Entity {
 
     public boolean isAlive() {
         return isAlive;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

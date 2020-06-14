@@ -2,18 +2,15 @@ package org.groupTw.MapEnitites;
 
 import java.awt.*;
 
-class ArcherTower extends Building {
+public class ArcherTower extends Building {
 
-    public ArcherTower(String color_) {
-        super("src/Art/tower"+color_.toLowerCase()+".png");
-    }
 
-    public ArcherTower(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_) {
-        super(position_, "src/Art/barracks.png", health_, attack_, defense_, canAttack_);
+    public ArcherTower(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_, String name_) {
+        super(position_, "src/Art/TowerBlue.png", health_, attack_, defense_, canAttack_, name_);
     }//constructor
 
-    public ArcherTower(Point position_, String color_){
-        super(position_, "src/Art/tower"+color_.toLowerCase()+".png", 100, 10, 50, true);
+    public ArcherTower(Point position_){
+        super(position_, "src/Art/TowerBlue.png", 100, 10, 25, true, "ArcherTower");
     }//constructor
 
     /*
@@ -35,10 +32,5 @@ class ArcherTower extends Building {
                 if (attackX > -1 && attackX < 8 && attackY > -1 && attackY < 8) this.getPossible_attacks().add(new Point(attackX, attackY));
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return "archer tower";
     }
 }

@@ -1,53 +1,58 @@
 package org.groupTw.MapEnitites;
 
-import org.groupTw.iMovable;
-
 import java.awt.*;
 
 
-public class Archer extends MovingUnit {
+public class Siege extends MovingUnit {
 
-    public Archer(){
+    public Siege(){
         super();
         MovePattern();
         AttackPattern();
     }//constructor
 
 
-    public Archer(Point position_, int health_, int attack_, int defense_, boolean canAttack_, String name_) {
-        super(position_, "src/Art/ArcherBlue.png", health_, attack_, defense_, canAttack_, name_);
+    public Siege(Point position_, int health_, int attack_, int defense_, boolean canAttack_, String name_) {
+        super(position_, "src/Art/CatapultBlue.png", health_, attack_, defense_, canAttack_, name_);
         MovePattern();
         AttackPattern();
 
     } //constructor
 
-    public Archer(Point position_){
-        super(position_,"src/Art/dagger.png",10,10,10,true, "Archer");
+    public Siege(Point position_){
+        super(position_,"src/Art/CatapultBlue.png",10,50,5,true,"Siege");
         MovePattern();
         AttackPattern();
     } //constructor
 
     /*
     attack pattern:
-    - - - - -
-    - - X - -
-    - - X - -
-    - - X - -
-    - - 0 - -
-    - - X - -
-    - - X - -
-    - - X - -
-    - - - - -
+    - - - - - - -
+    X X X X X X X
+    X - - - - - X
+    X - - - - - X
+    X - - 0 - - X
+    X - - - - - X
+    X - - - - - X
+    X X X X X X X
+    - - - - - - -
      */
     @Override
     void AttackPattern() {
         int x = this.getPosition().x;
         int y = this.getPosition().y;
         this.getPossible_attacks().clear();
-        for( int x_ = -3; x_< 4; x_++) {
-            if(x_ == 0)continue;
-            this.getPossible_attacks().add(new Point( x+x_,y ));
+        for (int x_ = -3; x_ < 4; x_ += 1) {
+            int attackX = x + x_;
+            for (int y_ = -3; y_ < 4; y_ += 1) {
+                int attackY = y + y_;
+                if (x_ == -3 || x_ == 3 || y_ == -3 || y_ == 3) {
+                    if (attackX > -1 && attackX < 8 && attackY > -1 && attackY < 8)
+                        this.getPossible_attacks().add(new Point(attackX, attackY));
+                }
+            }
         }
+
 
     }
     /*
@@ -73,6 +78,8 @@ public class Archer extends MovingUnit {
                 if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
+
+
     }
 
 }
