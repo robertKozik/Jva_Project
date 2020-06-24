@@ -4,6 +4,8 @@ import org.groupTw.AppFrame;
 import org.groupTw.GameLayout;
 import org.groupTw.Main;
 
+import java.lang.Cloneable;
+import java.lang.CloneNotSupportedException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +16,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class Entity {
+public abstract class Entity implements Cloneable{
     private Point position;
     private ArrayList<Point> possible_attacks;
     private boolean canAttack;
@@ -24,6 +26,7 @@ public abstract class Entity {
     private int defense;
     private boolean isAlive;
     private ImageIcon picLabel;
+    private String color;
     public final static int BLUE = 1;
     public final static int RED = 2;
     //__________________
@@ -53,7 +56,11 @@ public abstract class Entity {
         this.isAlive = true;
         picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
     }
-
+    public Entity clone()
+            throws CloneNotSupportedException
+    {
+        return (Entity) super.clone();
+    }
     private Image loadImage( String imagePath)  {
         try {
             Image img = ImageIO.read(new File(imagePath));
@@ -122,6 +129,14 @@ public abstract class Entity {
         this.defense = defense;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public ImageIcon getPicLabel() {
         return picLabel;
     }
@@ -156,7 +171,7 @@ public abstract class Entity {
         if (o == null || getClass() != o.getClass()) return false;
         Entity entity = (Entity) o;
         return maxHealth == entity.maxHealth &&
-                Objects.equals(position, entity.position);
+                Objects.equals(position, entity.position) && color.equals(entity.color);
     }
 
     @Override

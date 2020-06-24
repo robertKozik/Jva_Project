@@ -8,7 +8,7 @@ class Archer extends MovingUnit {
 
     public Archer(String color_){
         super("src/Art/archer"+color_+".png");
-
+        setColor(color_);
         MovePattern();
         AttackPattern();
     }//constructor

@@ -13,6 +13,7 @@ class Warrior extends MovingUnit {
         super("src/Art/warrior"+color_.toLowerCase()+".png");
         MovePattern();
         AttackPattern();
+        setColor(color_);
     }
 
     public Warrior (Point position_, String color_){

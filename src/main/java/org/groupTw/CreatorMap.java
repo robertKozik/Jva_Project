@@ -15,8 +15,8 @@ public class CreatorMap extends JPanel {
     private GameLayout mapLayout;
     private JPanel chooseMenuPlayer1;
     private JPanel chooseMenuPlayer2;
-    static private ArrayList<Entity> prototypes = new ArrayList<>();
-    static private int entityToPlace = -1;
+    static protected ArrayList<Entity> prototypes = new ArrayList<>();
+    static protected int entityToPlace = -1;
     private ButtonGroup btnGroup;
     private JPanel buttonPanel;
 
@@ -74,6 +74,7 @@ public class CreatorMap extends JPanel {
                             break;
                         }
                     }
+
                     System.out.println("Entity to place:" + CreatorMap.prototypes.get(entityToPlace).toString());
                 }
 
