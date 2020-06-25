@@ -16,5 +16,6 @@ public class CreatorLogic implements iLogic{
     @Override
     public void action(MapPanel tile_, MapPanel[][] mapTiles_) {
 
+
     }
 }
