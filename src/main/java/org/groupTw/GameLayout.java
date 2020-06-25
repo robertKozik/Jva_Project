@@ -66,11 +66,8 @@ public class GameLayout extends JPanel {
         @Override
         public void mouseReleased(MouseEvent e) {
             MapPanel panel = (MapPanel) e.getSource();
-            try {
-                logic.action(panel, mapTiles);
-            } catch (CloneNotSupportedException cloneNotSupportedException) {
-                cloneNotSupportedException.printStackTrace();
-            }
+
+            logic.action(panel, mapTiles);
 
             if(logic instanceof GameLogic ){
                 if( ((GameLogic)logic).getToShow() != null )
