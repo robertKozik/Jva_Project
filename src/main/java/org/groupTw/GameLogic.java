@@ -15,11 +15,12 @@ public class GameLogic implements iLogic {
     private Player currentPlayer;//player whose can play right now
     private Entity toShow;  //entity which is requested to show statistics
     private boolean gameState; // is game won?
-    private Player winner;
+    static protected Player winner;
 
 
     //constructor
     public GameLogic(Player[] playersArr_) {
+        GameLogic.winner = null;
         playersArr = playersArr_;
         possibleAttacks = new ArrayList<>();
         possibleMoves = new ArrayList<>();
