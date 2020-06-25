@@ -21,9 +21,8 @@ public class CreatorLogic implements iLogic {
     @Override
     public void action(MapPanel tile_, MapPanel[][] mapTiles_)
             throws CloneNotSupportedException {
-        if (CreatorMap.entityToPlace != -1) {
-            Entity toBeCloned = CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone();
-            tile_.setEntity_on_tile(toBeCloned);
+        if (CreatorMap.entityToPlace != -1 && tile_.entity_on_tile == null) {
+            tile_.setEntity_on_tile(CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone());
         }
     }
 }

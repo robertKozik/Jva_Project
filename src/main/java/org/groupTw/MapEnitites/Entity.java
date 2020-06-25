@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class Entity implements Cloneable{
+public abstract class Entity implements Cloneable {
     private Point position;
     private ArrayList<Point> possible_attacks;
     private boolean canAttack;
@@ -30,11 +30,11 @@ public abstract class Entity implements Cloneable{
     public final static int BLUE = 1;
     public final static int RED = 2;
     //__________________
-    final int imgW = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
-    final int imgH = (int)(GameLayout.MAPDIM*0.7)/AppFrame.MAPSIZE;
+    final int imgW = (int) (GameLayout.MAPDIM * 0.7) / AppFrame.MAPSIZE;
+    final int imgH = (int) (GameLayout.MAPDIM * 0.7) / AppFrame.MAPSIZE;
 
-    public Entity(String imagePath_){
-        this.position = new Point(-1,-1);
+    public Entity(String imagePath_) {
+        this.position = new Point(-1, -1);
         this.possible_attacks = new ArrayList<>();
         this.canAttack = false;
         this.maxHealth = 0;
@@ -45,7 +45,7 @@ public abstract class Entity implements Cloneable{
         picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
     }
 
-    public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ) {
+    public Entity(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_) {
         this.possible_attacks = new ArrayList<>();
         this.position = position_;
         this.canAttack = canAttack_;
@@ -56,26 +56,26 @@ public abstract class Entity implements Cloneable{
         this.isAlive = true;
         picLabel = new ImageIcon(Objects.requireNonNull(loadImage(imagePath_)));
     }
+
     public Entity clone()
-            throws CloneNotSupportedException
-    {
+            throws CloneNotSupportedException {
         return (Entity) super.clone();
     }
-    private Image loadImage( String imagePath)  {
+
+    private Image loadImage(String imagePath) {
         try {
             Image img = ImageIO.read(new File(imagePath));
-            return img.getScaledInstance(imgW,imgH,Image.SCALE_FAST);
-        }
-        catch(IOException exc){
+            return img.getScaledInstance(imgW, imgH, Image.SCALE_FAST);
+        } catch (IOException exc) {
             Logger.getLogger(Main.class.getName()).log(
                     Level.SEVERE, null, exc);
-             }
+        }
         return null;
     }
 
     abstract void AttackPattern();
 
-    public boolean getDamage(int damage_){
+    public boolean getDamage(int damage_) {
         this.currentHealth -= damage_;
         return this.currentHealth > 0;
     }
@@ -170,8 +170,7 @@ public abstract class Entity implements Cloneable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Entity entity = (Entity) o;
-        return maxHealth == entity.maxHealth &&
-                Objects.equals(position, entity.position) && color.equals(entity.color);
+        return Objects.equals(position, entity.position) && color.equals(entity.color);
     }
 
     @Override
