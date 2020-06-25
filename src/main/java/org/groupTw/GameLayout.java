@@ -84,6 +84,8 @@ public class GameLayout extends JPanel {
              }
             }
             repaintMap();
+            revalidate();
+            repaint();
         }
     }
 
