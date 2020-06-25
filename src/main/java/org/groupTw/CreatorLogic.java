@@ -1,7 +1,9 @@
 package org.groupTw;
 
+import org.groupTw.MapEnitites.Building;
 import org.groupTw.MapEnitites.Entity;
 import org.groupTw.MapEnitites.EntityFactory;
+import org.groupTw.MapEnitites.MovingUnit;
 
 import java.awt.*;
 import java.lang.Cloneable;
@@ -29,6 +31,10 @@ public class CreatorLogic implements iLogic {
                 Entity klon = CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone();
                 klon.setPosition(new Point(tile_.getY() / 60, tile_.getX() / 60));
                 System.out.println(klon.getPosition().toString());
+                if(klon instanceof MovingUnit)
+                    ((MovingUnit) klon).evaluatePatterns();
+                else
+                    ((Building) klon).evaluatePatterns();
                 playersArr[0].getArmy().add(klon);
                 tile_.setEntity_on_tile(klon);
             }
@@ -36,6 +42,10 @@ public class CreatorLogic implements iLogic {
             else if (CreatorMap.entityToPlace >= CreatorMap.prototypes.size() / 2 && tile_.getY() >= GameLayout.MAPDIM / 2) {
                 Entity klon = CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone();
                 klon.setPosition(new Point(tile_.getY() / 60, tile_.getX() / 60));
+                if(klon instanceof MovingUnit)
+                    ((MovingUnit) klon).evaluatePatterns();
+                else
+                    ((Building) klon).evaluatePatterns();
                 playersArr[1].getArmy().add(klon);
                 tile_.setEntity_on_tile(klon);
             }

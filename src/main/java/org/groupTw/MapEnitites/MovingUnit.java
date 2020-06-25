@@ -20,6 +20,10 @@ abstract public class MovingUnit extends Entity implements iMovable {
         this.possible_moves = new ArrayList<>();
     }
 
+    public void evaluatePatterns(){
+        MovePattern();
+        AttackPattern();
+    }
     abstract public void MovePattern();
     public void Move(Point position_){
         this.setPosition(position_);

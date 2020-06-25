@@ -27,8 +27,7 @@ public abstract class Entity implements Cloneable {
     private boolean isAlive;
     private ImageIcon picLabel;
     private String color;
-    public final static int BLUE = 1;
-    public final static int RED = 2;
+
     //__________________
     final int imgW = (int) (GameLayout.MAPDIM * 0.7) / AppFrame.MAPSIZE;
     final int imgH = (int) (GameLayout.MAPDIM * 0.7) / AppFrame.MAPSIZE;

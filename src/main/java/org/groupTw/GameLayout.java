@@ -43,14 +43,6 @@ public class GameLayout extends JPanel {
             }
         }
 
-        //temporary method of making troops
-        EntityFactory factory = new EntityFactory();
-
-
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("archer", new Point(1, 2), "blue"));
-
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("archer tower", new Point(3,3), "Red"));
-
         placeEntitiesOnMap();
 
         repaintMap();

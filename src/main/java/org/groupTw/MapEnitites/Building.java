@@ -2,7 +2,7 @@ package org.groupTw.MapEnitites;
 
 import java.awt.*;
 
-abstract class Building extends Entity {
+abstract public class Building extends Entity {
 
     public Building(String imgPath_) {
         super(imgPath_);
@@ -14,6 +14,8 @@ abstract class Building extends Entity {
         AttackPattern();
     }
 
-
+    public void evaluatePatterns(){
+        AttackPattern();
+    }
     abstract void AttackPattern();
 }
