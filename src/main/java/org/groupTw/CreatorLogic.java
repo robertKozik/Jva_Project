@@ -2,15 +2,13 @@ package org.groupTw;
 
 import org.groupTw.MapEnitites.Building;
 import org.groupTw.MapEnitites.Entity;
-import org.groupTw.MapEnitites.EntityFactory;
 import org.groupTw.MapEnitites.MovingUnit;
 
 import java.awt.*;
-import java.lang.Cloneable;
 
 public class CreatorLogic implements iLogic {
     private Player[] playersArr;
-    private Entity toPlace;
+    final private int MaxStartingSizeOfArmy = 5;
 
 
     public CreatorLogic(Player[] playersArr) {
@@ -23,12 +21,12 @@ public class CreatorLogic implements iLogic {
     }
 
     @Override
-    public void action(MapPanel tile_, MapPanel[][] mapTiles_)
-    {
+    public void action(MapPanel tile_, MapPanel[][] mapTiles_) {
         if (CreatorMap.entityToPlace != -1 && tile_.entity_on_tile == null) {
             //player1
             try {
-                if (CreatorMap.entityToPlace < CreatorMap.prototypes.size() / 2 && tile_.getY() < GameLayout.MAPDIM / 2) {
+                if (CreatorMap.entityToPlace < CreatorMap.prototypes.size() / 2 && tile_.getY() < GameLayout.MAPDIM / 2
+                        && playersArr[0].getArmy().size() < MaxStartingSizeOfArmy) {
 
                     Entity klon = CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone();
 
@@ -43,7 +41,8 @@ public class CreatorLogic implements iLogic {
 
                 }
                 //player2
-                else if (CreatorMap.entityToPlace >= CreatorMap.prototypes.size() / 2 && tile_.getY() >= GameLayout.MAPDIM / 2) {
+                else if (CreatorMap.entityToPlace >= CreatorMap.prototypes.size() / 2
+                        && tile_.getY() >= GameLayout.MAPDIM / 2 && playersArr[1].getArmy().size() < MaxStartingSizeOfArmy) {
 
                     Entity klon = CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone();
                     klon.setPosition(new Point(tile_.getY() / 60, tile_.getX() / 60));
@@ -55,8 +54,7 @@ public class CreatorLogic implements iLogic {
                     tile_.setEntity_on_tile(klon);
 
                 }
-            }catch (CloneNotSupportedException e)
-            {
+            } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
         }
