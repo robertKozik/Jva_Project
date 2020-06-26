@@ -4,25 +4,17 @@ import org.groupTw.iMovable;
 
 import java.awt.*;
 
+class Archer extends MovingUnit {
 
-public class Archer extends MovingUnit {
-
-    public Archer(){
-        super();
+    public Archer(String color_){
+        super("src/Art/archer"+color_+".png");
+        setColor(color_);
         MovePattern();
         AttackPattern();
     }//constructor
 
-
-    public Archer(Point position_, int health_, int attack_, int defense_, boolean canAttack_, String name_) {
-        super(position_, "src/Art/ArcherBlue.png", health_, attack_, defense_, canAttack_, name_);
-        MovePattern();
-        AttackPattern();
-
-    } //constructor
-
-    public Archer(Point position_){
-        super(position_,"src/Art/dagger.png",10,10,10,true, "Archer");
+    public Archer(Point position_, String color_){
+        super(position_,"src/Art/archer"+color_+".png",10,10,10,true);
         MovePattern();
         AttackPattern();
     } //constructor
@@ -75,4 +67,8 @@ public class Archer extends MovingUnit {
         }
     }
 
+    @Override
+    public String toString() {
+        return "archer";
+    }
 }

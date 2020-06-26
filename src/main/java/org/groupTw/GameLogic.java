@@ -15,11 +15,12 @@ public class GameLogic implements iLogic {
     private Player currentPlayer;//player whose can play right now
     private Entity toShow;  //entity which is requested to show statistics
     private boolean gameState; // is game won?
-    private Player winner;
+    static protected Player winner;
 
 
     //constructor
     public GameLogic(Player[] playersArr_) {
+        GameLogic.winner = null;
         playersArr = playersArr_;
         possibleAttacks = new ArrayList<>();
         possibleMoves = new ArrayList<>();
@@ -56,7 +57,7 @@ public class GameLogic implements iLogic {
             tileSelected(tile_);
             selected.setBorder(Color.BLACK, 0);
             selected = null;
-            updateBoardState();
+
 
         //second click on the same tile
         } else if (selected != null && selected.equals(tile_)) {
@@ -76,7 +77,7 @@ public class GameLogic implements iLogic {
 
     private void updateBoardState(){
         System.out.println(playersArr[ (roundCounter + 1)%2 ].getArmy().size());
-        if(playersArr[ (roundCounter + 1)%2 ].getArmy().size() == 0 || currentPlayer.getBase() == 0){
+        if(playersArr[ (roundCounter + 1)%2 ].getArmy().size() == 0){
             winner = currentPlayer;
             gameState = false;
         }
@@ -100,9 +101,11 @@ public class GameLogic implements iLogic {
         //checks if unit can move, if it cans checks if its possible to move to the selected tile
         if (this.selected.getEntity_on_tile() instanceof iMovable && this.possibleMoves.contains(Tile_) && Tile_ != selected) {
             moveEntity(Tile_, selected);
+            updateBoardState();
         //every entity can attack, so it only checks if tile is possible to attack
         } else if (this.possibleAttacks.contains(Tile_) && Tile_ != selected) {
             attackEntity(Tile_);
+            updateBoardState();
         }
         //clear highlights
         this.clearArrAttacks();
@@ -175,8 +178,8 @@ public class GameLogic implements iLogic {
         if(!tile_.getEntity_on_tile().getDamage(attackValue)){
 
             Player ply = this.playersArr[ (roundCounter+1)%2 ]; //get owner of killed unit
-            if((tile_.getEntity_on_tile()).getName() == "Base") ply.basecounter = 0;
             ply.getArmy().remove(tile_.getEntity_on_tile());
+
             tile_.removeAll();
             tile_.setEntity_on_tile(null);
             tile_.setOwner(null);

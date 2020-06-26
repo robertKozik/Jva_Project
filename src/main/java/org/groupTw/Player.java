@@ -8,13 +8,11 @@ import java.util.Random;
 public class Player {
     ArrayList<Entity> army;
     int gold;
-    int basecounter;
     String playerName;
 
     public Player(){
         army = new ArrayList<>();
         gold = 0;
-        basecounter = 1;
         playerName = "Player-"+ String.valueOf(new Random().nextInt(1000));
     }
     public Player(String playerName_, ArrayList<Entity> army_, int gold_){
@@ -36,10 +34,6 @@ public class Player {
 
     public ArrayList<Entity> getArmy() {
         return army;
-    }
-
-    public int getBase() {
-        return basecounter;
     }
 
     public void setArmy(ArrayList<Entity> army) {

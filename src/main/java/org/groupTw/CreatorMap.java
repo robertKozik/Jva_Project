@@ -5,6 +5,7 @@ import org.groupTw.MapEnitites.EntityFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,8 +16,8 @@ public class CreatorMap extends JPanel {
     private GameLayout mapLayout;
     private JPanel chooseMenuPlayer1;
     private JPanel chooseMenuPlayer2;
-    static private ArrayList<Entity> prototypes = new ArrayList<>();
-    static private int entityToPlace = -1;
+    static protected ArrayList<Entity> prototypes = new ArrayList<>();
+    static protected int entityToPlace = -1;
     private ButtonGroup btnGroup;
     private JPanel buttonPanel;
 
@@ -32,6 +33,7 @@ public class CreatorMap extends JPanel {
     }
 
     private void initView() {
+        CreatorMap.entityToPlace = -1;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         buttonPanel.setLayout( new BoxLayout(buttonPanel,BoxLayout.Y_AXIS) );
         JPanel secondaryLayout = new JPanel();
@@ -40,10 +42,20 @@ public class CreatorMap extends JPanel {
         addPlayerChooseButtons();
         secondaryLayout.add(buttonPanel);
 
+        JButton returnButton = new JButton("RETURN");
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sentToFrame("ENDCREATE");
+            }
+        });
+        secondaryLayout.add(returnButton);
+
         secondaryLayout.add(mapLayout);
 
         //creating prototypes
-        createPrototypes();
+        if(CreatorMap.prototypes.size() == 0)
+            createPrototypes();
 
         //place prototypes within chooseMenu
         createChooseMenu();
@@ -74,6 +86,7 @@ public class CreatorMap extends JPanel {
                             break;
                         }
                     }
+
                     System.out.println("Entity to place:" + CreatorMap.prototypes.get(entityToPlace).toString());
                 }
 
@@ -92,9 +105,16 @@ public class CreatorMap extends JPanel {
         CreatorMap.prototypes.add(factory.addEntity("archer", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("warrior", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("archer tower", "blue"));
+        CreatorMap.prototypes.add(factory.addEntity("mercenary", "blue"));
+        CreatorMap.prototypes.add(factory.addEntity("barracks", "blue"));
+        CreatorMap.prototypes.add(factory.addEntity("siege", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("archer", "red"));
         CreatorMap.prototypes.add(factory.addEntity("warrior", "red"));
         CreatorMap.prototypes.add(factory.addEntity("archer tower", "red"));
+        CreatorMap.prototypes.add(factory.addEntity("mercenary", "red"));
+        CreatorMap.prototypes.add(factory.addEntity("barracks", "red"));
+        CreatorMap.prototypes.add(factory.addEntity("siege", "red"));
+
     }
 
     private void addPlayerChooseButtons( ){
@@ -104,7 +124,8 @@ public class CreatorMap extends JPanel {
                 case "Player 1":
                     this.remove(chooseMenuPlayer2);
                     this.add(chooseMenuPlayer1);
-                    this.repaint();
+                    revalidate();
+                    repaint();
                     System.out.println("Player1");
                     break;
                 case "Player 2":
@@ -112,7 +133,6 @@ public class CreatorMap extends JPanel {
                     this.add(chooseMenuPlayer2);
                     revalidate();
                     repaint();
-                    chooseMenuPlayer2.repaint();
                     System.out.println("Player2");
                     break;
             }
@@ -131,5 +151,10 @@ public class CreatorMap extends JPanel {
         return entityToPlace;
     }
 
+    private void sentToFrame(String action_){
+        AppFrame ancestorFrame = (AppFrame)SwingUtilities.getWindowAncestor(this);
+        ancestorFrame.updateFrame(action_);
+
+    }
 
 }

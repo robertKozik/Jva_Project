@@ -5,12 +5,14 @@ import java.awt.*;
 
 public class AppFrame extends JFrame {
     final public static int MAPSIZE = 10;
-    final public static int FRAMEYSPAN = 720;
-    final public static int FRAMEXSPAN = 700;
+    final public static int FRAMEYSPAN = 920;
+    final public static int FRAMEXSPAN = 900;
     private Player[] playersArr;
     private iLogic logic;
     private Menu menu;
     private GameLayout mainGame;
+    private CreatorMap create;
+    private ScoreBoard scoreBoard;
 
 
     public AppFrame () {
@@ -33,8 +35,10 @@ public class AppFrame extends JFrame {
         switch (upperCase)
         {
             case "MENU":
-                this.repaint();
+                revalidate();
+                repaint();
                 this.add(menu);
+                pack();
                 setVisible(true);
                 break;
             case "NEW GAME":
@@ -43,10 +47,32 @@ public class AppFrame extends JFrame {
                 mainGame = new GameLayout(logic);
                 this.add(mainGame);
                 setVisible(true);
+                pack();
                 break;
             case "ENDGAME":
-                this.remove(mainGame);
+                this.remove(scoreBoard);
                 updateFrame("MENU");
+                break;
+            case "ENDCREATE":
+                this.remove(create);
+                updateFrame("MENU");
+                break;
+            case "CREATE YOUR MAP":
+                this.remove(menu);
+                logic = new CreatorLogic(playersArr);
+                create = new CreatorMap(new GameLayout(logic));
+                this.add(create);
+                setVisible(true);
+                pack();
+                break;
+            case "SCOREBOARD":
+                this.remove(mainGame);
+                scoreBoard = new ScoreBoard();
+                this.add(scoreBoard);
+                revalidate();
+                repaint();
+                pack();
+
         }
     }
 

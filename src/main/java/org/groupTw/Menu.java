@@ -12,7 +12,8 @@ public class Menu extends JPanel {
     final static int X_BUTTON_MENU = AppFrame.FRAMEXSPAN /3;
     final static int Y_BUTTON_MENU = AppFrame.FRAMEYSPAN /10;
 
-    public Menu(){
+    public Menu()
+    {
         createButtons();
         this.setLayout(new FlowLayout(FlowLayout.CENTER,(AppFrame.FRAMEXSPAN - X_BUTTON_MENU)/2,(AppFrame.FRAMEYSPAN - (this.buttons.size() * Y_BUTTON_MENU))/2));
         this.setPreferredSize(new Dimension(AppFrame.FRAMEXSPAN,AppFrame.FRAMEYSPAN));
@@ -24,9 +25,11 @@ public class Menu extends JPanel {
         }
     }
 
-    private void createButtons(){
+    private void createButtons()
+    {
         this.buttons = new ArrayList<>();
-        for( String label : new String[]{"New Game", "Settings","Create Your Map"} ) {
+        for( String label : new String[]{"New Game", "Settings", "Create Your Map", } )
+        {
             JButton btn = new JButton(label);
             btn.setActionCommand(label);
             btn.addActionListener(new ButtonAction());

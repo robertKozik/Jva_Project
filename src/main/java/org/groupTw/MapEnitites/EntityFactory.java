@@ -2,37 +2,43 @@ package org.groupTw.MapEnitites;
 
 
 import java.awt.*;
-
+// factory invokes builder ?
 public class EntityFactory {
 
-    public Entity addEntity(String type) throws NullPointerException {
-        if(type.equalsIgnoreCase("Warrior"))
-            return new Warrior();
-        else if(type.equalsIgnoreCase("Archer"))
-            return new Archer();
-        else if(type.equalsIgnoreCase("Siege"))
-            return new Siege();
-        else if(type.equalsIgnoreCase("Trident"))
-            return new Trident();
-        //...
-        throw new NullPointerException("No such a Unit");
-    }
-
-    public Entity addEntity(String type_, Point position_) throws NullPointerException {
+    public Entity addEntity(String type_, String color_) throws NullPointerException {
         String type = type_.toUpperCase();
         switch (type){
             case "WARRIOR":
-                return new Warrior(position_);
+                return new Warrior(color_);
             case "ARCHER":
-                return new Archer(position_);
-            case "SIEGE":
-                return new Siege(position_);
-            case "TRIDENT":
-                return new Trident(position_);
+                return new Archer(color_);
             case "ARCHER TOWER":
-                return new ArcherTower(position_);
-            case "BASE":
-                return new Base(position_);
+                return new ArcherTower(color_);
+            case "SIEGE":
+                return new Siege(color_);
+            case "BARRACKS":
+                return new Barracks(color_);
+            case "MERCENARY":
+                return new Mercenary(color_);
+        }
+        throw new NullPointerException("No such a Unit");
+    }
+
+    public Entity addEntity(String type_, Point position_, String color_) throws NullPointerException {
+        String type = type_.toUpperCase();
+        switch (type){
+            case "WARRIOR":
+                return new Warrior(position_,color_);
+            case "ARCHER":
+                return new Archer(position_,color_);
+            case "ARCHER TOWER":
+                return new ArcherTower(position_,color_);
+            case "SIEGE":
+                return new Siege(position_,color_);
+            case "BARRACKS":
+                return new Barracks(position_,color_);
+            case "MERCENARY":
+                return new Mercenary(position_,color_);
         }
         throw new NullPointerException("No such a Unit");
     }

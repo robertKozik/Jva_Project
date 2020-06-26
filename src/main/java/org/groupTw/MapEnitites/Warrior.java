@@ -5,25 +5,19 @@ import org.groupTw.iMovable;
 import java.awt.*;
 
 
-public class Warrior extends MovingUnit {
+class Warrior extends MovingUnit {
 
 
     //Constructor
-    public Warrior(){
-        super();
+    public Warrior(String color_){
+        super("src/Art/warrior"+color_.toLowerCase()+".png");
         MovePattern();
         AttackPattern();
+        setColor(color_);
     }
 
-    public Warrior(Point position_, int health_, int attack_, int defense_, boolean canAttack_, String name_) {
-        super(position_, "src/Art/WarriorRed.png", health_, attack_, defense_, canAttack_, name_);
-        MovePattern();
-        AttackPattern();
-
-    }
-
-    public Warrior (Point position_){
-        super(position_,"src/Art/WarriorRed.png",20,10,10,true, "Warrior");
+    public Warrior (Point position_, String color_){
+        super(position_,"src/Art/warrior"+color_.toLowerCase()+".png",20,10,10,true);
         AttackPattern();
         MovePattern();
     }
@@ -79,5 +73,8 @@ public class Warrior extends MovingUnit {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "warrior";
+    }
 }

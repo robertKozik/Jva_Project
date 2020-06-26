@@ -9,14 +9,14 @@ import java.util.Objects;
 abstract public class MovingUnit extends Entity implements iMovable {
     private ArrayList<Point> possible_moves;
 
-    public MovingUnit(){
-        super();
+    public MovingUnit(String imagePath_){
+        super(imagePath_);
         this.possible_moves = new ArrayList<>();
 
     }
 
-    public MovingUnit(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ , String name_){
-        super(position_, imagePath_, health_, attack_, defense_, canAttack_ , name_);
+    public MovingUnit(Point position_, String imagePath_, int health_, int attack_, int defense_, boolean canAttack_ ){
+        super(position_, imagePath_, health_, attack_, defense_, canAttack_ );
         this.possible_moves = new ArrayList<>();
     }
 
