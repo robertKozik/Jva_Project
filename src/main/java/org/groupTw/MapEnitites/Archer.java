@@ -1,5 +1,6 @@
 package org.groupTw.MapEnitites;
 
+import org.groupTw.AppFrame;
 import org.groupTw.iMovable;
 
 import java.awt.*;
@@ -9,14 +10,12 @@ class Archer extends MovingUnit {
     public Archer(String color_){
         super("src/Art/archer"+color_+".png");
         setColor(color_);
-        MovePattern();
-        AttackPattern();
+
     }//constructor
 
     public Archer(Point position_, String color_){
         super(position_,"src/Art/archer"+color_+".png",10,10,10,true);
-        MovePattern();
-        AttackPattern();
+        setColor(color_);
     } //constructor
 
     /*
@@ -38,7 +37,9 @@ class Archer extends MovingUnit {
         this.getPossible_attacks().clear();
         for( int x_ = -3; x_< 4; x_++) {
             if(x_ == 0)continue;
-            this.getPossible_attacks().add(new Point( x+x_,y ));
+            if(x+x_<= AppFrame.MAPSIZE) {
+                this.getPossible_attacks().add(new Point(x + x_, y));
+            }
         }
 
     }
@@ -62,7 +63,7 @@ class Archer extends MovingUnit {
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int moveY = y + y_;
-                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
+                if (moveX > -1 && moveX < AppFrame.MAPSIZE && moveY > -1 && moveY < AppFrame.MAPSIZE) this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
     }

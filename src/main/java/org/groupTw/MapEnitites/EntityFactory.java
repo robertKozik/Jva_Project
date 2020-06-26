@@ -12,12 +12,12 @@ public class EntityFactory {
                 return new Warrior(color_);
             case "ARCHER":
                 return new Archer(color_);
-            case "ARCHER TOWER":
-                return new ArcherTower(color_);
+            case "CATAPULT":
+                return new Catapult(color_);
             case "SIEGE":
                 return new Siege(color_);
             case "BARRACKS":
-                return new Barracks(color_);
+                return new Tower(color_);
             case "MERCENARY":
                 return new Mercenary(color_);
         }
@@ -31,12 +31,12 @@ public class EntityFactory {
                 return new Warrior(position_,color_);
             case "ARCHER":
                 return new Archer(position_,color_);
-            case "ARCHER TOWER":
-                return new ArcherTower(position_,color_);
+            case "CATAPULT":
+                return new Catapult(position_,color_);
             case "SIEGE":
                 return new Siege(position_,color_);
             case "BARRACKS":
-                return new Barracks(position_,color_);
+                return new Tower(position_,color_);
             case "MERCENARY":
                 return new Mercenary(position_,color_);
         }

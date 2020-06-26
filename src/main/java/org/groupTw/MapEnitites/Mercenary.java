@@ -1,5 +1,8 @@
 package org.groupTw.MapEnitites;
 
+import org.groupTw.AppFrame;
+import org.groupTw.GameLayout;
+
 import java.awt.*;
 
 class Mercenary extends MovingUnit {
@@ -13,6 +16,7 @@ class Mercenary extends MovingUnit {
 
     public Mercenary(Point position_, String color_){
         super(position_,"src/Art/mercenary"+color_+".png",10,10,10,true);
+        setColor(color_);
         MovePattern();
         AttackPattern();
     } //constructor
@@ -39,7 +43,7 @@ class Mercenary extends MovingUnit {
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int attackY = y + y_;
-                if (attackX > -1 && attackX < 8 && attackY > -1 && attackY < 8) this.getPossible_attacks().add(new Point(attackX, attackY));
+                if (attackX > -1 && attackX < AppFrame.MAPSIZE && attackY > -1 && attackY < AppFrame.MAPSIZE) this.getPossible_attacks().add(new Point(attackX, attackY));
             }
         }
 
@@ -64,7 +68,7 @@ class Mercenary extends MovingUnit {
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int moveY = y + y_;
-                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
+                if (moveX > -1 && moveX < AppFrame.MAPSIZE && moveY > -1 && moveY < AppFrame.MAPSIZE) this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
 
@@ -73,7 +77,7 @@ class Mercenary extends MovingUnit {
             for (int y_ = -2; y_ < 3; y_ += 2) {
                 int moveY = y + y_;
                 if(y_ == x_ || y_ == -x_)continue;
-                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
+                if (moveX > -1 && moveX < AppFrame.MAPSIZE && moveY > -1 && moveY < AppFrame.MAPSIZE) this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
     }

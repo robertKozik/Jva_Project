@@ -76,10 +76,8 @@ public class GameLogic implements iLogic {
     }
 
     private void updateBoardState(){
-        System.out.println(playersArr[ (roundCounter + 1)%2 ].getArmy().size());
         if(playersArr[ (roundCounter + 1)%2 ].getArmy().size() == 0){
             winner = currentPlayer;
-            gameState = false;
         }
         for(Player ply : playersArr){
             ply.getGoldPerTurn();

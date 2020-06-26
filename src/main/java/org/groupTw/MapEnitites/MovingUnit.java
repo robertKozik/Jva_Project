@@ -12,6 +12,8 @@ abstract public class MovingUnit extends Entity implements iMovable {
     public MovingUnit(String imagePath_){
         super(imagePath_);
         this.possible_moves = new ArrayList<>();
+        MovePattern();
+        AttackPattern();
 
     }
 

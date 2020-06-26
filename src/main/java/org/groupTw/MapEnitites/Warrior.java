@@ -1,5 +1,6 @@
 package org.groupTw.MapEnitites;
 
+import org.groupTw.AppFrame;
 import org.groupTw.iMovable;
 
 import java.awt.*;
@@ -12,15 +13,11 @@ class Warrior extends MovingUnit {
     public Warrior(String color_){
         super("src/Art/warrior"+color_.toLowerCase()+".png");
         setColor(color_);
-        MovePattern();
-        AttackPattern();
-        setColor(color_);
     }
 
     public Warrior (Point position_, String color_){
         super(position_,"src/Art/warrior"+color_.toLowerCase()+".png",20,10,10,true);
-        AttackPattern();
-        MovePattern();
+        setColor(color_);
     }
 
 
@@ -42,7 +39,8 @@ class Warrior extends MovingUnit {
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int attackY = y + y_;
-                if (attackX > -1 && attackX < 8 && attackY > -1 && attackY < 8) this.getPossible_attacks().add(new Point(attackX, attackY));
+                if (attackX > -1 && attackX < AppFrame.MAPSIZE && attackY > -1 && attackY < AppFrame.MAPSIZE)
+                    this.getPossible_attacks().add(new Point(attackX, attackY));
             }
         }
 
@@ -69,7 +67,8 @@ class Warrior extends MovingUnit {
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int moveY = y + y_;
-                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
+                if (moveX > -1 && moveX < AppFrame.MAPSIZE && moveY > -1 && moveY < AppFrame.MAPSIZE)
+                    this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
     }

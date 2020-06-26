@@ -35,7 +35,7 @@ public abstract class Entity implements Cloneable {
     public Entity(String imagePath_) {
         this.position = new Point(-1, -1);
         this.possible_attacks = new ArrayList<>();
-        this.canAttack = false;
+        this.canAttack = true;
         this.maxHealth = 0;
         this.currentHealth = this.maxHealth;
         this.attack = 0;

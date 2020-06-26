@@ -79,10 +79,11 @@ public class CreatorMap extends JPanel {
                 public void mousePressed(MouseEvent e) {
                     MapPanel source = (MapPanel) e.getSource();
                     Entity entityClicked = source.getEntity_on_tile();
-                    for (int i = 0; i < CreatorMap.prototypes.size() - 1; i++)//search grid to get prototype index
+                    for (int i = 0; i < CreatorMap.prototypes.size(); i++)//search grid to get prototype index
                     {
                         if (CreatorMap.prototypes.get(i).equals(entityClicked)) {
                             CreatorMap.entityToPlace = i;
+                            System.out.println(entityClicked.toString());
                             break;
                         }
                     }
@@ -104,16 +105,18 @@ public class CreatorMap extends JPanel {
         EntityFactory factory = new EntityFactory();
         CreatorMap.prototypes.add(factory.addEntity("archer", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("warrior", "blue"));
-        CreatorMap.prototypes.add(factory.addEntity("archer tower", "blue"));
+        CreatorMap.prototypes.add(factory.addEntity("catapult", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("mercenary", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("barracks", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("siege", "blue"));
+
         CreatorMap.prototypes.add(factory.addEntity("archer", "red"));
         CreatorMap.prototypes.add(factory.addEntity("warrior", "red"));
-        CreatorMap.prototypes.add(factory.addEntity("archer tower", "red"));
+        CreatorMap.prototypes.add(factory.addEntity("catapult", "red"));
         CreatorMap.prototypes.add(factory.addEntity("mercenary", "red"));
         CreatorMap.prototypes.add(factory.addEntity("barracks", "red"));
         CreatorMap.prototypes.add(factory.addEntity("siege", "red"));
+
 
     }
 
@@ -146,9 +149,6 @@ public class CreatorMap extends JPanel {
             buttonPanel.add(btn);
         }
 
-    }
-    public static int getEntityToPlace() {
-        return entityToPlace;
     }
 
     private void sentToFrame(String action_){

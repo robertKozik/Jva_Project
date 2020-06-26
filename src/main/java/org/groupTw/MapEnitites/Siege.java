@@ -1,5 +1,7 @@
 package org.groupTw.MapEnitites;
 
+import org.groupTw.AppFrame;
+
 import java.awt.*;
 
 class Siege extends MovingUnit {
@@ -7,14 +9,11 @@ class Siege extends MovingUnit {
     public Siege(String color_){
         super("src/Art/siege"+color_+".png");
         setColor(color_);
-        MovePattern();
-        AttackPattern();
     }//constructor
 
     public Siege(Point position_, String color_){
         super(position_,"src/Art/siege"+color_+".png",10,50,5,true);
-        MovePattern();
-        AttackPattern();
+        setColor(color_);
     } //constructor
 
     /*
@@ -39,7 +38,7 @@ class Siege extends MovingUnit {
             for (int y_ = -3; y_ < 4; y_ += 1) {
                 int attackY = y + y_;
                 if (x_ == -3 || x_ == 3 || y_ == -3 || y_ == 3) {
-                    if (attackX > -1 && attackX < 8 && attackY > -1 && attackY < 8)
+                    if (attackX > -1 && attackX < AppFrame.MAPSIZE && attackY > -1 && attackY < AppFrame.MAPSIZE)
                         this.getPossible_attacks().add(new Point(attackX, attackY));
                 }
             }
@@ -65,7 +64,7 @@ class Siege extends MovingUnit {
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int moveY = y + y_;
-                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
+                if (moveX > -1 && moveX < AppFrame.MAPSIZE && moveY > -1 && moveY < AppFrame.MAPSIZE) this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
     }
