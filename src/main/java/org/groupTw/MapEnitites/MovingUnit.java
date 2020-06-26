@@ -41,6 +41,8 @@ abstract public class MovingUnit extends Entity implements iMovable {
         this.possible_moves = possible_moves;
     }
 
+    public abstract String toString();
+
     @Override
     public boolean equals(Object o) {
         return super.equals(o);

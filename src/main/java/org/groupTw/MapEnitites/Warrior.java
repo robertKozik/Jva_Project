@@ -75,6 +75,6 @@ class Warrior extends MovingUnit {
 
     @Override
     public String toString() {
-        return "warrior";
+        return "warrior"+getColor();
     }
 }

@@ -176,4 +176,6 @@ public abstract class Entity implements Cloneable {
     public int hashCode() {
         return Objects.hash(position, maxHealth);
     }
+
+    public abstract String toString();
 }

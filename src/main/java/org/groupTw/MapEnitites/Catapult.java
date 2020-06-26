@@ -7,7 +7,8 @@ import java.awt.*;
 class Catapult extends Building {
 
     public Catapult(String color_) {
-        super("src/Art/siege"+color_.toLowerCase()+".png");
+        super("src/Art/catapult"+color_.toLowerCase()+".png");
+        setColor(color_);
     }
 
     public Catapult(Point position_, String color_, int health_, int attack_, int defense_, boolean canAttack_) {
@@ -37,13 +38,14 @@ class Catapult extends Building {
             for (int y_ = -2; y_ < 3; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int attackY = y + y_;
-                if (attackX > -1 && attackX < AppFrame.MAPSIZE && attackY > -1 && attackY < AppFrame.MAPSIZE) this.getPossible_attacks().add(new Point(attackX, attackY));
+                if (attackX > -1 && attackX < AppFrame.MAPSIZE && attackY > -1 && attackY < AppFrame.MAPSIZE)
+                    this.getPossible_attacks().add(new Point(attackX, attackY));
             }
         }
     }
 
     @Override
     public String toString() {
-        return "archer tower";
+        return "Catapult"+getColor();
     }
 }

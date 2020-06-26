@@ -47,7 +47,7 @@ class Tower extends Building {
 
     @Override
     public String toString() {
-        return "barracks";
+        return "barracks"+getColor();
     }
 }
 

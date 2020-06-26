@@ -79,10 +79,10 @@ public class CreatorMap extends JPanel {
                 public void mousePressed(MouseEvent e) {
                     MapPanel source = (MapPanel) e.getSource();
                     Entity entityClicked = source.getEntity_on_tile();
-                    for (int i = 0; i < CreatorMap.prototypes.size(); i++)//search grid to get prototype index
+                    for (int k = 0; k < CreatorMap.prototypes.size(); k++)//search grid to get prototype index
                     {
-                        if (CreatorMap.prototypes.get(i).equals(entityClicked)) {
-                            CreatorMap.entityToPlace = i;
+                        if (CreatorMap.prototypes.get(k).equals(entityClicked)) {
+                            CreatorMap.entityToPlace = k;
                             System.out.println(entityClicked.toString());
                             break;
                         }

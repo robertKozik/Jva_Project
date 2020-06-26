@@ -136,8 +136,8 @@ public class GameLogic implements iLogic {
         iMovable entityOnTile = (iMovable) Tile_.getEntity_on_tile();
         this.possibleMoves = new ArrayList<>();
         for (Point point : entityOnTile.getPossible_moves()) {
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < AppFrame.MAPSIZE; i++) {
+                for (int j = 0; j < AppFrame.MAPSIZE; j++) {
                     Point tilePosition = (Point) mapTiles_[i][j].getClientProperty("Position");
                     if (tilePosition.equals(point) && !mapTiles_[i][j].isOccupied()) {
                         mapTiles_[i][j].setBorder(color_, 1);

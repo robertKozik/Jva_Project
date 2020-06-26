@@ -84,7 +84,7 @@ class Mercenary extends MovingUnit {
 
     @Override
     public String toString() {
-        return "mercenary";
+        return "mercenary"+getColor();
     }
 }
 

@@ -64,13 +64,14 @@ class Siege extends MovingUnit {
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int moveY = y + y_;
-                if (moveX > -1 && moveX < AppFrame.MAPSIZE && moveY > -1 && moveY < AppFrame.MAPSIZE) this.getPossible_moves().add(new Point(moveX, moveY));
+                if (moveX > -1 && moveX < AppFrame.MAPSIZE && moveY > -1 && moveY < AppFrame.MAPSIZE)
+                    this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
     }
 
     @Override
     public String toString() {
-        return "siege";
+        return "siege"+getColor();
     }
 }
