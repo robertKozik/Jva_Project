@@ -105,9 +105,16 @@ public class CreatorMap extends JPanel {
         CreatorMap.prototypes.add(factory.addEntity("archer", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("warrior", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("archer tower", "blue"));
+        CreatorMap.prototypes.add(factory.addEntity("mercenary", "blue"));
+        CreatorMap.prototypes.add(factory.addEntity("barracks", "blue"));
+        CreatorMap.prototypes.add(factory.addEntity("siege", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("archer", "red"));
         CreatorMap.prototypes.add(factory.addEntity("warrior", "red"));
         CreatorMap.prototypes.add(factory.addEntity("archer tower", "red"));
+        CreatorMap.prototypes.add(factory.addEntity("mercenary", "red"));
+        CreatorMap.prototypes.add(factory.addEntity("barracks", "red"));
+        CreatorMap.prototypes.add(factory.addEntity("siege", "red"));
+
     }
 
     private void addPlayerChooseButtons( ){

@@ -1,35 +1,32 @@
 package org.groupTw.MapEnitites;
 
-import org.groupTw.iMovable;
-
 import java.awt.*;
 
+class Mercenary extends MovingUnit {
 
-class Warrior extends MovingUnit {
-
-
-    //Constructor
-    public Warrior(String color_){
-        super("src/Art/warrior"+color_.toLowerCase()+".png");
+    public Mercenary(String color_){
+        super("src/Art/mercenary"+color_+".png");
         setColor(color_);
         MovePattern();
         AttackPattern();
-        setColor(color_);
-    }
+    }//constructor
 
-    public Warrior (Point position_, String color_){
-        super(position_,"src/Art/warrior"+color_.toLowerCase()+".png",20,10,10,true);
-        AttackPattern();
+    public Mercenary(Point position_, String color_){
+        super(position_,"src/Art/mercenary"+color_+".png",10,10,10,true);
         MovePattern();
-    }
-
+        AttackPattern();
+    } //constructor
 
     /*
-    Attack pattern :
+    attack pattern:
+    - - - - -
+    - - - - -
     - - - - -
     - X X X -
     - X 0 X -
     - X X X -
+    - - - - -
+    - - - - -
     - - - - -
      */
     @Override
@@ -47,15 +44,13 @@ class Warrior extends MovingUnit {
         }
 
     }
-
-
     /*
-    move pattern :
-    - - - - -
+    move pattern
+    - - X - -
     - X X X -
-    - X 0 X -
+    X X 0 X X
     - X X X -
-    - - - - -
+    - - X - -
      */
     @Override
     public void MovePattern() {
@@ -65,10 +60,19 @@ class Warrior extends MovingUnit {
         this.getPossible_moves().clear();
 
         for (int x_ = -1; x_ < 2; x_++) {
-             int moveX = x + x_;
+            int moveX = x + x_;
             for (int y_ = -1; y_ < 2; y_++) {
                 if(x_ == 0 && y_== 0) continue;
                 int moveY = y + y_;
+                if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
+            }
+        }
+
+        for (int x_ = -2; x_ < 3; x_+=2) {
+            int moveX = x + x_;
+            for (int y_ = -2; y_ < 3; y_ += 2) {
+                int moveY = y + y_;
+                if(y_ == x_ || y_ == -x_)continue;
                 if (moveX > -1 && moveX < 8 && moveY > -1 && moveY < 8) this.getPossible_moves().add(new Point(moveX, moveY));
             }
         }
@@ -76,6 +80,8 @@ class Warrior extends MovingUnit {
 
     @Override
     public String toString() {
-        return "warrior";
+        return "mercenary";
     }
 }
+
+

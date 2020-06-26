@@ -14,6 +14,12 @@ public class EntityFactory {
                 return new Archer(color_);
             case "ARCHER TOWER":
                 return new ArcherTower(color_);
+            case "SIEGE":
+                return new Siege(color_);
+            case "BARRACKS":
+                return new Barracks(color_);
+            case "MERCENARY":
+                return new Mercenary(color_);
         }
         throw new NullPointerException("No such a Unit");
     }
@@ -27,6 +33,12 @@ public class EntityFactory {
                 return new Archer(position_,color_);
             case "ARCHER TOWER":
                 return new ArcherTower(position_,color_);
+            case "SIEGE":
+                return new Siege(position_,color_);
+            case "BARRACKS":
+                return new Barracks(position_,color_);
+            case "MERCENARY":
+                return new Mercenary(position_,color_);
         }
         throw new NullPointerException("No such a Unit");
     }
