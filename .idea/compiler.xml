@@ -13,8 +13,5 @@
         <module name="JAVA_PROJEKT" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="JAVA_PROJEKT" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

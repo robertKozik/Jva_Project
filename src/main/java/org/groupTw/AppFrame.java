@@ -92,4 +92,8 @@ public class AppFrame extends JFrame {
     public static Player[] getPlayersArr() {
         return playersArr;
     }
+
+    public static void setPlayersArr(Player[] playersArr) {
+        AppFrame.playersArr = playersArr;
+    }
 }

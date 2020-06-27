@@ -158,4 +158,19 @@ public class CreatorMap extends JPanel {
 
     }
 
+    public static ArrayList<Entity> getPrototypes() {
+        return prototypes;
+    }
+
+    public static int getEntityToPlace() {
+        return entityToPlace;
+    }
+
+    public static void setPrototypes(ArrayList<Entity> prototypes) {
+        CreatorMap.prototypes = prototypes;
+    }
+
+    public static void setEntityToPlace(int entityToPlace) {
+        CreatorMap.entityToPlace = entityToPlace;
+    }
 }

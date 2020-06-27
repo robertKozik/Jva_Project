@@ -70,6 +70,6 @@ public class Archer extends MovingUnit {
 
     @Override
     public String toString() {
-        return "/archer"+getColor();
+        return "archer"+getColor();
     }
 }

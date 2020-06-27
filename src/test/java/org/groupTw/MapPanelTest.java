@@ -2,12 +2,14 @@ package org.groupTw;
 
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Test;
 
 import java.awt.*;
 
-public class MapPanelTest extends TestCase {
+public class MapPanelTest {
 
-    public void testTestEquals() {
+    @Test
+    public void TilesTestEquals() {
         MapPanel mapPanel0 = new MapPanel();
         MapPanel mapPanel1 = new MapPanel();
         MapPanel mapPanel2 = new MapPanel();

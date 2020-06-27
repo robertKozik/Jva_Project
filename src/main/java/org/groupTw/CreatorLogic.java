@@ -56,7 +56,8 @@ public class CreatorLogic implements iLogic {
                     tile_.setEntity_on_tile(klon);
 
                 }
-                CreatorMap.selected.setBorder(null);
+                if(CreatorMap.selected != null)
+                    CreatorMap.selected.setBorder(null);
                 CreatorMap.selected = null;
                 CreatorMap.entityToPlace = -1;
             } else {
