@@ -42,6 +42,8 @@ public class AppFrame extends JFrame {
                 setVisible(true);
                 break;
             case "NEW GAME":
+                System.out.println(playersArr[0].getArmy());
+                System.out.println(playersArr[1].getArmy());
                 this.remove(menu);
                 logic = new GameLogic(this.playersArr);
                 mainGame = new GameLayout(logic);

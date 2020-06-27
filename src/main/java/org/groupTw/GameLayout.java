@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GameLayout extends JPanel {
-    private MapPanel[][] mapTiles;
+    public MapPanel[][] mapTiles;
     private JTabbedPane mainLayout;
     private JPanel statistics;
     private JPanel map;
@@ -45,7 +45,6 @@ public class GameLayout extends JPanel {
 
         placeEntitiesOnMap();
 
-        repaintMap();
         map.setPreferredSize(new Dimension(MAPDIM, MAPDIM));
         map.setMaximumSize(new Dimension(MAPDIM, MAPDIM));
         mainLayout.addTab("map", this.map); //show map
@@ -81,7 +80,14 @@ public class GameLayout extends JPanel {
             repaint();
         }
     }
-
+    // starting army setup
+    private void initArmy(){
+        EntityFactory factory = new EntityFactory();
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("MERCENARY", new Point(0,0), "blue"));
+        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("MERCENARY", new Point(9,9), "red"));
+        placeEntitiesOnMap();
+        repaintMap();
+    }
     //assign all troops to their tiles
     private void placeEntitiesOnMap(){
 
