@@ -9,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SettingsMenu extends JPanel {
-
+    private JSON json;
     public SettingsMenu() {
 
+        json = new JSON("nicks.txt");
         JPanel firstScreen = new JPanel();
         JPanel secondScreen = new JPanel();
         JPanel thirdScreen = new JPanel();
@@ -52,21 +53,36 @@ public class SettingsMenu extends JPanel {
         });
         thirdScreen.add(backButton);
 
+        JTextField nick0 = new JTextField("Player 1:");
+        JTextField nick1 = new JTextField("Player 2:");
+        String p0 = (String)json.JSONReadFromFile("player1");
+        String p1 = (String)json.JSONReadFromFile("player2");
+
+        JEditorPane nickChange0 = new JEditorPane();
+        JEditorPane nickChange1 = new JEditorPane();
+
+        nickChange0.setText(p0);
+        nickChange1.setText(p1);
+
         /* add save button */
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                json.JSONWriteToFile();
+                json.JSONAddValue("player1",nickChange0.getText());
+                json.JSONAddValue("player2",nickChange1.getText());
+                json.JSONCloseWithSave();
                 //JSON writeToFile = (JSON) SwingUtilities.;
 
             }
         });
         thirdScreen.add(saveButton);
 
-        JTextField nick0 = new JTextField("Player 1:");
-        JTextField nick1 = new JTextField("Player 2:");
-        JEditorPane nickChange0 = new JEditorPane();
-        JEditorPane nickChange1 = new JEditorPane();
+
+     //   json.JSONWriteToFile();
+     //   json.JSONAddValue("player1","u1");
+       // json.JSONAddValue("player2","u2");
 
         JPanel firstNick = new JPanel();
         firstNick.setBackground(Color.LIGHT_GRAY);

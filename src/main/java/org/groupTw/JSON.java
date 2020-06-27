@@ -1,40 +1,62 @@
 package org.groupTw;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 public class JSON {
-    public static void JSONWriteToFile() throws Exception {
-        JSONObject jo = new JSONObject();
+    private PrintWriter pw;
+    private String file;
+    private JSONObject jo;
 
-        //jo.put("Name","Maciej");
-//        jo.put("Surname","Kot");
-//        jo.put("Age",25);
+    public JSON(String file){
+        this.file =file;
+
+        jo = new JSONObject();
+    }
+
+    public void JSONWriteToFile() {
+
+        try {
+            pw = new PrintWriter(file) ;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
-        PrintWriter pw = new PrintWriter("JSONExample.json");
-        pw.write(jo.toJSONString());
+    }
+    public void JSONAddValue(String name, String value){
+
+        jo.put(name,value);
+    }
+
+    public void JSONCloseWithSave(){
         System.out.println("Saved in File");
+        pw.write(jo.toJSONString());
         pw.flush();
         pw.close();
     }
 
-    public static void JSONReadFromFile() throws Exception {
-        Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
+    public String JSONReadFromFile(String value)  {
+
+        Object obj = null;
+        try {
+            obj = new JSONParser().parse(new FileReader(file));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
 
         // typecasting obj to JSONObject
         JSONObject jo = (JSONObject) obj;
 
-        String Name = (String) jo.get("Name");
-        System.out.println(Name);
+        String v = (String) jo.get(value);
+        System.out.println(v);
 
-        String Surname = (String) jo.get("Surname");
-        System.out.println(Surname);
-
-        long Age = (long) jo.get("Age");
-        System.out.println(Age);
+        return v;
 
     }
 }
