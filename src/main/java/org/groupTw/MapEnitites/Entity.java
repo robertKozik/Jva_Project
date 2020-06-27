@@ -1,9 +1,11 @@
 package org.groupTw.MapEnitites;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.groupTw.AppFrame;
 import org.groupTw.GameLayout;
 import org.groupTw.Main;
 
+import java.io.Serializable;
 import java.lang.Cloneable;
 import java.lang.CloneNotSupportedException;
 import javax.imageio.ImageIO;
@@ -15,8 +17,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.*;
 
-public abstract class Entity implements Cloneable {
+public abstract class Entity implements Cloneable, Serializable {
     private Point position;
     private ArrayList<Point> possible_attacks;
     private boolean canAttack;
@@ -57,8 +60,8 @@ public abstract class Entity implements Cloneable {
     }
 
     public Entity clone()
-            throws CloneNotSupportedException {
-        return (Entity) super.clone();
+            throws SerializationException {
+        return (Entity) SerializationUtils.clone(this);
     }
 
     private Image loadImage(String imagePath) {
@@ -176,6 +179,4 @@ public abstract class Entity implements Cloneable {
     public int hashCode() {
         return Objects.hash(position, maxHealth);
     }
-
-    public abstract String toString();
 }
