@@ -5,7 +5,7 @@ import org.groupTw.iMovable;
 
 import java.awt.*;
 
-class Archer extends MovingUnit {
+public class Archer extends MovingUnit {
 
     public Archer(String color_){
         super("/archer"+color_+".png",10,10,10);
