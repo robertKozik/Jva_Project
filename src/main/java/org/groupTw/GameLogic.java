@@ -170,7 +170,7 @@ public class GameLogic implements iLogic {
     Unit on a selected tile attacks and kills Entity on MapPanel tile_ .
     all Entities can attack .
      */
-    private void attackEntity(MapPanel tile_) {
+    public void attackEntity(MapPanel tile_) {
 
         int attackValue = selected.getEntity_on_tile().getAttack();
         if(!tile_.getEntity_on_tile().getDamage(attackValue)){
