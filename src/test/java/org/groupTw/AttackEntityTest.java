@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 /**
  * Unit test for simple App.
  */
-public class TestAttackEntity
+public class AttackEntityTest
 {
     private AppFrame appFrame;
     private iLogic logic;
