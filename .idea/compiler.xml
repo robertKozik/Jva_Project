@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Jvapro" />
+        <module name="Jva_Project2" />
         <module name="Jva_Project" />
         <module name="Jva_Project1" />
-        <module name="Jvapro" />
       </profile>
     </annotationProcessing>
   </component>

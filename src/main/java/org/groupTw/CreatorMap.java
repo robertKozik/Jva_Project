@@ -18,6 +18,7 @@ public class CreatorMap extends JPanel {
     private JPanel chooseMenuPlayer2;
     static protected ArrayList<Entity> prototypes = new ArrayList<>();
     static protected int entityToPlace = -1;
+    static protected MapPanel selected = null;
     private ButtonGroup btnGroup;
     private JPanel buttonPanel;
 
@@ -30,18 +31,18 @@ public class CreatorMap extends JPanel {
         chooseMenuPlayer1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         chooseMenuPlayer2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         initView();
+
     }
 
     private void initView() {
         CreatorMap.entityToPlace = -1;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        buttonPanel.setLayout( new BoxLayout(buttonPanel,BoxLayout.Y_AXIS) );
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         JPanel secondaryLayout = new JPanel();
-        secondaryLayout.setLayout(new BoxLayout(secondaryLayout,BoxLayout.X_AXIS));
+        secondaryLayout.setLayout(new BoxLayout(secondaryLayout, BoxLayout.X_AXIS));
         this.add(secondaryLayout);
         addPlayerChooseButtons();
         secondaryLayout.add(buttonPanel);
-
         JButton returnButton = new JButton("RETURN");
         returnButton.addActionListener(new ActionListener() {
             @Override
@@ -54,7 +55,7 @@ public class CreatorMap extends JPanel {
         secondaryLayout.add(mapLayout);
 
         //creating prototypes
-        if(CreatorMap.prototypes.size() == 0)
+        if (CreatorMap.prototypes.size() == 0)
             createPrototypes();
 
         //place prototypes within chooseMenu
@@ -66,19 +67,17 @@ public class CreatorMap extends JPanel {
 
     }
 
-    private void createChooseMenu()
-    {
+    private void createChooseMenu() {
         AtomicInteger i = new AtomicInteger();
         CreatorMap.prototypes.forEach(unit -> {
             MapPanel unitPanel = new MapPanel();
             unitPanel.setEntity_on_tile(unit);
             unitPanel.add(new JLabel(unit.getPicLabel()));
-            unitPanel.addMouseListener(new MouseAdapter()
-            {
+            unitPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    MapPanel source = (MapPanel) e.getSource();
-                    Entity entityClicked = source.getEntity_on_tile();
+                    selected = (MapPanel) e.getSource();
+                    Entity entityClicked = selected.getEntity_on_tile();
                     for (int k = 0; k < CreatorMap.prototypes.size(); k++)//search grid to get prototype index
                     {
                         if (CreatorMap.prototypes.get(k).equals(entityClicked)) {
@@ -87,12 +86,13 @@ public class CreatorMap extends JPanel {
                             break;
                         }
                     }
-
+                    //Bordering chosen entity to place for one next click
+                    selected.setBorder(Color.RED, 2);
                     System.out.println("Entity to place:" + CreatorMap.prototypes.get(entityToPlace).toString());
                 }
 
             });
-            if(i.get() < CreatorMap.prototypes.size()/2)
+            if (i.get() < CreatorMap.prototypes.size() / 2)
                 chooseMenuPlayer1.add(unitPanel);
             else
                 chooseMenuPlayer2.add(unitPanel);
@@ -100,8 +100,7 @@ public class CreatorMap extends JPanel {
         });
     }
 
-    private void createPrototypes()
-    {
+    private void createPrototypes() {
         EntityFactory factory = new EntityFactory();
         CreatorMap.prototypes.add(factory.addEntity("archer", "blue"));
         CreatorMap.prototypes.add(factory.addEntity("warrior", "blue"));
@@ -120,10 +119,10 @@ public class CreatorMap extends JPanel {
 
     }
 
-    private void addPlayerChooseButtons( ){
+    private void addPlayerChooseButtons() {
         ActionListener listener = event -> {
-            JRadioButton btn = (JRadioButton)event.getSource();
-            switch(btn.getName()){
+            JRadioButton btn = (JRadioButton) event.getSource();
+            switch (btn.getName()) {
                 case "Player 1":
                     this.remove(chooseMenuPlayer2);
                     this.add(chooseMenuPlayer1);
@@ -141,7 +140,7 @@ public class CreatorMap extends JPanel {
             }
         };
 
-        for(String str : new String[]{"Player 1", "Player 2"}){
+        for (String str : new String[]{"Player 1", "Player 2"}) {
             JRadioButton btn = new JRadioButton(str, str.equals("Player 1"));
             btn.setName(str);
             btn.addActionListener(listener);
@@ -151,8 +150,8 @@ public class CreatorMap extends JPanel {
 
     }
 
-    private void sentToFrame(String action_){
-        AppFrame ancestorFrame = (AppFrame)SwingUtilities.getWindowAncestor(this);
+    private void sentToFrame(String action_) {
+        AppFrame ancestorFrame = (AppFrame) SwingUtilities.getWindowAncestor(this);
         ancestorFrame.updateFrame(action_);
 
     }
