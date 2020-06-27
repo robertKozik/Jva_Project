@@ -12,6 +12,7 @@ public class AppFrame extends JFrame {
     private Player[] playersArr;
     private iLogic logic;
     private Menu menu;
+    private SettingsMenu settingsMenu;
     private GameLayout mainGame;
     private CreatorMap create;
     private ScoreBoard scoreBoard;
@@ -19,6 +20,7 @@ public class AppFrame extends JFrame {
 
     public AppFrame () {
         menu = new Menu();
+        settingsMenu = new SettingsMenu();
         mainGame = null;
         this.playersArr = new Player[2];
         for(int i=0; i<2; i++)
@@ -32,7 +34,7 @@ public class AppFrame extends JFrame {
         }
 
 
-    void updateFrame(String name_){
+    public void updateFrame(String name_){
         String upperCase = name_.toUpperCase();
         switch (upperCase)
         {
@@ -40,6 +42,7 @@ public class AppFrame extends JFrame {
                 revalidate();
                 repaint();
                 this.add(menu);
+                this.remove(settingsMenu);
                 pack();
                 setVisible(true);
                 break;
@@ -53,8 +56,7 @@ public class AppFrame extends JFrame {
                 break;
             case "SETTINGS":
                 this.remove(menu);
-                this.add(new SettingsMenu());
-
+                this.add(settingsMenu);
                 setVisible(true);
                 pack();
                 break;
