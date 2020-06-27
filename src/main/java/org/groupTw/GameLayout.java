@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GameLayout extends JPanel {
-    private MapPanel[][] mapTiles;
+    public MapPanel[][] mapTiles;
     private JTabbedPane mainLayout;
     private JPanel statistics;
     private JPanel map;
@@ -43,7 +43,7 @@ public class GameLayout extends JPanel {
             }
         }
 
-        initArmy();
+        //initArmy();
 
         map.setPreferredSize(new Dimension(MAPDIM, MAPDIM));
         map.setMaximumSize(new Dimension(MAPDIM, MAPDIM));
