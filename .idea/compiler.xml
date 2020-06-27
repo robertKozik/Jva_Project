@@ -10,6 +10,7 @@
         <module name="Jva_Project2" />
         <module name="Jva_Project" />
         <module name="Jva_Project1" />
+        <module name="Jva_Project4" />
       </profile>
     </annotationProcessing>
   </component>

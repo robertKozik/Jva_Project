@@ -76,6 +76,8 @@ public class CreatorMap extends JPanel {
             unitPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
+                    if (selected != null )
+                        selected.setBorder(null);
                     selected = (MapPanel) e.getSource();
                     Entity entityClicked = selected.getEntity_on_tile();
                     for (int k = 0; k < CreatorMap.prototypes.size(); k++)//search grid to get prototype index
