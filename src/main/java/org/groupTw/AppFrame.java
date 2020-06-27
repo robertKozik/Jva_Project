@@ -1,5 +1,7 @@
 package org.groupTw;
 
+import org.groupTw.Settings.SettingsMenu;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -46,6 +48,13 @@ public class AppFrame extends JFrame {
                 logic = new GameLogic(this.playersArr);
                 mainGame = new GameLayout(logic);
                 this.add(mainGame);
+                setVisible(true);
+                pack();
+                break;
+            case "SETTINGS":
+                this.remove(menu);
+                this.add(new SettingsMenu());
+
                 setVisible(true);
                 pack();
                 break;
