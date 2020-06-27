@@ -5,5 +5,6 @@ public class Main {
 
         AppFrame app = new AppFrame();
         app.setVisible(true);
+        // kom
     }
 }
