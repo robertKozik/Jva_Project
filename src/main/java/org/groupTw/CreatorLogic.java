@@ -98,7 +98,7 @@ public class CreatorLogic implements iLogic {
                 firstClick=null;
             }
         }
-    }catch (CloneNotSupportedException e) {
+    }catch (Exception e) {
             e.printStackTrace();
     }
     }
