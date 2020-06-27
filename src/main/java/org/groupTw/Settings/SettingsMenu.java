@@ -1,7 +1,6 @@
 package org.groupTw.Settings;
 
 import org.groupTw.AppFrame;
-import org.groupTw.Menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +22,9 @@ public class SettingsMenu extends JPanel {
         this.add(secondScreen);
         this.add(thirdScreen);
 
-        firstScreen.setBackground(Color.RED);
-        secondScreen.setBackground(Color.BLUE);
-        thirdScreen.setBackground(Color.YELLOW);
+        //firstScreen.setBackground(Color.LIGHT_GRAY);
+        //secondScreen.setBackground(Color.LIGHT_GRAY);
+        //thirdScreen.setBackground(Color.lightGray);
 
         firstScreen.setMaximumSize(new Dimension(AppFrame.FRAMEXSPAN / 9, AppFrame.FRAMEYSPAN));
         firstScreen.setPreferredSize(new Dimension(AppFrame.FRAMEXSPAN / 9, AppFrame.FRAMEYSPAN));
@@ -37,15 +36,16 @@ public class SettingsMenu extends JPanel {
         thirdScreen.setPreferredSize(new Dimension(AppFrame.FRAMEXSPAN / 9, AppFrame.FRAMEYSPAN));
 
         // add scrollbar
-        JPanel test = new JPanel();
-        test.setPreferredSize(new Dimension( 7 * AppFrame.FRAMEXSPAN / 9,2000));
-        JScrollPane scrollFrame = new JScrollPane(test);
+        JPanel scrollScreen = new JPanel();
+        //test.setPreferredSize(new Dimension( 7 * AppFrame.FRAMEXSPAN / 9,2000));
+        JScrollPane scrollFrame = new JScrollPane(scrollScreen);
         scrollFrame.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollFrame.setPreferredSize(new Dimension( 7 * AppFrame.FRAMEXSPAN / 9, AppFrame.FRAMEYSPAN));
         secondScreen.add(scrollFrame);
+        scrollScreen.setLayout(new BoxLayout(scrollScreen, BoxLayout.Y_AXIS));
 
         // add back button
-        JButton backButton = new JButton("Krzysiu");
+        JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,5 +55,37 @@ public class SettingsMenu extends JPanel {
             }
         });
         thirdScreen.add(backButton);
+
+        // add save button
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        thirdScreen.add(saveButton);
+
+        JTextField nick0 = new JTextField("Player 1:");
+        JTextField nick1 = new JTextField("Player 2:");
+        JEditorPane nickChange0 = new JEditorPane();
+        JEditorPane nickChange1 = new JEditorPane();
+
+        JPanel firstNick = new JPanel();
+        firstNick.setBackground(Color.LIGHT_GRAY);
+        firstNick.add(nick0);
+        firstNick.add(nickChange0);
+        scrollScreen.add(firstNick);
+        nick0.setEditable(false);
+
+        JPanel secondNick = new JPanel();
+        secondNick.setBackground(Color.LIGHT_GRAY);
+        secondNick.add(nick1);
+        secondNick.add(nickChange1);
+        scrollScreen.add(secondNick);
+        nick0.setEditable(false);
+
+
     }
+
 }
