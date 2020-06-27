@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.InputStream;
 
 
 class MapPanel extends JPanel {
@@ -22,7 +23,8 @@ class MapPanel extends JPanel {
         entity_on_tile = null;
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         try{
-            this.bgImage = ImageIO.read(new File("src/Art/grass.png"));
+            InputStream path = this.getClass().getResourceAsStream("/grass.png");
+            this.bgImage = ImageIO.read(path);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -33,7 +35,7 @@ class MapPanel extends JPanel {
         super();
         this.entity_on_tile = entity_;
         try{
-            this.bgImage = ImageIO.read(new File("src/Art/grass.png"));
+            this.bgImage = ImageIO.read(this.getClass().getResourceAsStream("/grass.png"));
         }catch(Exception e){
             e.printStackTrace();
         }

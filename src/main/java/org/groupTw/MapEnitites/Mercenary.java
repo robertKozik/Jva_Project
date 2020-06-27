@@ -8,14 +8,14 @@ import java.awt.*;
 class Mercenary extends MovingUnit {
 
     public Mercenary(String color_){
-        super("src/Art/mercenary"+color_+".png");
+        super("/mercenary"+color_+".png",10,10,10);
         setColor(color_);
         MovePattern();
         AttackPattern();
     }//constructor
 
     public Mercenary(Point position_, String color_){
-        super(position_,"src/Art/mercenary"+color_+".png",10,10,10,true);
+        super(position_,"/mercenary"+color_+".png",10,10,10);
         setColor(color_);
         MovePattern();
         AttackPattern();
@@ -24,13 +24,9 @@ class Mercenary extends MovingUnit {
     /*
     attack pattern:
     - - - - -
-    - - - - -
-    - - - - -
     - X X X -
     - X 0 X -
     - X X X -
-    - - - - -
-    - - - - -
     - - - - -
      */
     @Override

@@ -43,9 +43,6 @@ public class GameLayout extends JPanel {
             }
         }
 
-        EntityFactory factory = new EntityFactory();
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("MERCENARY", new Point(1,1), "blue"));
-        logic.getPlayersArr()[1].getArmy().add(factory.addEntity("MERCENARY", new Point(7,7), "red"));
         placeEntitiesOnMap();
 
         repaintMap();

@@ -55,7 +55,16 @@ public class Menu extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e){
+            if(e.getActionCommand() == "New Game"){
+                Player[] ply = AppFrame.getPlayersArr();
+                if(ply[0].getArmy().size() != 0 && ply[1].getArmy().size() != 0) {
+                    sentToFrame(e.getActionCommand());
+                    return;
+                }
+                return;
+            }
             sentToFrame(e.getActionCommand());
+            return;
         }
     }
 

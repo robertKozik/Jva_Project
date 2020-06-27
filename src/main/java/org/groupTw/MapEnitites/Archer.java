@@ -8,13 +8,13 @@ import java.awt.*;
 class Archer extends MovingUnit {
 
     public Archer(String color_){
-        super("src/Art/archer"+color_+".png");
+        super("/archer"+color_+".png",10,10,10);
         setColor(color_);
 
     }//constructor
 
     public Archer(Point position_, String color_){
-        super(position_,"src/Art/archer"+color_+".png",10,10,10,true);
+        super(position_,"/archer"+color_+".png",10,10,10);
         setColor(color_);
     } //constructor
 
@@ -70,6 +70,6 @@ class Archer extends MovingUnit {
 
     @Override
     public String toString() {
-        return "archer"+getColor();
+        return "/archer"+getColor();
     }
 }

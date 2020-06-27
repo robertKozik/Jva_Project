@@ -7,17 +7,17 @@ import java.awt.*;
 class Tower extends Building {
 
     public Tower(String color_) {
-        super("src/Art/tower"+color_.toLowerCase()+".png");
+        super("/tower"+color_.toLowerCase()+".png",40,5,20);
         setColor(color_);
     }
 
-    public Tower(Point position_, String color_, int health_, int attack_, int defense_, boolean canAttack_) {
-        super(position_, "src/Art/tower"+color_.toLowerCase()+".png", health_, attack_, defense_, canAttack_);
+    public Tower(Point position_, String color_, int health_, int attack_, int defense_) {
+        super(position_, "/tower"+color_.toLowerCase()+".png", health_, attack_, defense_);
         setColor(color_);
     }//constructor
 
     public Tower(Point position_, String color_){
-        super(position_, "src/Art/tower"+color_.toLowerCase()+".png", 40, 5, 20, true);
+        super(position_, "/tower"+color_.toLowerCase()+".png", 40, 5, 20);
         setColor(color_);
     }//constructor
 

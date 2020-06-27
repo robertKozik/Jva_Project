@@ -10,7 +10,11 @@
         <module name="Jva_Project2" />
         <module name="Jva_Project" />
         <module name="Jva_Project1" />
+        <module name="JAVA_PROJEKT" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="JAVA_PROJEKT" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

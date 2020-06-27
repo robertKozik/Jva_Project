@@ -51,6 +51,28 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>archerblue.png</include>
+          <include>archerred.png</include>
+          <include>barracksblue.png</include>
+          <include>barracksred.png</include>
+          <include>catapultred.png</include>
+          <include>catapultblue.png</include>
+          <include>grass.png</include>
+          <include>mercenaryblue.png</include>
+          <include>mercenaryred.png</include>
+          <include>siegeblue.png</include>
+          <include>siegered.png</include>
+          <include>towerblue.png</include>
+          <include>towerred.png</include>
+          <include>warriorblue.png</include>
+          <include>warriorred.png</include>
+        </includes>
+      </resource>
+    </resources>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
@@ -74,6 +96,15 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>lib/</classpathPrefix>
+                <mainClass>org.groupTw.Main</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -103,6 +134,19 @@
                   <target>8</target>
               </configuration>
           </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+            <archive>
+              <manifest>
+                <mainClass>fully.qualified.MainClass</mainClass>
+              </manifest>
+            </archive>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+          </configuration>
+        </plugin>
       </plugins>
   </build>
 </project>

@@ -11,12 +11,12 @@ class Warrior extends MovingUnit {
 
     //Constructor
     public Warrior(String color_){
-        super("src/Art/warrior"+color_.toLowerCase()+".png");
+        super("/warrior"+color_.toLowerCase()+".png",20,10,10);
         setColor(color_);
     }
 
     public Warrior (Point position_, String color_){
-        super(position_,"src/Art/warrior"+color_.toLowerCase()+".png",20,10,10,true);
+        super(position_,"/warrior"+color_.toLowerCase()+".png",20,10,10);
         setColor(color_);
     }
 
