@@ -1,6 +1,7 @@
 package org.groupTw;
 
 import junit.framework.TestCase;
+import org.groupTw.MapEnitites.Archer;
 import org.junit.Assert;
 
 import java.awt.*;
@@ -16,5 +17,15 @@ public class MapPanelTest extends TestCase {
         mapPanel2.putClientProperty("Position", new Point(0, 0));
         Assert.assertTrue(mapPanel0.equals(mapPanel1));
         Assert.assertFalse(mapPanel1.equals((mapPanel2)));
+    }
+
+    public void testIsOccupied() {
+        MapPanel mapPanel = new MapPanel();
+        Assert.assertFalse(mapPanel.isOccupied());
+
+        mapPanel.setEntity_on_tile(new Archer(new Point(1,1),"red"));
+
+        Assert.assertTrue(mapPanel.isOccupied());
+
     }
 }
