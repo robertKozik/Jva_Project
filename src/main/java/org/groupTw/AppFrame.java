@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AppFrame extends JFrame {
-    final public static int MAPSIZE = 6;
+    final public static int MAPSIZE = 10;
     final public static int FRAMEYSPAN = 920;
     final public static int FRAMEXSPAN = 900;
     private Player[] playersArr;
