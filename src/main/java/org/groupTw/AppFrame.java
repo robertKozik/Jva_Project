@@ -1,7 +1,5 @@
 package org.groupTw;
 
-import org.groupTw.Settings.SettingsMenu;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -47,8 +45,9 @@ public class AppFrame extends JFrame {
                 setVisible(true);
                 break;
             case "NEW GAME":
-                System.out.println(playersArr[0].getArmy());
-                System.out.println(playersArr[1].getArmy());
+                JSON json = new JSON ("/nicks.txt");
+                playersArr[0].setPlayerName(json.JSONReadFromFile("player1"));
+                playersArr[1].setPlayerName(json.JSONReadFromFile("player2"));
                 this.remove(menu);
                 logic = new GameLogic(this.playersArr);
                 mainGame = new GameLayout(logic);

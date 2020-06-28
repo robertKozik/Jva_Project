@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GameLogic implements iLogic {
-    static private int roundCounter; //number of current round
+    private int roundCounter; //number of current round
     private ArrayList<MapPanel> possibleAttacks; //possible attacks of current selected unit
     private ArrayList<MapPanel> possibleMoves;  //possible moves of current selected unit
     private MapPanel selected;//selected map tile
@@ -29,14 +29,6 @@ public class GameLogic implements iLogic {
         selected = null;
         winner = null;
         gameState = true;
-    }
-
-    public static int getRoundCounter() {
-        return roundCounter;
-    }
-
-    public static void setRoundCounter(int roundCounter) {
-        GameLogic.roundCounter = roundCounter;
     }
 
     /*

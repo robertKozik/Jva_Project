@@ -18,10 +18,9 @@ public class ScoreBoard extends JPanel {
     private void init(){
         //init primary layout
         this.setLayout(new FlowLayout());
-        //this.add(new JPanel());
         //init secondary layout
         secondaryLayout.setLayout(new BoxLayout(secondaryLayout, BoxLayout.Y_AXIS));
-        //secondaryLayout.add(new JPanel());
+        secondaryLayout.add(new JPanel());
         this.add(secondaryLayout);
 
         //init winner name label

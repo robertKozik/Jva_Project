@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class CreatorLogic implements iLogic {
     private Player[] playersArr;
-    final private int MaxStartingSizeOfArmy = 5;
+    final public int MAX_ARMY_SIZE = 5;
 
     public CreatorLogic(Player[] playersArr) {
         this.playersArr = playersArr;
@@ -28,7 +28,7 @@ public class CreatorLogic implements iLogic {
             if (CreatorMap.entityToPlace != -1 && tile_.entity_on_tile == null) {
                 //player1
                 if (CreatorMap.entityToPlace < CreatorMap.prototypes.size() / 2 && tile_.getY() < GameLayout.MAPDIM / 2
-                        && playersArr[0].getArmy().size() < MaxStartingSizeOfArmy) {
+                        && playersArr[0].getArmy().size() < MAX_ARMY_SIZE) {
 
                     Entity klon = CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone();
 
@@ -44,7 +44,7 @@ public class CreatorLogic implements iLogic {
                 }
                 //player2
                 else if (CreatorMap.entityToPlace >= CreatorMap.prototypes.size() / 2
-                        && tile_.getY() >= GameLayout.MAPDIM / 2 && playersArr[1].getArmy().size() < MaxStartingSizeOfArmy) {
+                        && tile_.getY() >= GameLayout.MAPDIM / 2 && playersArr[1].getArmy().size() < MAX_ARMY_SIZE) {
 
                     Entity klon = CreatorMap.prototypes.get(CreatorMap.entityToPlace).clone();
                     klon.setPosition(new Point(tile_.getY() / 60, tile_.getX() / 60));

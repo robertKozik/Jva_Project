@@ -1,11 +1,12 @@
 package org.groupTw;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
+import org.json.simple.*;
 
 public class JSON {
     private PrintWriter pw;
@@ -13,7 +14,7 @@ public class JSON {
     private JSONObject jo;
 
     public JSON(String file){
-        this.file =file;
+        this.file = file;
 
         jo = new JSONObject();
     }
@@ -21,8 +22,10 @@ public class JSON {
     public void JSONWriteToFile() {
 
         try {
-            pw = new PrintWriter(file) ;
-        } catch (FileNotFoundException e) {
+            URL resourceUrl = getClass().getResource(this.file);
+            File outputFile = new File(resourceUrl.toURI());
+            pw = new PrintWriter(outputFile) ;
+        } catch (FileNotFoundException | URISyntaxException e) {
             e.printStackTrace();
         }
 
@@ -44,7 +47,7 @@ public class JSON {
 
         Object obj = null;
         try {
-            obj = new JSONParser().parse(new FileReader(file));
+            obj = new JSONParser().parse(new InputStreamReader(getClass().getResourceAsStream(file)));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -54,7 +57,7 @@ public class JSON {
         JSONObject jo = (JSONObject) obj;
 
         String v = (String) jo.get(value);
-        System.out.println(v);
+        //System.out.println(v);
 
         return v;
 

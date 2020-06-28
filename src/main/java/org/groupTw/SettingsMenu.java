@@ -1,4 +1,4 @@
-package org.groupTw.Settings;
+package org.groupTw;
 
 import org.groupTw.AppFrame;
 import org.groupTw.JSON;
@@ -12,7 +12,7 @@ public class SettingsMenu extends JPanel {
     private JSON json;
     public SettingsMenu() {
 
-        json = new JSON("nicks.txt");
+        json = new JSON("/nicks.txt");
         JPanel firstScreen = new JPanel();
         JPanel secondScreen = new JPanel();
         JPanel thirdScreen = new JPanel();
@@ -32,14 +32,6 @@ public class SettingsMenu extends JPanel {
         thirdScreen.setMaximumSize(new Dimension(2 * AppFrame.FRAMEXSPAN / 9, AppFrame.FRAMEYSPAN));
         thirdScreen.setPreferredSize(new Dimension(2 * AppFrame.FRAMEXSPAN / 9, AppFrame.FRAMEYSPAN));
 
-        /* add scrollbar */
-        //JPanel scrollScreen = new JPanel();
-        //test.setPreferredSize(new Dimension( 7 * AppFrame.FRAMEXSPAN / 9,2000));
-//        JScrollPane scrollFrame = new JScrollPane(scrollScreen);
-//        scrollFrame.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        scrollFrame.setPreferredSize(new Dimension( 7 * AppFrame.FRAMEXSPAN / 9, AppFrame.FRAMEYSPAN));
-//        secondScreen.add(scrollFrame);
-//        scrollScreen.setLayout(new BoxLayout(scrollScreen, BoxLayout.Y_AXIS));
 
         /* add back button */
         JButton backButton = new JButton("Back");

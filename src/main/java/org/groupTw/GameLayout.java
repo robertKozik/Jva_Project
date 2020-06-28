@@ -45,11 +45,15 @@ public class GameLayout extends JPanel {
 
         placeEntitiesOnMap();
 
+
         map.setPreferredSize(new Dimension(MAPDIM, MAPDIM));
         map.setMaximumSize(new Dimension(MAPDIM, MAPDIM));
         mainLayout.addTab("map", this.map); //show map
+        createStatisticsTab();//add statistic tab
         setVisible(true);
-
+        repaintMap();
+        revalidate();
+        repaint();
 
     }
 
@@ -69,18 +73,16 @@ public class GameLayout extends JPanel {
             logic.action(panel, mapTiles);
 
             if(logic instanceof GameLogic ){
-                if( ((GameLogic)logic).getToShow() != null )
-                    createStatisticsTab(((GameLogic)logic).getToShow());
              if(((GameLogic)logic).getWinner() != null) {
                  sentToFrame("SCOREBOARD");
              }
             }
             repaintMap();
-            revalidate();
-            repaint();
+            createStatisticsTab();
         }
     }
-    // starting army setup
+
+    // starting army setup for debugging
     private void initArmy(){
         EntityFactory factory = new EntityFactory();
         logic.getPlayersArr()[0].getArmy().add(factory.addEntity("MERCENARY", new Point(0,0), "blue"));
@@ -88,6 +90,7 @@ public class GameLayout extends JPanel {
         placeEntitiesOnMap();
         repaintMap();
     }
+
     //assign all troops to their tiles
     private void placeEntitiesOnMap(){
 
@@ -99,6 +102,9 @@ public class GameLayout extends JPanel {
 
                 mapTiles[xPosition][yPosition].setEntity_on_tile(troop);
                 mapTiles[xPosition][yPosition].setOwner(ply);
+
+                revalidate();
+                repaint();
             }
         }
     }
@@ -115,9 +121,11 @@ public class GameLayout extends JPanel {
                 }
             }
         }
+        revalidate();
+        repaint();
     }
 
-    private void createStatisticsTab(Entity entity_){
+    private void createStatisticsTab(){
         mainLayout.remove(statistics);
         statistics = new JPanel();
         statistics.setLayout(new BorderLayout() );

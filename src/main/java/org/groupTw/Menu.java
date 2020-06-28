@@ -61,10 +61,13 @@ public class Menu extends JPanel {
                     sentToFrame(e.getActionCommand());
                     return;
                 }
+                JButton button = (JButton) e.getSource();
+                buttons.get(0).setBackground(Color.RED);
+                buttons.get(0).setOpaque(true);
+                buttons.get(0).setBorderPainted(false);
                 return;
             }
             sentToFrame(e.getActionCommand());
-            return;
         }
     }
 
