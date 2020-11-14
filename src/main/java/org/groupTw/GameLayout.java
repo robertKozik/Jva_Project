@@ -7,14 +7,40 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Main Layout of game. Consists of map of game and statistics tab.
+ */
 public class GameLayout extends JPanel {
-    public MapPanel[][] mapTiles;
-    private JTabbedPane mainLayout;
-    private JPanel statistics;
-    private JPanel map;
-    private iLogic logic;
+    /**
+     * width of map display in px.
+     */
     final public static int MAPDIM = 600;
+    /**
+     * Array of MapTiles. It's representation of main view of the game.
+     */
+    public MapPanel[][] mapTiles;
+    /**
+     * Main layout of JPanel, setted in initLayout() method.
+     */
+    private JTabbedPane mainLayout;
+    /**
+     * child Jpanel of Gamelayout which contains statistics of alive units.
+     */
+    private JPanel statistics;
+    /**
+     * JPanl in which mapTiles will be displayed.
+     */
+    private JPanel map;
+    /**
+     * Object of iLogic which will be responible for handling user input.
+     */
+    private iLogic logic;
 
+    /**
+     * Creates instance of GameLayout, creates instances of fields
+     *
+     * @param logic_ instance of class that implements iLogic interface, it handles user input
+     */
     public GameLayout(iLogic logic_) {
         this.mainLayout = new JTabbedPane();
         this.logic = logic_;
@@ -25,6 +51,9 @@ public class GameLayout extends JPanel {
 
     }
 
+    /**
+     * inits sublayouts, inits mapTiles with empty mapTile instances, sets Size of Frame
+     */
     private void initLayout() {
         this.setLayout(new BorderLayout());
         this.add(mainLayout);
@@ -57,6 +86,10 @@ public class GameLayout extends JPanel {
     }
 
     //assign all troops to their tiles
+
+    /**
+     * Assings all troops from players to their position on map, sets ownership of tiles
+     */
     private void placeEntitiesOnMap() {
 
         for (Player ply : logic.getPlayersArr()) {
@@ -75,6 +108,10 @@ public class GameLayout extends JPanel {
     }
 
     //show all units on assigned tiles
+
+    /**
+     * Paints all alive units on MapTiles
+     */
     private void repaintMap() {
 
         for (int i = 0; i < AppFrame.MAPSIZE; i++) {
@@ -90,6 +127,9 @@ public class GameLayout extends JPanel {
         repaint();
     }
 
+    /**
+     * Creates layout of statistics JPanel, initializes statistics for every unit and adds them to statistics JPanel
+     */
     private void createStatisticsTab() {
         mainLayout.remove(statistics);
         statistics = new JPanel();
@@ -132,10 +172,10 @@ public class GameLayout extends JPanel {
 
     /**
      * Click Action Class is design in order to get any click on a MapTile,
-     * then it decodes MapTile position property and next sends it to GameLogic class object
+     * then it decodes MapTile position property and next sends it to instance of iLogic interface object
      * According to current state of "selected" object it runs different method of GameLogic class,
-     * if no tile selected, method tile not selected, if anyone selected, method tile selected is called
-     * GameLogic class process the rest of game states
+     * if no tile selected, method tile not selected, if anyone selected, method tile selected is called.
+     * GameLogic class process the rest of game states.
      */
     private class ClickAction extends MouseAdapter {
 

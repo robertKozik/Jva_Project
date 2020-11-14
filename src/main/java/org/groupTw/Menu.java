@@ -6,14 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static java.lang.System.exit;
+
 public class Menu extends JPanel {
     ArrayList<JButton> buttons;
     JPanel panel;
-    final static int X_BUTTON_MENU = AppFrame.FRAMEXSPAN /3;
-    final static int Y_BUTTON_MENU = AppFrame.FRAMEYSPAN /10;
+    final static int X_BUTTON_MENU = AppFrame.FRAMEXSPAN / 3;
+    final static int Y_BUTTON_MENU = AppFrame.FRAMEYSPAN / 10;
 
-    public Menu()
-    {
+    public Menu() {
         createButtons();
         this.setLayout(new FlowLayout(FlowLayout.CENTER, (AppFrame.FRAMEXSPAN - X_BUTTON_MENU) / 2, (AppFrame.FRAMEYSPAN - (this.buttons.size() * Y_BUTTON_MENU)) / 2));
         this.setPreferredSize(new Dimension(AppFrame.FRAMEXSPAN, AppFrame.FRAMEYSPAN));
@@ -43,7 +44,7 @@ public class Menu extends JPanel {
         quit.addActionListener(new ButtonAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                exit(0);
             }
         });
         quit.setPreferredSize(new Dimension(X_BUTTON_MENU, Y_BUTTON_MENU));
@@ -84,6 +85,9 @@ public class Menu extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("New Game")) {
                 Player[] ply = AppFrame.getPlayersArr();
+                if (ply == null) {
+                    exit(1);
+                }
                 if (ply[0].getArmy().size() != 0 && ply[1].getArmy().size() != 0) {
                     sentToFrame(e.getActionCommand());
                     return;

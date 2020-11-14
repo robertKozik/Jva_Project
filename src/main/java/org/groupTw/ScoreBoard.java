@@ -3,20 +3,29 @@ package org.groupTw;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * JFrame displayed after end of the game. Informs user who won the game
+ */
 public class ScoreBoard extends JPanel {
 
     JPanel secondaryLayout;
     JLabel winnerName;
     JButton returnButton;
 
-    public ScoreBoard(){
+    /**
+     * Creates ScoreBoard and initializes it
+     */
+    public ScoreBoard() {
         secondaryLayout = new JPanel();
         winnerName = new JLabel();
         returnButton = new JButton();
         init();
     }
 
-    private void init(){
+    /**
+     * Inits primary and secondary layout, gets and sets winner name, init return to menu button
+     */
+    private void init() {
         //init primary layout
         this.setLayout(new FlowLayout());
         //init secondary layout

@@ -1,7 +1,7 @@
 package org.groupTw;
 
 import org.groupTw.MapEnitites.Archer;
-import org.groupTw.MapEnitites.UnitEnum;
+import org.groupTw.MapEnitites.ColorEnum;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class MapPanelTest {
         MapPanel mapPanel = new MapPanel();
         Assert.assertFalse(mapPanel.isOccupied());
 
-        mapPanel.setEntity_on_tile(new Archer(new Point(1, 1), UnitEnum.RED));
+        mapPanel.setEntity_on_tile(new Archer(new Point(1, 1), ColorEnum.RED));
 
         Assert.assertTrue(mapPanel.isOccupied());
 

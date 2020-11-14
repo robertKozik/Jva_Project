@@ -4,7 +4,7 @@ package org.groupTw.MapEnitites;
 import java.awt.*;
 public class EntityFactory {
 
-    public Entity addEntity(UnitEnum type_, UnitEnum color_) throws NullPointerException {
+    public Entity addEntity(UnitEnum type_, ColorEnum color_) throws NullPointerException {
 
         switch (type_) {
             case WARRIOR:
@@ -23,7 +23,7 @@ public class EntityFactory {
         throw new NullPointerException("No such a Unit");
     }
 
-    public Entity addEntity(UnitEnum type_, Point position_, UnitEnum color_) throws NullPointerException {
+    public Entity addEntity(UnitEnum type_, Point position_, ColorEnum color_) throws NullPointerException {
 
         switch (type_) {
             case WARRIOR:

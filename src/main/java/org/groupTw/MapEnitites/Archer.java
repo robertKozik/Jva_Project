@@ -6,13 +6,13 @@ import java.awt.*;
 
 public class Archer extends MovingUnit {
 
-    public Archer(UnitEnum color_) {
+    public Archer(ColorEnum color_) {
         super("/archer" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
 
     }//constructor
 
-    public Archer(Point position_, UnitEnum color_) {
+    public Archer(Point position_, ColorEnum color_) {
         super(position_, "/archer" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
     } //constructor

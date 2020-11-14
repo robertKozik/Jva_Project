@@ -9,12 +9,12 @@ class Warrior extends MovingUnit {
 
 
     //Constructor
-    public Warrior(UnitEnum color_) {
+    public Warrior(ColorEnum color_) {
         super("/warrior" + color_.getValue() + ".png", 20, 10);
         setColor(color_);
     }
 
-    public Warrior(Point position_, UnitEnum color_) {
+    public Warrior(Point position_, ColorEnum color_) {
         super(position_, "/warrior" + color_.getValue() + ".png", 20, 10);
         setColor(color_);
     }

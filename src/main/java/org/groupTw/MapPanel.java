@@ -8,14 +8,30 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
+/**
+ *
+ */
 class MapPanel extends JPanel {
-
-    private Color border = Color.BLACK;
+    /**
+     * Contains, if there is any, entity which is placed on this particular MapPanel
+     */
     protected Entity entity_on_tile;
+    /**
+     * Contains relation to Player who have unit on this MapPanel
+     */
     protected Player owner;
+    /**
+     * Border of JPanel on map.
+     */
+    private Color border = Color.BLACK;
+    /**
+     * Background image to paint
+     */
     private Image bgImage;
 
+    /**
+     * Creates MapPanel without background.
+     */
     public MapPanel() {
 
         super();
@@ -25,6 +41,10 @@ class MapPanel extends JPanel {
         initUI();
     }
 
+    /**
+     * Creates MapPanel with background. Loads image grom bgName_ path
+     * @param bgName_ path to the image which will be paint as background
+     */
     public MapPanel(String bgName_) {
         super();
         this.entity_on_tile = null;
@@ -36,7 +56,9 @@ class MapPanel extends JPanel {
         initUI();
     }
 
-
+    /**
+     * Method adds listener to MapPanel object.
+     */
     private void initUI() {
         addMouseListener(new MouseAdapter() {
 
@@ -68,13 +90,10 @@ class MapPanel extends JPanel {
         }
     }
 
+    //Getters and Setters ________________________________________________
     public void setBorder(Color border_, int width_) {
         this.border = border_;
         this.setBorder(BorderFactory.createLineBorder(border, width_));
-    }
-
-    public Color getTileBorder() {
-        return border;
     }
 
     public Player getOwner() {

@@ -1,13 +1,18 @@
 package org.groupTw;
 
-import java.io.*;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
-import org.json.simple.*;
-
+/**
+ * Class handles Json file, it can write and read information and present it to application.
+ */
 public class JSON {
     private PrintWriter pw;
     private String file;
@@ -19,33 +24,50 @@ public class JSON {
         jo = new JSONObject();
     }
 
+
     public void JSONWriteToFile() {
 
         try {
             URL resourceUrl = getClass().getResource(this.file);
             File outputFile = new File(resourceUrl.toURI());
-            pw = new PrintWriter(outputFile) ;
+            pw = new PrintWriter(outputFile);
         } catch (FileNotFoundException | URISyntaxException e) {
             e.printStackTrace();
         }
 
 
     }
-    public void JSONAddValue(String name, String value){
 
-        jo.put(name,value);
+    /**
+     * Adds new value to Json file.
+     *
+     * @param key   desired Key String
+     * @param value desired Value
+     */
+    public void JSONAddValue(String key, String value) {
+
+        jo.put(key, value);
     }
 
-    public void JSONCloseWithSave(){
+    /**
+     * Saves all changes to Json file and closes it.
+     */
+    public void JSONCloseWithSave() {
         System.out.println("Saved in File");
         pw.write(jo.toJSONString());
         pw.flush();
         pw.close();
     }
 
-    public String JSONReadFromFile(String value)  {
+    /**
+     * Method opens Json file, and reads from it value behind given key.
+     *
+     * @param key Unique String which we want value .
+     * @return Value of key.
+     */
+    public String JSONReadFromFile(String key) {
 
-        Object obj = null;
+        Object obj;
         try {
             obj = new JSONParser().parse(new InputStreamReader(getClass().getResourceAsStream(file)));
         } catch (Exception e) {
@@ -56,8 +78,8 @@ public class JSON {
         // typecasting obj to JSONObject
         JSONObject jo = (JSONObject) obj;
 
-        String v = (String) jo.get(value);
-        //System.out.println(v);
+        String v = (String) jo.get(key);
+        System.out.println(v);
 
         return v;
 

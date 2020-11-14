@@ -6,12 +6,12 @@ import java.awt.*;
 
 class Tower extends Building {
 
-    public Tower(UnitEnum color_) {
+    public Tower(ColorEnum color_) {
         super("/tower" + color_.getValue() + ".png", 40, 5);
         setColor(color_);
     }
 
-    public Tower(Point position_, UnitEnum color_) {
+    public Tower(Point position_, ColorEnum color_) {
         super(position_, "/tower" + color_.getValue() + ".png", 40, 5);
         setColor(color_);
     }//constructor

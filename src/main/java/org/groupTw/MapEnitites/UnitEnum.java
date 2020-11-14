@@ -1,14 +1,15 @@
 package org.groupTw.MapEnitites;
 
+/**
+ *
+ */
 public enum UnitEnum {
     ARCHER("archer"),
     CATAPULT("catapult"),
     MERCENARY("mercenary"),
     SIEGE("siege"),
     TOWER("tower"),
-    WARRIOR("warrior"),
-    RED("red"),
-    BLUE("blue");
+    WARRIOR("warrior");
 
     private String value;
 

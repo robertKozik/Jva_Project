@@ -3,8 +3,18 @@ package org.groupTw;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel represents Settings. Allows User to change player names and return to Main Menu.
+ */
 public class SettingsMenu extends JPanel {
+    /**
+     * Json file which stores players name.
+     */
     private JSON json;
+
+    /**
+     * Creates Settings menu, inits its layouts and elements with default size and values
+     */
     public SettingsMenu() {
 
         json = new JSON("/nicks.txt");

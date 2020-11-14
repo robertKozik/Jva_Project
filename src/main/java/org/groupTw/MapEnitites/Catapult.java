@@ -6,12 +6,12 @@ import java.awt.*;
 
 class Catapult extends Building {
 
-    public Catapult(UnitEnum color_) {
+    public Catapult(ColorEnum color_) {
         super("/catapult" + color_.getValue() + ".png", 100, 10);
         setColor(color_);
     }
 
-    public Catapult(Point position_, UnitEnum color_) {
+    public Catapult(Point position_, ColorEnum color_) {
         super(position_, "/catapult" + color_.getValue() + ".png", 100, 10);
         setColor(color_);
     }//constructor

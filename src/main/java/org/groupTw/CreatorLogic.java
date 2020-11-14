@@ -2,19 +2,26 @@ package org.groupTw;
 
 import org.apache.commons.lang3.SerializationException;
 import org.groupTw.MapEnitites.Building;
+import org.groupTw.MapEnitites.ColorEnum;
 import org.groupTw.MapEnitites.Entity;
 import org.groupTw.MapEnitites.MovingUnit;
-import org.groupTw.MapEnitites.UnitEnum;
 
 import java.awt.*;
 
+/**
+ * Contains all logic responsible for handling user click on Creation map feature, implements interface ILogic
+ */
 public class CreatorLogic implements iLogic {
     private Player[] playersArr;
     private MapPanel firstClick = null; //previously clicked tile
 
     final public int MAX_ARMY_SIZE = 5;
 
-
+    /**
+     * Creates instance of Class with given players
+     *
+     * @param playersArr array of players
+     */
     public CreatorLogic(Player[] playersArr) {
         this.playersArr = playersArr;
     }
@@ -94,7 +101,7 @@ public class CreatorLogic implements iLogic {
                 }
                 //Second click on same tile (removing entity)
                 else if (firstClick != null && tile_.entity_on_tile.equals(firstClick.entity_on_tile)) {
-                    if (firstClick.entity_on_tile.getColor() == UnitEnum.BLUE) {
+                    if (firstClick.entity_on_tile.getColor() == ColorEnum.BLUE) {
                         playersArr[0].getArmy().remove(firstClick.entity_on_tile);
                     } else {
                         playersArr[1].getArmy().remove(firstClick.entity_on_tile);

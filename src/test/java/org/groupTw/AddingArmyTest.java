@@ -1,5 +1,6 @@
 package org.groupTw;
 
+import org.groupTw.MapEnitites.ColorEnum;
 import org.groupTw.MapEnitites.EntityFactory;
 import org.groupTw.MapEnitites.UnitEnum;
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class AddingArmyTest {
     public void addUnitToArmy() {
         Player ply = new Player();
         EntityFactory factory = new EntityFactory();
-        ply.getArmy().add(factory.addEntity(UnitEnum.WARRIOR, UnitEnum.RED));
+        ply.getArmy().add(factory.addEntity(UnitEnum.WARRIOR, ColorEnum.RED));
 
         assertEquals(ply.getArmy().size(), 1);
     }

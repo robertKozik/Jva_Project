@@ -6,14 +6,14 @@ import java.awt.*;
 
 class Mercenary extends MovingUnit {
 
-    public Mercenary(UnitEnum color_) {
+    public Mercenary(ColorEnum color_) {
         super("/mercenary" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
         MovePattern();
         AttackPattern();
     }//constructor
 
-    public Mercenary(Point position_, UnitEnum color_) {
+    public Mercenary(Point position_, ColorEnum color_) {
         super(position_, "/mercenary" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
         MovePattern();

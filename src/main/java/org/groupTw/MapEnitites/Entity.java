@@ -20,7 +20,7 @@ public abstract class Entity implements Cloneable, Serializable {
     private int currentHealth;
     private int attack;
     private ImageIcon picLabel;
-    private UnitEnum color;
+    private ColorEnum color;
 
     //__________________
     final int imgW = (int) (GameLayout.MAPDIM * 0.7) / AppFrame.MAPSIZE;
@@ -89,11 +89,11 @@ public abstract class Entity implements Cloneable, Serializable {
         return attack;
     }
 
-    public UnitEnum getColor() {
+    public ColorEnum getColor() {
         return color;
     }
 
-    public void setColor(UnitEnum color) {
+    public void setColor(ColorEnum color) {
         this.color = color;
     }
 
