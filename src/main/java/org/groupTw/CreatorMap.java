@@ -2,10 +2,10 @@ package org.groupTw;
 
 import org.groupTw.MapEnitites.Entity;
 import org.groupTw.MapEnitites.EntityFactory;
+import org.groupTw.MapEnitites.UnitEnum;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -44,12 +44,7 @@ public class CreatorMap extends JPanel {
         addPlayerChooseButtons();
         secondaryLayout.add(buttonPanel);
         JButton returnButton = new JButton("RETURN");
-        returnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sentToFrame("ENDCREATE");
-            }
-        });
+        returnButton.addActionListener(e -> sentToFrame(FramesEnum.ENDCREATE));
         secondaryLayout.add(returnButton);
 
         secondaryLayout.add(mapLayout);
@@ -104,19 +99,23 @@ public class CreatorMap extends JPanel {
 
     private void createPrototypes() {
         EntityFactory factory = new EntityFactory();
-        CreatorMap.prototypes.add(factory.addEntity("archer", "blue"));
-        CreatorMap.prototypes.add(factory.addEntity("warrior", "blue"));
-        CreatorMap.prototypes.add(factory.addEntity("catapult", "blue"));
-        CreatorMap.prototypes.add(factory.addEntity("mercenary", "blue"));
-        CreatorMap.prototypes.add(factory.addEntity("barracks", "blue"));
-        CreatorMap.prototypes.add(factory.addEntity("siege", "blue"));
+        try {
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.ARCHER, UnitEnum.BLUE));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.WARRIOR, UnitEnum.BLUE));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.CATAPULT, UnitEnum.BLUE));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.MERCENARY, UnitEnum.BLUE));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.TOWER, UnitEnum.BLUE));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.SIEGE, UnitEnum.BLUE));
 
-        CreatorMap.prototypes.add(factory.addEntity("archer", "red"));
-        CreatorMap.prototypes.add(factory.addEntity("warrior", "red"));
-        CreatorMap.prototypes.add(factory.addEntity("catapult", "red"));
-        CreatorMap.prototypes.add(factory.addEntity("mercenary", "red"));
-        CreatorMap.prototypes.add(factory.addEntity("barracks", "red"));
-        CreatorMap.prototypes.add(factory.addEntity("siege", "red"));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.ARCHER, UnitEnum.RED));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.WARRIOR, UnitEnum.RED));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.CATAPULT, UnitEnum.RED));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.MERCENARY, UnitEnum.RED));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.TOWER, UnitEnum.RED));
+            CreatorMap.prototypes.add(factory.addEntity(UnitEnum.SIEGE, UnitEnum.RED));
+        } catch (NullPointerException exc) {
+            exc.printStackTrace();
+        }
 
 
     }
@@ -152,25 +151,10 @@ public class CreatorMap extends JPanel {
 
     }
 
-    private void sentToFrame(String action_) {
+    private void sentToFrame(FramesEnum action_) {
         AppFrame ancestorFrame = (AppFrame) SwingUtilities.getWindowAncestor(this);
         ancestorFrame.updateFrame(action_);
 
     }
 
-    public static ArrayList<Entity> getPrototypes() {
-        return prototypes;
-    }
-
-    public static int getEntityToPlace() {
-        return entityToPlace;
-    }
-
-    public static void setPrototypes(ArrayList<Entity> prototypes) {
-        CreatorMap.prototypes = prototypes;
-    }
-
-    public static void setEntityToPlace(int entityToPlace) {
-        CreatorMap.entityToPlace = entityToPlace;
-    }
 }

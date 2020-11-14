@@ -1,7 +1,6 @@
 package org.groupTw.MapEnitites;
 
 import org.groupTw.AppFrame;
-import org.groupTw.iMovable;
 
 import java.awt.*;
 
@@ -10,13 +9,13 @@ class Warrior extends MovingUnit {
 
 
     //Constructor
-    public Warrior(String color_){
-        super("/warrior"+color_.toLowerCase()+".png",20,10,10);
+    public Warrior(UnitEnum color_) {
+        super("/warrior" + color_.getValue() + ".png", 20, 10);
         setColor(color_);
     }
 
-    public Warrior (Point position_, String color_){
-        super(position_,"/warrior"+color_.toLowerCase()+".png",20,10,10);
+    public Warrior(Point position_, UnitEnum color_) {
+        super(position_, "/warrior" + color_.getValue() + ".png", 20, 10);
         setColor(color_);
     }
 

@@ -1,21 +1,20 @@
 package org.groupTw.MapEnitites;
 
 import org.groupTw.AppFrame;
-import org.groupTw.GameLayout;
 
 import java.awt.*;
 
 class Mercenary extends MovingUnit {
 
-    public Mercenary(String color_){
-        super("/mercenary"+color_+".png",10,10,10);
+    public Mercenary(UnitEnum color_) {
+        super("/mercenary" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
         MovePattern();
         AttackPattern();
     }//constructor
 
-    public Mercenary(Point position_, String color_){
-        super(position_,"/mercenary"+color_+".png",10,10,10);
+    public Mercenary(Point position_, UnitEnum color_) {
+        super(position_, "/mercenary" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
         MovePattern();
         AttackPattern();

@@ -2,8 +2,9 @@ package org.groupTw;
 
 import org.groupTw.MapEnitites.Entity;
 import org.groupTw.MapEnitites.EntityFactory;
-
+import org.groupTw.MapEnitites.UnitEnum;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class DamageTest {
@@ -13,7 +14,7 @@ public class DamageTest {
     public void testDamageDeal(){
         EntityFactory factory = new EntityFactory();
 
-        entity = factory.addEntity("warrior", "blue");
+        entity = factory.addEntity(UnitEnum.WARRIOR, UnitEnum.RED);
         entity.getDamage(10);
 
         assertEquals(10,entity.getCurrentHealth());

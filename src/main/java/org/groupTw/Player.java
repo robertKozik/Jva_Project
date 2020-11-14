@@ -13,7 +13,7 @@ public class Player {
     public Player(){
         army = new ArrayList<>();
         gold = 0;
-        playerName = "Player-"+ String.valueOf(new Random().nextInt(1000));
+        playerName = "Player-" + new Random().nextInt(1000);
     }
     public Player(String playerName_, ArrayList<Entity> army_, int gold_){
         army = army_;
@@ -30,22 +30,11 @@ public class Player {
     public void getGoldPerTurn(){
         this.gold += 100;
     }
+
     //Getters and setters:
 
     public ArrayList<Entity> getArmy() {
         return army;
-    }
-
-    public void setArmy(ArrayList<Entity> army) {
-        this.army = army;
-    }
-
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
     }
 
     public String getPlayerName() {

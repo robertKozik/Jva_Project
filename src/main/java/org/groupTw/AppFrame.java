@@ -5,10 +5,9 @@ import java.awt.*;
 
 public class AppFrame extends JFrame {
     final public static int MAPSIZE = 10;
-    final public static int FRAMEYSPAN = 920;
-    final public static int FRAMEXSPAN = 900;
+    final public static int FRAMEYSPAN = 600;
+    final public static int FRAMEXSPAN = 800;
     static private Player[] playersArr;
-    private iLogic logic;
     private Menu menu;
     private SettingsMenu settingsMenu;
     private GameLayout mainGame;
@@ -16,27 +15,35 @@ public class AppFrame extends JFrame {
     private ScoreBoard scoreBoard;
 
 
-    public AppFrame () {
+    public AppFrame() {
         menu = new Menu();
         settingsMenu = new SettingsMenu();
         mainGame = null;
-        this.playersArr = new Player[2];
-        for(int i=0; i<2; i++)
-            this.playersArr[i] = new Player();//init new players
+        playersArr = new Player[2];
+        for (int i = 0; i < 2; i++)
+            playersArr[i] = new Player();//init new players
         this.setSize(FRAMEXSPAN, FRAMEYSPAN);
         this.setLayout(new FlowLayout());
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        updateFrame("MENU");
-        }
+        updateFrame(FramesEnum.MENU);
+    }
 
+    //getters and setters
+    public static Player[] getPlayersArr() {
+        return playersArr;
+    }
 
-    public void updateFrame(String name_){
-        String upperCase = name_.toUpperCase();
-        switch (upperCase)
-        {
-            case "MENU":
+    /**
+     * method changes displayed JPanel, removes currently displayed one
+     *
+     * @param name_ name from FramesEnum of JPanel to invoke in frame
+     */
+    public void updateFrame(FramesEnum name_) {
+
+        switch (name_) {
+            case MENU:
                 revalidate();
                 repaint();
                 this.add(menu);
@@ -44,32 +51,33 @@ public class AppFrame extends JFrame {
                 pack();
                 setVisible(true);
                 break;
-            case "NEW GAME":
-                JSON json = new JSON ("/nicks.txt");
+            case NEWGAME:
+                JSON json = new JSON("/nicks.txt");
                 playersArr[0].setPlayerName(json.JSONReadFromFile("player1"));
                 playersArr[1].setPlayerName(json.JSONReadFromFile("player2"));
+
                 this.remove(menu);
-                logic = new GameLogic(this.playersArr);
+                iLogic logic = new GameLogic(playersArr);
                 mainGame = new GameLayout(logic);
                 this.add(mainGame);
                 setVisible(true);
                 pack();
                 break;
-            case "SETTINGS":
+            case SETTINGS:
                 this.remove(menu);
                 this.add(settingsMenu);
                 setVisible(true);
                 pack();
                 break;
-            case "ENDGAME":
+            case ENDGAME:
                 this.remove(scoreBoard);
-                updateFrame("MENU");
+                updateFrame(FramesEnum.MENU);
                 break;
-            case "ENDCREATE":
+            case ENDCREATE:
                 this.remove(create);
-                updateFrame("MENU");
+                updateFrame(FramesEnum.MENU);
                 break;
-            case "CREATE YOUR MAP":
+            case CREATEYOURMAP:
                 this.remove(menu);
                 logic = new CreatorLogic(playersArr);
                 create = new CreatorMap(new GameLayout(logic));
@@ -77,7 +85,7 @@ public class AppFrame extends JFrame {
                 setVisible(true);
                 pack();
                 break;
-            case "SCOREBOARD":
+            case SCOREBOARD:
                 this.remove(mainGame);
                 scoreBoard = new ScoreBoard();
                 this.add(scoreBoard);
@@ -86,10 +94,6 @@ public class AppFrame extends JFrame {
                 pack();
 
         }
-    }
-
-    public static Player[] getPlayersArr() {
-        return playersArr;
     }
 
     public static void setPlayersArr(Player[] playersArr) {

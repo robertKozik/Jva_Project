@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 public interface iMovable {
 
-    public void MovePattern();
-    public void Move(Point position_);
-    public ArrayList<Point> getPossible_moves();
+    void MovePattern();
+
+    void Move(Point position_);
+
+    ArrayList<Point> getPossible_moves();
 
 }

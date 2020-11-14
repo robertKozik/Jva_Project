@@ -1,11 +1,12 @@
 package org.groupTw;
 
 import org.groupTw.MapEnitites.EntityFactory;
+import org.groupTw.MapEnitites.UnitEnum;
 import org.junit.Test;
 
 import java.awt.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Unit test for simple App.
@@ -23,7 +24,7 @@ public class TestMoveEntity
         mainGame = new GameLayout(logic);
 
         EntityFactory factory = new EntityFactory();
-        logic.getPlayersArr()[0].getArmy().add(factory.addEntity("MERCENARY", new Point(0,0), "blue"));
+        logic.getPlayersArr()[0].getArmy().add(factory.addEntity(UnitEnum.MERCENARY, new Point(0, 0), UnitEnum.BLUE));
         mainGame.mapTiles[0][0].setEntity_on_tile(AppFrame.getPlayersArr()[0].getArmy().get(0));
         mainGame.mapTiles[0][0].setOwner(logic.getPlayersArr()[0]);
         logic.action(mainGame.mapTiles[0][0],mainGame.mapTiles);

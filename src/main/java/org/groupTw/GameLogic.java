@@ -20,7 +20,6 @@ public class GameLogic implements iLogic {
 
     //constructor
     public GameLogic(Player[] playersArr_) {
-        GameLogic.winner = null;
         playersArr = playersArr_;
         possibleAttacks = new ArrayList<>();
         possibleMoves = new ArrayList<>();
@@ -31,9 +30,13 @@ public class GameLogic implements iLogic {
         gameState = true;
     }
 
-    /*
-    Action method analise clicked tile according to current state of map and selected field.
-    After analise it gets to right method which updates map state .
+
+    /**
+     * action method handles all action invoked by mouse click, checks if it's second click on the same tile, if emptny
+     * tile was clicked, or if unit of current active player was clicked.
+     *
+     * @param tile_     clicked tile on game map - MapPanel type
+     * @param mapTiles_ whole map, double-dim array of MapPanels
      */
     public void action(MapPanel tile_, MapPanel[][] mapTiles_) {
         currentPlayer = playersArr[roundCounter % 2];
@@ -58,7 +61,7 @@ public class GameLogic implements iLogic {
             selected = null;
             clearArrMoves();
             clearArrAttacks();
-        //for now - first click on a tile without unit, or on a tile which contains not yours unit
+            //for now - first click on a tile without unit, or on a tile which contains not yours unit
         } else {
             selected = null;
             clearArrAttacks();
@@ -67,16 +70,24 @@ public class GameLogic implements iLogic {
 
     }
 
-    private void updateBoardState(){
-        if(playersArr[ (roundCounter + 1)%2 ].getArmy().size() == 0){
+    /*
+     * This method checks if the game ended, updates turn counter
+     */
+    private void updateBoardState() {
+        if (playersArr[(roundCounter + 1) % 2].getArmy().size() == 0) {
             winner = currentPlayer;
         }
-        for(Player ply : playersArr){
+        for (Player ply : playersArr) {
             ply.getGoldPerTurn();
         }
         roundCounter++;
     }
-    //updates map state, when no tile is selected before
+
+    /*
+     * Method updates map state, when no tile was selected
+     * @param Tile_ currently selected tile
+     * @param mapTiles_ map of game
+     */
     private void tileNotSelected(MapPanel Tile_, MapPanel[][] mapTiles_) {
         if (Tile_.getEntity_on_tile() instanceof iMovable) {
             setMoveBorders(Tile_, mapTiles_, Color.MAGENTA);
@@ -87,12 +98,17 @@ public class GameLogic implements iLogic {
     /*
     Updates map state, when unit was selected before. Checks if we ordered to move or attack
      */
+
+    /*
+     * Updates map state, when tile was seleted before. Checks if unit can move or attack tile
+     * @param Tile_ currently selected tile
+     */
     private void tileSelected(MapPanel Tile_) {
-        //checks if unit can move, if it cans checks if its possible to move to the selected tile
+        //checks if unit can move, if it can, checks if its possible to move to the selected tile
         if (this.selected.getEntity_on_tile() instanceof iMovable && this.possibleMoves.contains(Tile_) && Tile_ != selected) {
             moveEntity(Tile_, selected);
             updateBoardState();
-        //every entity can attack, so it only checks if tile is possible to attack
+            //every entity can attack, so it only checks if tile is possible to attack
         } else if (this.possibleAttacks.contains(Tile_) && Tile_ != selected) {
             attackEntity(Tile_);
             updateBoardState();
@@ -103,7 +119,10 @@ public class GameLogic implements iLogic {
     }
 
     /*
-    updates possibleAttacks array, change borders of tiles to highlight possible attacks
+     * Method updates possibleAttacks array, changes borders of tiles possible to attack
+     * @param Tile_ currenty selected tile
+     * @param mapTiles_ map of game
+     * @param color_ color to which border color will be changed
      */
     private void setAttackBorders(MapPanel Tile_, MapPanel[][] mapTiles_, Color color_) {
         Entity entityOnTile = Tile_.getEntity_on_tile();
@@ -122,7 +141,10 @@ public class GameLogic implements iLogic {
     }
 
     /*
-    updates possibleMoves array, change borders of these tiles to highlight possible moves
+     * Method updates possibleAttacks array, changes borders of tiles possible to move
+     * @param Tile_ currently selected tile
+     * @param mapTiles_ map of game
+     * @param color_ color to which border color will be changed
      */
     private void setMoveBorders(MapPanel Tile_, MapPanel[][] mapTiles_, Color color_) {
         iMovable entityOnTile = (iMovable) Tile_.getEntity_on_tile();

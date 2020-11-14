@@ -6,13 +6,13 @@ import java.awt.*;
 
 class Siege extends MovingUnit {
 
-    public Siege(String color_){
-        super("/siege"+color_+".png",10,50,5);
+    public Siege(UnitEnum color_) {
+        super("/siege" + color_.getValue() + ".png", 10, 50);
         setColor(color_);
     }//constructor
 
-    public Siege(Point position_, String color_){
-        super(position_,"/siege"+color_+".png",10,50,5);
+    public Siege(Point position_, UnitEnum color_) {
+        super(position_, "/siege" + color_.getValue() + ".png", 10, 50);
         setColor(color_);
     } //constructor
 

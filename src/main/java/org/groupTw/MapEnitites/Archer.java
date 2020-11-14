@@ -1,20 +1,19 @@
 package org.groupTw.MapEnitites;
 
 import org.groupTw.AppFrame;
-import org.groupTw.iMovable;
 
 import java.awt.*;
 
 public class Archer extends MovingUnit {
 
-    public Archer(String color_){
-        super("/archer"+color_+".png",10,10,10);
+    public Archer(UnitEnum color_) {
+        super("/archer" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
 
     }//constructor
 
-    public Archer(Point position_, String color_){
-        super(position_,"/archer"+color_+".png",10,10,10);
+    public Archer(Point position_, UnitEnum color_) {
+        super(position_, "/archer" + color_.getValue() + ".png", 10, 10);
         setColor(color_);
     } //constructor
 

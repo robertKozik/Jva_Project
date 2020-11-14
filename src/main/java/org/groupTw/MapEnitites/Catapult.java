@@ -6,18 +6,13 @@ import java.awt.*;
 
 class Catapult extends Building {
 
-    public Catapult(String color_) {
-        super("/catapult"+color_.toLowerCase()+".png",100,10,50);
+    public Catapult(UnitEnum color_) {
+        super("/catapult" + color_.getValue() + ".png", 100, 10);
         setColor(color_);
     }
 
-    public Catapult(Point position_, String color_, int health_, int attack_, int defense_) {
-        super(position_, "/catapult"+color_.toLowerCase()+".png", health_, attack_, defense_);
-        setColor(color_);
-    }//constructor
-
-    public Catapult(Point position_, String color_){
-        super(position_, "/catapult"+color_.toLowerCase()+".png", 100, 10, 50);
+    public Catapult(Point position_, UnitEnum color_) {
+        super(position_, "/catapult" + color_.getValue() + ".png", 100, 10);
         setColor(color_);
     }//constructor
 

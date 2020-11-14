@@ -1,12 +1,7 @@
 package org.groupTw;
 
-import org.groupTw.AppFrame;
-import org.groupTw.JSON;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingsMenu extends JPanel {
     private JSON json;
@@ -35,20 +30,17 @@ public class SettingsMenu extends JPanel {
 
         /* add back button */
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AppFrame ancestorFrame = (AppFrame) SwingUtilities.getWindowAncestor(thirdScreen);
+        backButton.addActionListener(e -> {
+            AppFrame ancestorFrame = (AppFrame) SwingUtilities.getWindowAncestor(thirdScreen);
 
-                ancestorFrame.updateFrame("MENU");
-            }
+            ancestorFrame.updateFrame(FramesEnum.MENU);
         });
         thirdScreen.add(backButton);
 
         JTextField nick0 = new JTextField("Player 1:");
         JTextField nick1 = new JTextField("Player 2:");
-        String p0 = (String)json.JSONReadFromFile("player1");
-        String p1 = (String)json.JSONReadFromFile("player2");
+        String p0 = json.JSONReadFromFile("player1");
+        String p1 = json.JSONReadFromFile("player2");
 
         JEditorPane nickChange0 = new JEditorPane();
         JEditorPane nickChange1 = new JEditorPane();
@@ -58,23 +50,15 @@ public class SettingsMenu extends JPanel {
 
         /* add save button */
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                json.JSONWriteToFile();
-                json.JSONAddValue("player1",nickChange0.getText());
-                json.JSONAddValue("player2",nickChange1.getText());
-                json.JSONCloseWithSave();
-                //JSON writeToFile = (JSON) SwingUtilities.;
+        saveButton.addActionListener(e -> {
+            json.JSONWriteToFile();
+            json.JSONAddValue("player1", nickChange0.getText());
+            json.JSONAddValue("player2", nickChange1.getText());
+            json.JSONCloseWithSave();
 
-            }
+
         });
         thirdScreen.add(saveButton);
-
-
-     //   json.JSONWriteToFile();
-     //   json.JSONAddValue("player1","u1");
-       // json.JSONAddValue("player2","u2");
 
         JPanel firstNick = new JPanel();
         firstNick.setBackground(Color.LIGHT_GRAY);

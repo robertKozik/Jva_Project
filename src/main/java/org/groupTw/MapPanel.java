@@ -5,9 +5,8 @@ import org.groupTw.MapEnitites.Entity;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.io.InputStream;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 class MapPanel extends JPanel {
@@ -22,21 +21,16 @@ class MapPanel extends JPanel {
         super();
         entity_on_tile = null;
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        try{
-            InputStream path = this.getClass().getResourceAsStream("/grass.png");
-            this.bgImage = ImageIO.read(path);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        bgImage = null;
         initUI();
     }
 
-    public MapPanel(Entity entity_) {
+    public MapPanel(String bgName_) {
         super();
-        this.entity_on_tile = entity_;
-        try{
-            this.bgImage = ImageIO.read(this.getClass().getResourceAsStream("/grass.png"));
-        }catch(Exception e){
+        this.entity_on_tile = null;
+        try {
+            this.bgImage = ImageIO.read(this.getClass().getResourceAsStream("/" + bgName_));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         initUI();
@@ -68,8 +62,10 @@ class MapPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image img = bgImage.getScaledInstance(GameLayout.MAPDIM/AppFrame.MAPSIZE,GameLayout.MAPDIM/AppFrame.MAPSIZE, Image.SCALE_FAST);
-        g.drawImage(img, 0, 0, null);
+        if (bgImage != null) {
+            Image img = bgImage.getScaledInstance(GameLayout.MAPDIM / AppFrame.MAPSIZE, GameLayout.MAPDIM / AppFrame.MAPSIZE, Image.SCALE_FAST);
+            g.drawImage(img, 0, 0, null);
+        }
     }
 
     public void setBorder(Color border_, int width_) {

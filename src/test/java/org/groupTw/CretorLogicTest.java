@@ -3,10 +3,7 @@ package org.groupTw;
 import org.groupTw.MapEnitites.EntityFactory;
 import org.junit.Test;
 
-import java.awt.*;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class CretorLogicTest {
 
